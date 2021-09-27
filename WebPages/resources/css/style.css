@@ -30,3 +30,9 @@ font-size: 200%;
 #login label {
 	float:left;
 }
+
+#signup label{
+	display: inline-block;
+	width: 10em;
+	--text-align: right;
+}
