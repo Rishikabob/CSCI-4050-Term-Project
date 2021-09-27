@@ -18,6 +18,10 @@
 	float: left;
 }
 
+#subHeader{
+	background-color: gray;
+}
+
 #login > * {
 	margin-bottom: 5%;
 }
