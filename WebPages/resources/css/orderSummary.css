@@ -1,0 +1,30 @@
+* {
+	font-family: Arial, Hervetica, sans-serif;
+	color: white;
+}	
+
+html {
+	background-color: black;
+}
+
+header {
+	border: 2px solid red;
+	background-color: red;
+	color: white;
+}
+
+div.sep {
+	border-bottom: 1px solid white;
+	width: 12em;
+	margin-left:33.5em;
+}
+
+button {
+	background-color: white;
+	color: red;
+	float:right;
+}
+
+div.content {
+	text-align: center;
+}
