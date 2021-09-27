@@ -31,8 +31,16 @@ font-size: 200%;
 	float:left;
 }
 
+#signup > * {
+	margin-bottom: .75%;
+}
 #signup label{
 	display: inline-block;
+	font-size: 125%;
 	width: 10em;
 	--text-align: right;
+}
+
+#signup input{
+	font-size:125%;
 }
