@@ -12,7 +12,7 @@
 	margin-left: 1%;
 	margin-top: 1%;
 	margin-bottom: 1%;
-	font-size: 500%;
+	font-size: 400%;
 	border-radius: 5px;
 }
 
@@ -81,4 +81,35 @@ font-size: 150%;
 	border: thin solid red;
 	border-radius: .5em;
 	text-decoration: none;
+}
+
+
+#editProf > * {
+	margin-bottom: .75%;
+}
+#editProf input{
+	background-color: white;
+	border-color: black;
+	color:black;
+	border-radius: 5px;
+	font-size: 125%;
+}
+#editProf label {
+	display: inline-block;
+	font-size: 125%;
+	width: 15em;
+	--text-align: right;
+}
+
+#editProf select {
+	
+	background-color: white;
+	border-color: black;
+	color:black;
+	border-radius: 5px;
+	width: 10em;
+	font-size: 125%;
+}
+#cc1 {
+	width: 9%;
 }
