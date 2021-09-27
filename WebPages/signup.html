@@ -10,22 +10,22 @@
     <h1>Sign Up</h1>
       <form method="post" id="signup">
         <!--Password-->
-		<label for="p">Password:</label>
-        <input type="password" name="p" placeholder="Password" required="required" /></br>
+		<label    for="p">Password:</label>
+        <input  type="password" name="p" placeholder="Password" required="required" /></br>
         <!--Name-->
-        <label for="n">Name:</label>
-		<input type="text" name="n" placeholder="Name" required="required" /></br>
+        <label    for="n">Name:</label>
+		<input  type="text" name="n" placeholder="Name" required="required" /></br>
         <!--Phone Number-->
-        <label for="pn">Phone Number:</label>
-		<input type="text" name="pn" placeholder="PhoneNumber" required="required" /></br>
+        <label   for="pn">Phone Number:</label>
+		<input  type="text" name="pn" placeholder="PhoneNumber" required="required" /></br>
         <!--Email Address-->
-        <label for="ea">Email Address:</label>
-		<input type="text" name="ea" placeholder="Email" required="required" /></br>
+        <label   for="ea">Email Address:</label>
+		<input  type="text" name="ea" placeholder="Email" required="required" /></br>
         <!--Payment Info-->
         <h2 id="subHeader">Payment Info</h2>
         <!--Card Type-->
-        <label for="ct">Card Type:</label>
-        <select id="ct" name="Card Type">
+        <label   for="ct">Card Type:</label>
+        <select  id="ct" name="Card Type">
         <option value=''>Card Type</option>
         <option value="mstr">MasterCard</option>
         <option value="vsa">Visa</option>
@@ -36,14 +36,14 @@
         <label for="cn">Card Number:</label>
         <input class="inputCard" type="text" name="cc1" id="cc1"/>
         -
-        <input class="inputCard" type="text" name="cc2" id="cc2"/>
+        <input  class="inputCard" type="text" name="cc2" id="cc2"/>
         -
-        <input class="inputCard" type="text" name="cc3" id="cc3"/>
+        <input  class="inputCard" type="text" name="cc3" id="cc3"/>
         -
-        <input class="inputCard" type="text" name="cc4" id="cc4"/>
+        <input  class="inputCard" type="text" name="cc4" id="cc4"/>
         <br />
         <!--Card Expiration-->
-        <label for="ed">Expiration Date:</label>
+        <label   for="ed">Expiration Date:</label>
 		<select name='expireMM' id='expireMM'>
             <option value=''>Month</option>
             <option value='01'>January</option>
@@ -59,7 +59,7 @@
             <option value='11'>November</option>
             <option value='12'>December</option>
         </select> 
-        <select name='expireYY' id='expireYY'>
+        <select  name='expireYY' id='expireYY'>
             <option value=''>Year</option>
             <option value='20'>2020</option>
             <option value='21'>2021</option>
@@ -67,17 +67,17 @@
             <option value='23'>2023</option>
             <option value='24'>2024</option>
         </select> 
-        <input class="inputCard" type="hidden" name="expiry" id="expiry" maxlength="4"/> </br>
+        <input  class="inputCard" type="hidden" name="expiry" id="expiry" maxlength="4"/> </br>
         <!--Home Address-->
         <h2 id="subHeader">Home Address</h2>
-        <label for="sa">Street Address:</label>
-		<input type="text" name="sa" placeholder="Street" required="required" /></br>
+        <label   for="sa">Street Address:</label>
+		<input  type="text" name="sa" placeholder="Street" required="required" /></br>
         <!--City-->
-        <label for="city">City:</label>
-		<input type="text" name="c" placeholder="City" required="required" /></br>
+        <label   for="city">City:</label>
+		<input   type="text" name="c" placeholder="City" required="required" /></br>
         <!--State-->
-        <label for="state">State:</label>
-        <select>
+        <label   for="state">State:</label>
+        <select  >
             <option value="">Select State</option>
             <option value="AL">Alabama</option>
             <option value="AK">Alaska</option>
@@ -131,11 +131,11 @@
             <option value="WI">Wisconsin</option>
             <option value="WY">Wyoming</option>
         </select></br>
-        <label for="z">ZipCode:</label>
-		<input type="text" name="z" placeholder="ZipCode" required="required" /></br>				
+        <label   for="z">ZipCode:</label>
+		<input  type="text" name="z" placeholder="ZipCode" required="required" /></br></br>				
 
         <!--Submit Button-->
-        <button type="submit" class="btn btn-primary btn-block btn-large">Log In.</button>
+        <button id = "redButton" type="submit" class="btn btn-primary btn-block btn-large">Log In.</button>
       </form>
 	  <a href="createaccount.html">Create Account</a> </br>
 	  <a href="forgotpassword.html">Forgot Password</a>

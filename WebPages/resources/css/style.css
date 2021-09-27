@@ -13,34 +13,64 @@
 	margin-top: 1%;
 	margin-bottom: 1%;
 	font-size: 500%;
+	border-radius: 5px;
+}
+
+#redButton {
+	border-radius: 25px;
+	background-color: red;
+	border-color: red;
+	width: 300px;
+	height: 50px ;
+	font-size: 20px;
 }
 
 #subHeader{
 	background-color: gray;
+	font-size: 150%;
+	padding-left: 1%;
+	border-radius: 5px;
 }
 
 #login > * {
 	margin-bottom: 5%;
-	font-size:200%;
-
 }
 #login input{
-font-size: 200%;
+background-color: white;
+border-color: black;
+color:black;
+border-radius: 5px;
+font-size: 150%;
+
 }
 #login label {
 	float:left;
 }
 
+
 #signup > * {
 	margin-bottom: .75%;
 }
-#signup label{
+#signup input{
+	background-color: white;
+	border-color: black;
+	color:black;
+	border-radius: 5px;
+	font-size: 125%;
+}
+#signup label {
 	display: inline-block;
 	font-size: 125%;
 	width: 10em;
 	--text-align: right;
 }
 
-#signup input{
-	font-size:125%;
+#signup select {
+	
+	background-color: white;
+	border-color: black;
+	color:black;
+	border-radius: 5px;
+	width: 10em;
+	font-size: 125%;
 }
