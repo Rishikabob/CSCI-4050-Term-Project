@@ -4,9 +4,15 @@
     font-family: Arial, Helvetica, sans-serif;
 	background-color: black;
 	color: white;
+	margin-left: 1%;
 }
 
 #header{
     border: thin solid red;
 	background-color: red;
+	margin-right: 1%;
+	margin-left: 1%;
+s	margin-top: 1%;
+	margin-bottom: 1%;
+	font-size: 400%;
 }
