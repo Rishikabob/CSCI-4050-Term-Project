@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit</title>
+  <link rel="stylesheet" type="text/css"  href="resources/css/style.css">
+</head>
+<body>
+  <h1 id="header">Edit Movie 1</h1>
+  <div class="editPage">   
+	  <form method="post" id="signup">
+        <!--Password-->
+		
+		<label    for="mTitle">Movie Title:</label>
+		<textarea id="mTitle" name="mTitle" rows="4" cols="50"></textarea>
+        <!--Name-->
+        <!--Card Expiration-->
+        <label   for="mCategory">Category:</label>
+		<select name='mCategory' id='mCategory'>
+            <option value=''>comedy</option>
+            <option value='01'>horror</option>
+            <option value='02'>drama</option>
+            <option value='03'>romance</option>
+            <option value='04'>action</option>
+            <option value='05'>adventure</option>
+            <option value='06'>fantasy</option>
+            <option value='07'>scifi</option>          
+        </select> 
+		<label    for="mCast">Cast:</label>
+		<textarea id="mCast" name="mCast" rows="4" cols="50"></textarea>
+		<label    for="mDirector">Director:</label>
+		<textarea id="mDirector" name="mProducer" rows="4" cols="50"></textarea>
+		<label    for="mProducer">Producer:</label>
+		<textarea id="mProducer" name="mProducer" rows="4" cols="50"></textarea>
+		<label    for="mSynopsis">Synopsis:</label>
+		<textarea id="mSynopsis" name="mSynopsis" rows="4" cols="50"></textarea>
+		<label    for="mReviews">Reviews:</label>
+		<textarea id="mReviews" name="mReviews" rows="4" cols="50"></textarea>
+		
+        <!--Submit Button-->
+        <button id = "redButton" type="submit" class="btn btn-primary btn-block btn-large">Submit.</button>
+      </form>
+  </div>
+ 
+</body>
+</html>
