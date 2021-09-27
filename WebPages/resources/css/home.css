@@ -1,10 +1,11 @@
-* {
-	font-family:Arial, Helvetica, sans-serif;
+*{
+    font-family: Arial, Helvetica, sans-serif;
+	background-color: #252525;
+	color: white;
+	margin-inline: 1%;
 }
 
-html {
-	background-color: black;
-}
+
 
 div.desc {
 	color:white;
@@ -15,6 +16,7 @@ div.desc {
 	margin-top: 1em;
 	margin-left: 22em;
 	width: 50em;
+	background-color: white;
 }
 
 button.bookMovie {
@@ -22,11 +24,14 @@ button.bookMovie {
 	margin-left: 2.5em;
 	background-color: red;
 	color: white;
+	border-radius: 5px;
+	border-color: red;
+	
 }
 
 div.gallery {
 	margin: 20px;
-	border: 1px solid black;
+	border: 2px solid black;
 	float: left;
 	width: 150px;
 }
@@ -40,20 +45,23 @@ div.gallery img {
 	height: 200px;
 }
 
-header {
-	color: white;
-	border: solid red 2px;
+#header {
+	border: thin solid red;
 	background-color: red;
-	margin: 5px;
+	margin-right: 1%;
+	margin-left: 1%;
+	margin-top: 1%;
+	margin-bottom: 1%;
+	font-size: 400%;
+	border-radius: 5px;
 }
 
-#title {
-	margin-left:1em;
-}
 
 #signin, #signup {
 	float:right;
 	background-color: white;
+	border-radius: 5px;
+	border-color: white;
 	color: red;
 }
 
