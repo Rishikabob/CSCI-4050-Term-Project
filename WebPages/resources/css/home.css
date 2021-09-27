@@ -5,7 +5,9 @@
 	margin-inline: 1%;
 }
 
-
+#trailerBlock {
+	display: block;
+}
 
 div.desc {
 	color:white;
