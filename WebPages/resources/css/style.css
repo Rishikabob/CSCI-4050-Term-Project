@@ -1,6 +1,4 @@
 *{
-    margin: 0;
-    padding: 0;
     font-family: Arial, Helvetica, sans-serif;
 	background-color: black;
 	color: white;
@@ -12,7 +10,14 @@
 	background-color: red;
 	margin-right: 1%;
 	margin-left: 1%;
-s	margin-top: 1%;
+	margin-top: 1%;
 	margin-bottom: 1%;
 	font-size: 400%;
+}
+#login {
+	float: left;
+}
+
+#login > * {
+	margin-bottom: 5%;
 }
