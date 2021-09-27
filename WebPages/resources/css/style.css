@@ -162,6 +162,7 @@ font-size: 150%;
   position: absolute;
   margin-top:100px;
   right: 3%;
+}
 .row {
   display: flex;
 }
