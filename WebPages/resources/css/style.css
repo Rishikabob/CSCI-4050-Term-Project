@@ -12,12 +12,18 @@
 	margin-left: 1%;
 	margin-top: 1%;
 	margin-bottom: 1%;
-	font-size: 400%;
+	font-size: 500%;
 }
-#login {
-	float: left;
-}
+
 
 #login > * {
 	margin-bottom: 5%;
+	font-size:200%;
+
+}
+#login input{
+font-size: 200%;
+}
+#login label {
+	float:left;
 }
