@@ -74,3 +74,11 @@ font-size: 150%;
 	width: 10em;
 	font-size: 125%;
 }
+
+.adminPage a{
+	font-size: 250%;
+	background-color: red;
+	border: thin solid red;
+	border-radius: .5em;
+	text-decoration: none;
+}
