@@ -91,11 +91,13 @@ font-size: 150%;
 }
 
 .adminPage a{
-	font-size: 250%;
+	margin-bottom: 10%;
+	font-size: 230%;
 	background-color: red;
-	border: thin solid red;
+	border: thick solid red;
 	border-radius: .5em;
 	text-decoration: none;
+	
 }
 
 #editPage > * {
