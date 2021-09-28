@@ -98,8 +98,36 @@ font-size: 150%;
 	text-decoration: none;
 }
 
+#editPage > * {
+	margin-bottom: .75%;
+}
+#editPage input{
+	background-color: white;
+	border-color: black;
+	color:black;
+	border-radius: 5px;
+	font-size: 125%;
+}
+#editPage label {
+	display: block;
+	font-size: 125%;
+	width: 10em;
+	
+	
+}
 
-#editProf > * {
+#editPage select {
+	
+	background-color: white;
+	border-color: black;
+	color:black;
+	border-radius: 5px;
+	width: 10em;
+	font-size: 125%;
+}
+
+
+#editPage > * {
 	margin-bottom: .75%;
 }
 #editProf input{
