@@ -2,48 +2,44 @@
 <html>
 <head>
   <title>Signup</title>
-  <link rel="stylesheet" type="text/css"  href="resources/css/style.css">
+  <link rel="stylesheet" type="text/css"  href="resources/css/signup.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-  <h1 id="header">Sign Up</h1>
-  <div class="signup">
-    <h1>Sign Up</h1>
-      <form method="post" id="signup">
-        <!--Password-->
-		<label    for="p">Password:</label>
-        <input  type="password" name="p" placeholder="Password" required="required" /></br>
-        <!--Name-->
-        <label    for="n">Name:</label>
-		<input  type="text" name="n" placeholder="Name" required="required" /></br>
-        <!--Phone Number-->
-        <label   for="pn">Phone Number:</label>
-		<input  type="text" name="pn" placeholder="PhoneNumber" required="required" /></br>
-        <!--Email Address-->
-        <label   for="ea">Email Address:</label>
-		<input  type="text" name="ea" placeholder="Email" required="required" /></br>
-        <!--Payment Info-->
-        <h2 id="subHeader">Payment Info</h2>
-        <!--Card Type-->
-        <label   for="ct">Card Type:</label>
-        <select  id="ct" name="Card Type">
-        <option value=''>Card Type</option>
-        <option value="mstr">MasterCard</option>
-        <option value="vsa">Visa</option>
-        <option value="disc">Discover</option>
-        <option value="amex">American Express</option>
-        </select></br>
+    <div class="container">
+        <div class="box">
+          <h1 id = 'header'>Sign Up</h1>
+            <form id = form method="post">
+                <i class="fa fa-user icon"></i>
+                <input type="text" name="u" placeholder="Enter Username" required="required" /></br>
+                <i class="fa fa-key icon"></i>
+                <input type="password" name="p" placeholder="Enter Password" required="required" /></br>
+                <i class="fa fa-key icon"></i>
+                <input type="password" name="rp" placeholder="Re-Enter Password" required="required" /></br>
+                <i class="fa fa-phone icon"></i>
+                <input type="text" name="pn" placeholder="Enter Phone Number" required="required" /></br>
+                <i class="fa fa-envelope icon"></i>
+                <input  type="text" name="ea" placeholder="Enter Email" required="required" /></br>
+                <h2>Payment Info</h2>
+                <!--Card Type-->
+                <label   for="ct">Name on Card</label></br>
+                <i class="fa fa-user icon"></i>
+                <input type="text" name = cName placeholder="" required="required"/></br>
+                
         <!--Card number-->
-        <label for="cn">Card Number:</label>
-        <input class="inputCard" type="text" name="cc1" id="cc1"/>
+        <label for="cn">Card Number</label></br>
+        <i class="fa fa-credit-card-alt icon"></i>
+        <input id="inputCard" type="text" name="cc1" id="cc1"/>
         -
-        <input  class="inputCard" type="text" name="cc2" id="cc1"/>
+        <input  id="inputCard" type="text" name="cc2" id="cc1"/>
         -
-        <input  class="inputCard" type="text" name="cc3" id="cc1"/>
+        <input  id="inputCard" type="text" name="cc3" id="cc1"/>
         -
-        <input  class="inputCard" type="text" name="cc4" id="cc1"/>
+        <input  id="inputCard" type="text" name="cc4" id="cc1"/>
         <br />
         <!--Card Expiration-->
-        <label   for="ed">Expiration Date:</label>
+        <label   for="ed">Expiration Date</label>
+        <label for="cn">CVC/CVV</label></br>
 		<select name='expireMM' id='expireMM'>
             <option value=''>Month</option>
             <option value='01'>January</option>
@@ -66,17 +62,18 @@
             <option value='22'>2022</option>
             <option value='23'>2023</option>
             <option value='24'>2024</option>
-        </select> 
-        <input  class="inputCard" type="hidden" name="expiry" id="expiry" maxlength="4"/> </br>
-        <!--Home Address-->
-        <h2 id="subHeader">Home Address</h2>
-        <label   for="sa">Street Address:</label>
-		<input  type="text" name="sa" placeholder="Street" required="required" /></br>
+        </select>               
+        <input  class="inputCard" type="hidden" name="expiry" id="expiry" maxlength="4"/> <s></s>
+        <input id="inputCard" type="text" name="cvc" placeholder=""/>
+        <h2>Billing Information</h2>
+        <!--Street-->
+        <i class="fa fa-road icon"></i>
+		<input  type="text" name="sa" placeholder="Enter Street Address" required="required" /></br>
         <!--City-->
-        <label   for="city">City:</label>
-		<input   type="text" name="c" placeholder="City" required="required" /></br>
+        <i class="fa fa-map-marker icon"></i>
+		<input   type="text" name="c" placeholder="Enter City" required="required" /></br>
         <!--State-->
-        <label   for="state">State:</label>
+        <i class="fa fa-globe icon"></i>
         <select  >
             <option value="">Select State</option>
             <option value="AL">Alabama</option>
@@ -131,13 +128,14 @@
             <option value="WI">Wisconsin</option>
             <option value="WY">Wyoming</option>
         </select></br>
-        <label   for="z">ZipCode:</label>
-		<input  type="text" name="z" placeholder="ZipCode" required="required" /></br></br>				
+        <i class="fa fa-map-signs icon"></i>
+		<input  type="text" name="z" placeholder="Enter ZipCode" required="required" /></br></br>				
 
-        <!--Submit Button-->
-        <button id = "redButton" type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
-      </form>
-  </div>
+        <button id = "redButton" type="submit" class="btn btn-primary btn-block btn-large">Submit</button></br>
+              
+            </form>
+        </div>
+      </div>
  
 </body>
 </html>

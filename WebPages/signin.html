@@ -2,23 +2,24 @@
 <html>
 <head>
   <title>Login</title>
-  <link rel="stylesheet" type="text/css"  href="resources/css/style.css">
+  <link rel="stylesheet" type="text/css"  href="resources/css/signin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-  <h1 id="header">Welcome</h1>
-  <div class="login">
-    <h1>Sign In</h1>
-    <form method="post" id="login">
-		<label for="u">Username:</label>
-    <input type="text" name="u" placeholder="Username" required="required" /></br>
-    
-    <label for="p">Password:</label>
-		<input type="password" name="p" placeholder="Password" required="required" /></br>
-    <button id = "redButton" type="submit" class="btn btn-primary btn-block btn-large">Log In.</button>
+<div class="container">
+  <div class="box">
+    <h1 id = 'header'>Sign In</h1>
+      <form id = form method="post">
+        <i class="fa fa-user icon"></i>
+        <input id = input type="text" name="u" placeholder="Enter Username" required="required" /></br>
+        <i class="fa fa-key icon"></i>
+        <input id = input type="password" name="p" placeholder="Enter Password" required="required" /></br>
+        <button id = "redButton" type="submit" class="btn btn-primary btn-block btn-large">Log In</button></br>
+        <a id = center href="createaccount.html">Create Account</a> </br></br>
+        <a id = center href="forgotpassword.html">Forgot Password</a>
       </form>
-	  <a href="createaccount.html">Create Account</a> </br>
-	  <a href="forgotpassword.html">Forgot Password</a>
   </div>
+</div>
  
 </body>
 </html>
