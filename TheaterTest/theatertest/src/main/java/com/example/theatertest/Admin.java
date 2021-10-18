@@ -1,36 +1,36 @@
 package com.example.theatertest;
 
-public class Admin {
+public class Admin extends User {
 
-    void AddMovie() {
-
-    }
-
-    void DeleteMovie() {
+    void addMovie() {
 
     }
 
-    void EditMovie() {
+    void deleteMovie() {
 
     }
 
-    void AddPromo() {
+    void editMovie() {
 
     }
 
-    void RemovePromo()  {
+    void addPromo() {
 
     }
 
-    void EditPromo() {
+    void removePromo()  {
 
     }
 
-    void ManageUsers() {
+    void editPromo() {
 
     }
 
-    void ManageTicketPrices() {
+    void manageUsers() {
+
+    }
+
+    void manageTicketPrices() {
 
     }
 
