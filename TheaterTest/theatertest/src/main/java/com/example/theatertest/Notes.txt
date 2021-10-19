@@ -1,0 +1,17 @@
+/**
+ * Feel free to add any notes, thoughts, observations, etc. 
+*/
+
+General Process
+    User adds information into an HTML structured form. Their HTML code will require a submit button
+    to be hit. This submit button in HTML will have an action along with it. We will need to research 
+    the possible actions, meaning how we can get the info from that form into our method.
+    Our method will take that data and push it to the database. We will use MySQL queries to grab
+    specific info from the database and display it to the dynamic web page.
+    
+    Things to think about
+        Submit button actions
+        Connecting HTML to Java and Java to database
+        Getters and Setters for accessing MovieTitle.java in Admin.java and modifying attributes
+        MySQL queries and modifying dynamic web page
+
