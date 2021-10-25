@@ -8,7 +8,7 @@ public class Admin extends User {
      * in the database. 
      */
     void addMovie() {
-        
+       
     }
 
     /**

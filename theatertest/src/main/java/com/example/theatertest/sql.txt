@@ -1,0 +1,8 @@
+AddMovie
+    INSERT INTO movieTitle (MovieID, title, category, director, producer, synopsis, trailerPicture,
+        trailerVideo, ratingCode, showDate, showTime) VALUES (001, 'It', 'Horror', 'Mike', 'Sully', 
+        'A killer clown terrorizes a small town', 'pic.jpg', 'vid.mv', 'PG-13', 'Tuesday', 'Four')
+
+RemoveMovie
+
+EditMovie
