@@ -7,8 +7,8 @@
 
 
 #header {
-	border: thin solid red;
-	background-color: red;
+	border: thin solid crimson;
+	background-color: crimson;
 	margin-right: 1%;
 	margin-left: 1%;
 	margin-top: 1%;
@@ -31,11 +31,13 @@ button {
 	margin-top: 1%;
 	height: 50px;
 	width: 100px;
-	background-color: white;
-	color: red;
+	background-color: crimson;
+    border-radius: 25px;
+	color: white;
 	font-size: large;
 	align-self: center;
 	border-radius: 5px;
+	border-style: hidden;
 
 }
 
@@ -49,8 +51,44 @@ div.content {
 	justify-content: center;
 }
 
-.inline{
-  display: inline-block;
-  margin-left: 5px;
+.inlineAddSubtract{
+	background-color: crimson;
+    border-radius: 25px;
+    border-style: hidden;
+    color: white;
+    font-size: 120%;
+    height:45px;
+	width:45px;
+	 display: inline-block;
+    margin-left: 5px;
    margin-right: 5px;
+}
+
+.inline{
+	 display: inline-block;
+    margin-left: 5px;
+   margin-right: 5px;
+}
+
+#backButton {
+		border-radius: 25px;
+	background-color: crimson;
+	border-color: crimson;
+	width: 300px;
+	height: 50px ;
+	font-size: 20px;
+  position: absolute;
+  margin-top:100px;
+  left: 3%;
+}
+#continueButton {
+		border-radius: 25px;
+	background-color: crimson;
+	border-color: crimson;
+	width: 300px;
+	height: 50px ;
+	font-size: 20px;
+  position: absolute;
+  margin-top:100px;
+  right: 3%;
 }
