@@ -10,7 +10,7 @@ import c3.theater.springweb.repositories.UserRepository;
 @Component
 public class BootStrapData implements CommandLineRunner {
 
-    private final UserRepository userRepository;
+    public final UserRepository userRepository;
 
     public BootStrapData(UserRepository userRepository) {
         this.userRepository = userRepository;

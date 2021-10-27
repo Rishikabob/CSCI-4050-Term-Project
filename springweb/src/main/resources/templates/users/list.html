@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Spring Framework Guru</title>
+    <title>Users List</title>
 </head>
 <body>
 <h1>Book List</h1>
@@ -23,6 +23,9 @@
         <td th:text="${user.password}">abc123</td>
     </tr>
 </table>
+
+<!--Below - Figure out how to add a user upon button click -->
+<button type="button" onclick=" ${BootStrapData.UserRepository.()}">Click Me!</button>
 
 </body>
 </html>
