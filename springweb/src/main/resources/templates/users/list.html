@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Framework Guru</title>
+</head>
+<body>
+<h1>Book List</h1>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Password</th>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}">123</td>
+        <td th:text="${user.firstName}">TestFirstName</td>
+        <td th:text="${user.lastName}">TestLastName</td>
+        <td th:text="${user.email}">testemail@testemailprovider.com</td>
+        <td th:text="${user.password}">abc123</td>
+    </tr>
+</table>
+
+</body>
+</html>
