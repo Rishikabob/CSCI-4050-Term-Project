@@ -25,6 +25,7 @@ public class User {
     private String cardExp1;
     private String cardExp2;
     private String cardExp3;
+    private boolean promo;
 
     public User() {
     }
@@ -155,6 +156,14 @@ public class User {
 
     public void setCardExp3(String cardExp3) {
         this.cardExp3 = cardExp3;
+    }
+
+    public boolean isPromo() {
+        return promo;
+    }
+
+    public void setPromo(boolean promo) {
+        this.promo = promo;
     }
 
     @Override

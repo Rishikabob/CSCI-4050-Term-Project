@@ -36,6 +36,7 @@ public class UserController {
         //BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         //String encodedPassword = passwordEncoder.encode(user.getPassword());
         //user.setPassword(encodedPassword);
+        user.setStatus(User.Status.INACTIVE);
         userRepository.save(user);
 
         return "users/register_success";
