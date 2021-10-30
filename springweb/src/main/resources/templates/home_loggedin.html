@@ -6,10 +6,12 @@
 <body>
 <h1>Welcome!</h1>
 
-<p>You are not logged in. :(</p>
-
-<form th:action="@{/login}" th:object="${user}">
-    <input type="submit" value="Log In"/>
+<p>You are logged in! :)</p>
+<form th:action="@{/edit_profile}" th:object="${user}">
+    <input type="submit" value="Edit Profile"/>
+</form>
+<form th:action="@{/home}" th:object="${user}" method="post">
+    <input type="submit" value="Log Out"/>
 </form>
 </body>
 </html>
