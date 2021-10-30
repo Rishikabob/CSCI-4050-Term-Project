@@ -55,10 +55,27 @@ public class UserController {
         //String encodedPassword = passwordEncoder.encode(user.getPassword());
         //user.setPassword(encodedPassword);
         user.setStatus(User.Status.INACTIVE);
-        System.out.println(user.getFirstName()); // shows how i will accesss user data from attempted login
+        //System.out.println(user.getFirstName()); // shows how i will accesss user data from attempted login
         userRepository.save(user);
+        thisUser = new User();
+        thisUser.setFirstName(user.getFirstName());
+        thisUser.setLastName(user.getLastName());
+        thisUser.setPassword(user.getPassword());
+        thisUser.setStatus(user.getStatus());
+        thisUser.setId(user.getId()); // not working?, probably not an issue tho
+        thisUser.setEmail(user.getEmail());
+        thisUser.setCardNum1(user.getCardNum1());
+        thisUser.setCardBill1(user.getCardBill1());
+        thisUser.setCardExp1(user.getCardExp1());
+        thisUser.setCardNum2(user.getCardNum2());
+        thisUser.setCardBill2(user.getCardBill2());
+        thisUser.setCardExp2(user.getCardExp2());
+        thisUser.setCardNum3(user.getCardNum3());
+        thisUser.setCardBill3(user.getCardBill3());
+        thisUser.setCardExp3(user.getCardExp3());
+        thisUser.setPromo(user.isPromo());
 
-        return "users/register_success";
+        return "home_loggedin";
     }
 
     // Allows login
