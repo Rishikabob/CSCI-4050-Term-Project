@@ -184,6 +184,7 @@ public class User {
                 ", cardExp1='" + cardExp1 + '\'' +
                 ", cardExp2='" + cardExp2 + '\'' +
                 ", cardExp3='" + cardExp3 + '\'' +
+                ", promo='" + promo + '\'' +
                 '}';
     }
 
