@@ -146,9 +146,9 @@ public class UserController {
                 // make sure to add option to add or edit other payment methods
                 //System.out.println("Found the user edited in db");
                 System.out.println("User elem entirety after editing: " + userElem.toString());
-                //userRepository.save(thisUser); // TRY saving user or thisuser or someway to edit rather than create new
-                userRepository.save(user);
-                userRepository.delete(userElem); // TEST THIS
+                userRepository.save(userElem); // TRY saving user or thisuser or someway to edit rather than create new
+                //userRepository.save(user);
+                //userRepository.delete(userElem); // TEST THIS
 
                 break; // make sure this doesnt mess with anything and only breaks out of for loop
 
