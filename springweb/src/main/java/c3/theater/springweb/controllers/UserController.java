@@ -16,6 +16,7 @@ public class UserController {
     private final UserRepository userRepository;
     private final EmailSender emailSender;
     User thisUser;
+    private User thisRegAttemptUser;
     private String thisRegCode; // the registration code
 
     public UserController(UserRepository userRepository, EmailSender emailSender) {
@@ -60,24 +61,26 @@ public class UserController {
 
         // maybe store as a temporary thisUser, not the real one, until they are activated/confirmed
         // onyl do above though if this seems to cause errors
+        //thisUser = new User();
+        //thisUser.setEmail();
         userRepository.save(user);
-        thisUser = new User();
-        thisUser.setFirstName(user.getFirstName());
-        thisUser.setLastName(user.getLastName());
-        thisUser.setPassword(user.getPassword());
-        thisUser.setStatus(user.getStatus());
-        thisUser.setId(user.getId()); // not working?, probably not an issue tho
-        thisUser.setEmail(user.getEmail());
-        thisUser.setCardNum1(user.getCardNum1());
-        thisUser.setCardBill1(user.getCardBill1());
-        thisUser.setCardExp1(user.getCardExp1());
-        thisUser.setCardNum2(user.getCardNum2());
-        thisUser.setCardBill2(user.getCardBill2());
-        thisUser.setCardExp2(user.getCardExp2());
-        thisUser.setCardNum3(user.getCardNum3());
-        thisUser.setCardBill3(user.getCardBill3());
-        thisUser.setCardExp3(user.getCardExp3());
-        thisUser.setPromo(user.isPromo());
+        thisRegAttemptUser = new User();
+        thisRegAttemptUser.setFirstName(user.getFirstName());
+        thisRegAttemptUser.setLastName(user.getLastName());
+        thisRegAttemptUser.setPassword(user.getPassword());
+        thisRegAttemptUser.setStatus(user.getStatus());
+        thisRegAttemptUser.setId(user.getId()); // not working?, probably not an issue tho
+        thisRegAttemptUser.setEmail(user.getEmail());
+        thisRegAttemptUser.setCardNum1(user.getCardNum1());
+        thisRegAttemptUser.setCardBill1(user.getCardBill1());
+        thisRegAttemptUser.setCardExp1(user.getCardExp1());
+        thisRegAttemptUser.setCardNum2(user.getCardNum2());
+        thisRegAttemptUser.setCardBill2(user.getCardBill2());
+        thisRegAttemptUser.setCardExp2(user.getCardExp2());
+        thisRegAttemptUser.setCardNum3(user.getCardNum3());
+        thisRegAttemptUser.setCardBill3(user.getCardBill3());
+        thisRegAttemptUser.setCardExp3(user.getCardExp3());
+        thisRegAttemptUser.setPromo(user.isPromo());
 
         int random_intA = (int)Math.floor(Math.random()*(9+1)+0); //
         int random_intB = (int)Math.floor(Math.random()*(9+1)+0); //
@@ -152,7 +155,7 @@ public class UserController {
                 "  </tbody></table><div class=\"yj6qo\"></div><div class=\"adL\">\n" +
                 "\n" +
                 "</div></div>";
-        emailSender.send(thisUser.getEmail(), emailWithCode);
+        emailSender.send(thisRegAttemptUser.getEmail(), emailWithCode);
 
         return "users/register_confirm";
     }
@@ -167,30 +170,36 @@ public class UserController {
         String returnString = "";
 
         if (user.getCardNum2().equals(thisRegCode)) { // valid code entered
-            //user.setStatus(User.Status.ACTIVE); // maybe store a current registerAttemptUser;
-            // MAKE STATUS ACTIVE
             returnString = "home_loggedin";
+            thisUser = new User();
+            thisUser.setFirstName(thisRegAttemptUser.getFirstName());
+            thisUser.setLastName(thisRegAttemptUser.getLastName());
+            thisUser.setPassword(thisRegAttemptUser.getPassword());
+            thisUser.setStatus(thisRegAttemptUser.getStatus());
+            thisUser.setId(thisRegAttemptUser.getId()); // not working?, probably not an issue tho
+            thisUser.setEmail(thisRegAttemptUser.getEmail());
+            thisUser.setCardNum1(thisRegAttemptUser.getCardNum1());
+            thisUser.setCardBill1(thisRegAttemptUser.getCardBill1());
+            thisUser.setCardExp1(thisRegAttemptUser.getCardExp1());
+            thisUser.setCardNum2(thisRegAttemptUser.getCardNum2());
+            thisUser.setCardBill2(thisRegAttemptUser.getCardBill2());
+            thisUser.setCardExp2(thisRegAttemptUser.getCardExp2());
+            thisUser.setCardNum3(thisRegAttemptUser.getCardNum3());
+            thisUser.setCardBill3(thisRegAttemptUser.getCardBill3());
+            thisUser.setCardExp3(thisRegAttemptUser.getCardExp3());
+            thisUser.setPromo(thisRegAttemptUser.isPromo());
+            for (User userElem : userRepository.findAll()) { // finds user in db that
+                if (userElem.getEmail().equals(thisUser.getEmail())) {
+                    userElem.setStatus(User.Status.ACTIVE);
+                    userRepository.save(userElem);
+                }
+            }
         } else { // invalid code entered
             returnString = "users/register_confirm";
         }
 
-//        thisUser = new User();
-//        thisUser.setFirstName(user.getFirstName());
-//        thisUser.setLastName(user.getLastName());
-//        thisUser.setPassword(user.getPassword());
-//        thisUser.setStatus(user.getStatus());
-//        thisUser.setId(user.getId()); // not working?, probably not an issue tho
-//        thisUser.setEmail(user.getEmail());
-//        thisUser.setCardNum1(user.getCardNum1());
-//        thisUser.setCardBill1(user.getCardBill1());
-//        thisUser.setCardExp1(user.getCardExp1());
-//        thisUser.setCardNum2(user.getCardNum2());
-//        thisUser.setCardBill2(user.getCardBill2());
-//        thisUser.setCardExp2(user.getCardExp2());
-//        thisUser.setCardNum3(user.getCardNum3());
-//        thisUser.setCardBill3(user.getCardBill3());
-//        thisUser.setCardExp3(user.getCardExp3());
-//        thisUser.setPromo(user.isPromo());
+
+
 
         return returnString;
     }
