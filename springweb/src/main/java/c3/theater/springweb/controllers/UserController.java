@@ -18,6 +18,7 @@ public class UserController {
     User thisUser;
     private User thisRegAttemptUser;
     private String thisRegCode; // the registration code
+    private String thisForgotPasswordCode;
 
     public UserController(UserRepository userRepository, EmailSender emailSender) {
         this.userRepository = userRepository;
@@ -210,8 +211,6 @@ public class UserController {
         }
 
 
-
-
         return returnString;
     }
 
@@ -375,7 +374,8 @@ public class UserController {
     }
 
     // Processes Edit Profile
-    @PostMapping("/process_edit_profile") // what would happen if multiple ones had same mapping, how would html differentiate
+    @PostMapping("/process_edit_profile")
+    // what would happen if multiple ones had same mapping, how would html differentiate
     public String processEditProfile(User user) {
         thisUser.setFirstName(user.getFirstName());
         thisUser.setLastName(user.getLastName());
@@ -424,14 +424,15 @@ public class UserController {
 
     // Change Password
     @GetMapping("/change_password") // what would happen if multiple ones had same mapping, how would html differentiate
-    public String processChangePassword(Model model) {
+    public String changePassword(Model model) {
         model.addAttribute("user", thisUser);
         return "users/change_password";
 
     }
 
     // Processes Change Password
-    @PostMapping("/process_change_password") // what would happen if multiple ones had same mapping, how would html differentiate
+    @PostMapping("/process_change_password")
+    // what would happen if multiple ones had same mapping, how would html differentiate
     public String processChangePassword(User user) {
         String returnString = "";
         System.out.println("old user pass: " + user.getPassword());
@@ -455,6 +456,136 @@ public class UserController {
         }
 
 
+        return returnString;
+    }
+
+    // Forgot Password
+    @GetMapping("/forgot_password") // what would happen if multiple ones had same mapping, how would html differentiate
+    public String forgotPassword(User user) {
+        //model.addAttribute("user", new User()); // is new user the correct thing to pass or thisUser
+        // get email from user
+        // send email with code
+        // set thisForgotPasswordCode
+        System.out.println("user forgot pass email: " + user.getEmail());
+        int random_intA = (int) Math.floor(Math.random() * (9 + 1) + 0); //
+        int random_intB = (int) Math.floor(Math.random() * (9 + 1) + 0); //
+        int random_intC = (int) Math.floor(Math.random() * (9 + 1) + 0); //
+        int random_intD = (int) Math.floor(Math.random() * (9 + 1) + 0); //
+        String generatedString = String.valueOf(random_intA) + String.valueOf(random_intB) + String.valueOf(random_intC) + String.valueOf(random_intD);
+        thisForgotPasswordCode = generatedString;
+        //System.out.println("genereated code string: " + generatedString);
+        String emailWithCode = "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" +
+                "\n" +
+                "<span style=\"display:none;font-size:1px;color:#fff;max-height:0\"></span>\n" +
+                "\n" +
+                "  <table role=\"presentation\" width=\"100%\" style=\"border-collapse:collapse;min-width:100%;width:100%!important\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n" +
+                "    <tbody><tr>\n" +
+                "      <td width=\"100%\" height=\"53\" bgcolor=\"#0b0c0c\">\n" +
+                "        \n" +
+                "        <table role=\"presentation\" width=\"100%\" style=\"border-collapse:collapse;max-width:580px\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\">\n" +
+                "          <tbody><tr>\n" +
+                "            <td width=\"70\" bgcolor=\"#0b0c0c\" valign=\"middle\">\n" +
+                "                <table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse\">\n" +
+                "                  <tbody><tr>\n" +
+                "                    <td style=\"padding-left:10px\">\n" +
+                "                  \n" +
+                "                    </td>\n" +
+                "                    <td style=\"font-size:28px;line-height:1.315789474;Margin-top:4px;padding-left:10px\">\n" +
+                "                      <span style=\"font-family:Helvetica,Arial,sans-serif;font-weight:700;color:#ffffff;text-decoration:none;vertical-align:top;display:inline-block\">Code: " + generatedString + "</span>\n" +
+                "                    </td>\n" +
+                "                  </tr>\n" +
+                "                </tbody></table>\n" +
+                "              </a>\n" +
+                "            </td>\n" +
+                "          </tr>\n" +
+                "        </tbody></table>\n" +
+                "        \n" +
+                "      </td>\n" +
+                "    </tr>\n" +
+                "  </tbody></table>\n" +
+                "  <table role=\"presentation\" class=\"m_-6186904992287805515content\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse;max-width:580px;width:100%!important\" width=\"100%\">\n" +
+                "    <tbody><tr>\n" +
+                "      <td width=\"10\" height=\"10\" valign=\"middle\"></td>\n" +
+                "      <td>\n" +
+                "        \n" +
+                "                <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse\">\n" +
+                "                  <tbody><tr>\n" +
+                "                    <td bgcolor=\"#1D70B8\" width=\"100%\" height=\"10\"></td>\n" +
+                "                  </tr>\n" +
+                "                </tbody></table>\n" +
+                "        \n" +
+                "      </td>\n" +
+                "      <td width=\"10\" valign=\"middle\" height=\"10\"></td>\n" +
+                "    </tr>\n" +
+                "  </tbody></table>\n" +
+                "\n" +
+                "\n" +
+                "\n" +
+                "  <table role=\"presentation\" class=\"m_-6186904992287805515content\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse;max-width:580px;width:100%!important\" width=\"100%\">\n" +
+                "    <tbody><tr>\n" +
+                "      <td height=\"30\"><br></td>\n" +
+                "    </tr>\n" +
+                "    <tr>\n" +
+                "      <td width=\"10\" valign=\"middle\"><br></td>\n" +
+                "      <td style=\"font-family:Helvetica,Arial,sans-serif;font-size:19px;line-height:1.315789474;max-width:560px\">\n" +
+                "        \n" +
+                "            <p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Hi " + ",</p><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> Thank you for registering. Please enter the code, " + generatedString + " into the site. </p><blockquote style=\"Margin:0 0 20px 0;border-left:10px solid #b1b4b6;padding:15px 0 0.1px 15px;font-size:19px;line-height:25px\"><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> <a href=\"" + "\"></a> </p></blockquote>\n  <p></p>" +
+                "        \n" +
+                "      </td>\n" +
+                "      <td width=\"10\" valign=\"middle\"><br></td>\n" +
+                "    </tr>\n" +
+                "    <tr>\n" +
+                "      <td height=\"30\"><br></td>\n" +
+                "    </tr>\n" +
+                "  </tbody></table><div class=\"yj6qo\"></div><div class=\"adL\">\n" +
+                "\n" +
+                "</div></div>";
+        boolean emailIsValid = false;
+        for (User userElem : userRepository.findAll()) {
+            if (userElem.getEmail().equals(user.getEmail())) { // email is attached to account
+                emailIsValid = true;
+            }
+        }
+        if (emailIsValid) {
+            emailSender.send(user.getEmail(), emailWithCode); // only send email w code if its attached to an account
+            thisUser = new User();
+            thisUser.setEmail(user.getEmail());
+        }
+        return "users/forgot_password";
+    }
+
+    // Processes forgot Password
+    @PostMapping("/process_forgot_password")
+    public String processForgotPassword(User user) {
+        String returnString = "";
+        boolean validEmail = false;
+        boolean validCode = false;
+        String enteredCode = user.getCardBill2();
+        System.out.println("forgot pass code: " + thisForgotPasswordCode);
+        System.out.println("enteredcode: " + enteredCode);
+        //System.out.println("user email: " + thisUser.getEmail());
+        if (thisUser == null) {
+            thisUser = new User();
+        }
+        for (User userElem : userRepository.findAll()) {
+            if (userElem.getEmail().equals(thisUser.getEmail())) { // email is attached to account
+                validEmail = true;
+                System.out.println("elem email equals user email");
+                if (thisForgotPasswordCode.equals(enteredCode)) { // code is also valid
+                    // THIS IS NOT WORKINg
+                    System.out.println("entered code matches email code for forgot pass");
+                    validCode = true;
+                    userElem.setPassword(user.getPassword());
+                    userRepository.save(userElem);
+                    returnString = "home";
+                }
+            }
+        }
+        if (!validCode) {
+            returnString = "users/forgot_password"; // wrong code entered
+        } else if (!validEmail) {
+            returnString = "users/login"; // wrong email entered
+        }
         return returnString;
     }
 

@@ -16,5 +16,9 @@
     <div><label> Password: <input th:field="*{password}" type="password" name="password"/> </label></div>
     <div><input type="submit" value="Sign In"/></div>
 </form>
+<form th:action="@{/forgot_password}" th:object="${user}">
+    <div><label> Email : <input th:field="*{email}" type="text" name="email"/> </label></div>
+    <input type="submit" value="Forgot Password"/>
+</form>
 </body>
 </html>
