@@ -22,7 +22,6 @@
                    required minlength="10" maxlength="10" name="phone" placeholder="Enter PhoneNumber*" /></br>
 
 
-
             <h2>Payment Info 1</h2>
             <label>Card Number</label></br>
             <i class="fa fa-credit-card-alt icon"></i>
@@ -62,6 +61,10 @@
 
             <button id = "redButton" type="submit" class="btn btn-primary btn-block btn-large">Submit</button></br>
 
+        </form>
+
+        <form th:action="@{/change_password}" th:object="${user}">
+            <input type="submit" value="Change Password"/>
         </form>
     </div>
 </div>

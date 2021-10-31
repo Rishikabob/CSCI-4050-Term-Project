@@ -391,12 +391,12 @@ public class UserController {
         thisUser.setPromo(user.isPromo());
         thisUser.setPhone(user.getPhone());
 
-        System.out.println("user email before loop: " + user.getEmail());  // USER EMAIL IS NEVER SET, CHECK AGAISNT REAL EMAIL SOMEHOW
+        //System.out.println("user email before loop: " + user.getEmail());  // USER EMAIL IS NEVER SET, CHECK AGAISNT REAL EMAIL SOMEHOW
         for (User userElem : userRepository.findAll()) {
-            System.out.println("looping through db");
-            System.out.println("user elem looping email to find match: " + userElem.getEmail());
+//            System.out.println("looping through db");
+//            System.out.println("user elem looping email to find match: " + userElem.getEmail());
             if (userElem.getEmail().equals(thisUser.getEmail())) {
-                System.out.println("found match in db");
+
 
                 //System.out.println("user elem first name b4: " + userElem.getFirstName());
                 //System.out.println("user first name before: " + user.getFirstName());
@@ -420,6 +420,42 @@ public class UserController {
         }
         return "home_loggedin";
 
+    }
+
+    // Change Password
+    @GetMapping("/change_password") // what would happen if multiple ones had same mapping, how would html differentiate
+    public String processChangePassword(Model model) {
+        model.addAttribute("user", thisUser);
+        return "users/change_password";
+
+    }
+
+    // Processes Change Password
+    @PostMapping("/process_change_password") // what would happen if multiple ones had same mapping, how would html differentiate
+    public String processChangePassword(User user) {
+        String returnString = "";
+        System.out.println("old user pass: " + user.getPassword());
+        System.out.println("new user pass: " + user.getCardBill2());
+        boolean validAttempt = false;
+        // check if old password matches password for thisUsers email
+        for (User userElem : userRepository.findAll()) {
+            if (userElem.getEmail().equals(thisUser.getEmail())) {
+                if (userElem.getPassword().equals(user.getPassword())) {
+                    validAttempt = true;
+                    userElem.setPassword(user.getCardBill2());
+                    userRepository.save(userElem);
+                }
+            }
+        }
+        // if old pass is valid
+        if (validAttempt) {
+            returnString = "home_loggedin";
+        } else {
+            returnString = "users/change_password";
+        }
+
+
+        return returnString;
     }
 
 }
