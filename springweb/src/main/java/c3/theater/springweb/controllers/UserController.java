@@ -7,13 +7,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.charset.Charset;
+import java.util.Random;
+
 @Controller
 public class UserController {
 
     private final UserRepository userRepository;
     private final EmailSender emailSender;
     User thisUser;
-    //maybe create a User item here to store which user is currently logged in and can access when edit profile is attempted
+    private String thisRegCode; // the registration code
 
     public UserController(UserRepository userRepository, EmailSender emailSender) {
         this.userRepository = userRepository;
@@ -53,11 +56,10 @@ public class UserController {
     // Processes registration
     @PostMapping("/process_register")
     public String processRegister(User user) {
-        //BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        //String encodedPassword = passwordEncoder.encode(user.getPassword());
-        //user.setPassword(encodedPassword);
         user.setStatus(User.Status.INACTIVE);
-        //System.out.println(user.getFirstName()); // shows how i will accesss user data from attempted login
+
+        // maybe store as a temporary thisUser, not the real one, until they are activated/confirmed
+        // onyl do above though if this seems to cause errors
         userRepository.save(user);
         thisUser = new User();
         thisUser.setFirstName(user.getFirstName());
@@ -77,9 +79,13 @@ public class UserController {
         thisUser.setCardExp3(user.getCardExp3());
         thisUser.setPromo(user.isPromo());
 
-        // make register not send to home logged in till logged in, and dont set this user since it is not active yet
-
-        String code = "abcd1234"; // make sure to randomize this code
+        int random_intA = (int)Math.floor(Math.random()*(9+1)+0); //
+        int random_intB = (int)Math.floor(Math.random()*(9+1)+0); //
+        int random_intC = (int)Math.floor(Math.random()*(9+1)+0); //
+        int random_intD = (int)Math.floor(Math.random()*(9+1)+0); //
+        String generatedString = String.valueOf(random_intA) + String.valueOf(random_intB) + String.valueOf(random_intC) + String.valueOf(random_intD);
+        thisRegCode = generatedString;
+        System.out.println("genereated code string: " + generatedString);
         String emailWithCode = "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" +
                 "\n" +
                 "<span style=\"display:none;font-size:1px;color:#fff;max-height:0\"></span>\n" +
@@ -97,7 +103,7 @@ public class UserController {
                 "                  \n" +
                 "                    </td>\n" +
                 "                    <td style=\"font-size:28px;line-height:1.315789474;Margin-top:4px;padding-left:10px\">\n" +
-                "                      <span style=\"font-family:Helvetica,Arial,sans-serif;font-weight:700;color:#ffffff;text-decoration:none;vertical-align:top;display:inline-block\">Confirm your email</span>\n" +
+                "                      <span style=\"font-family:Helvetica,Arial,sans-serif;font-weight:700;color:#ffffff;text-decoration:none;vertical-align:top;display:inline-block\">Code: " + generatedString + "</span>\n" +
                 "                    </td>\n" +
                 "                  </tr>\n" +
                 "                </tbody></table>\n" +
@@ -135,7 +141,7 @@ public class UserController {
                 "      <td width=\"10\" valign=\"middle\"><br></td>\n" +
                 "      <td style=\"font-family:Helvetica,Arial,sans-serif;font-size:19px;line-height:1.315789474;max-width:560px\">\n" +
                 "        \n" +
-                "            <p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Hi " + ",</p><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> Thank you for registering. Please click on the below link to activate your account: </p><blockquote style=\"Margin:0 0 20px 0;border-left:10px solid #b1b4b6;padding:15px 0 0.1px 15px;font-size:19px;line-height:25px\"><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> <a href=\"" + "\">Activate Now</a> </p></blockquote>\n Link will expire in 15 minutes. <p>See you soon</p>" +
+                "            <p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Hi " + ",</p><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> Thank you for registering. Please enter the code, " + generatedString + " into the site. </p><blockquote style=\"Margin:0 0 20px 0;border-left:10px solid #b1b4b6;padding:15px 0 0.1px 15px;font-size:19px;line-height:25px\"><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> <a href=\"" + "\"></a> </p></blockquote>\n  <p></p>" +
                 "        \n" +
                 "      </td>\n" +
                 "      <td width=\"10\" valign=\"middle\"><br></td>\n" +
@@ -148,7 +154,45 @@ public class UserController {
                 "</div></div>";
         emailSender.send(thisUser.getEmail(), emailWithCode);
 
-        return "home_loggedin";
+        return "users/register_confirm";
+    }
+
+    //METHOD FOR WHEN THE USER REGISTRATION IS CONFIRMED
+    // Confirm registration
+    @PostMapping("/confirm_registration")
+    public String confirmRegistration(User user) { // maybe pass String rather than user?, how to do multiple params
+        //model.addAttribute("code", thisRegCode);
+        //model.addAttribute("user", new User());
+        System.out.println("the user code entered stored in getCardNum2 : " + user.getCardNum2());
+        String returnString = "";
+
+        if (user.getCardNum2().equals(thisRegCode)) { // valid code entered
+            //user.setStatus(User.Status.ACTIVE); // maybe store a current registerAttemptUser;
+            // MAKE STATUS ACTIVE
+            returnString = "home_loggedin";
+        } else { // invalid code entered
+            returnString = "users/register_confirm";
+        }
+
+//        thisUser = new User();
+//        thisUser.setFirstName(user.getFirstName());
+//        thisUser.setLastName(user.getLastName());
+//        thisUser.setPassword(user.getPassword());
+//        thisUser.setStatus(user.getStatus());
+//        thisUser.setId(user.getId()); // not working?, probably not an issue tho
+//        thisUser.setEmail(user.getEmail());
+//        thisUser.setCardNum1(user.getCardNum1());
+//        thisUser.setCardBill1(user.getCardBill1());
+//        thisUser.setCardExp1(user.getCardExp1());
+//        thisUser.setCardNum2(user.getCardNum2());
+//        thisUser.setCardBill2(user.getCardBill2());
+//        thisUser.setCardExp2(user.getCardExp2());
+//        thisUser.setCardNum3(user.getCardNum3());
+//        thisUser.setCardBill3(user.getCardBill3());
+//        thisUser.setCardExp3(user.getCardExp3());
+//        thisUser.setPromo(user.isPromo());
+
+        return returnString;
     }
 
     // Allows login
