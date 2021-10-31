@@ -81,6 +81,7 @@ public class UserController {
         thisRegAttemptUser.setCardBill3(user.getCardBill3());
         thisRegAttemptUser.setCardExp3(user.getCardExp3());
         thisRegAttemptUser.setPromo(user.isPromo());
+        thisRegAttemptUser.setPhone(user.getPhone());
 
         int random_intA = (int)Math.floor(Math.random()*(9+1)+0); //
         int random_intB = (int)Math.floor(Math.random()*(9+1)+0); //
@@ -188,6 +189,7 @@ public class UserController {
             thisUser.setCardBill3(thisRegAttemptUser.getCardBill3());
             thisUser.setCardExp3(thisRegAttemptUser.getCardExp3());
             thisUser.setPromo(thisRegAttemptUser.isPromo());
+            thisUser.setPhone(thisRegAttemptUser.getPhone());
             for (User userElem : userRepository.findAll()) { // finds user in db that
                 if (userElem.getEmail().equals(thisUser.getEmail())) {
                     userElem.setStatus(User.Status.ACTIVE);
@@ -241,6 +243,7 @@ public class UserController {
                     thisUser.setCardBill3(userElem.getCardBill3());
                     thisUser.setCardExp3(userElem.getCardExp3());
                     thisUser.setPromo(userElem.isPromo());
+                    thisUser.setPhone(userElem.getPhone());
                     break; // make sure this doesnt mess with anything and only breaks out of for loop
                 }
             }
@@ -290,10 +293,6 @@ public class UserController {
     public String processEditProfile(User user) {
         thisUser.setFirstName(user.getFirstName());
         thisUser.setLastName(user.getLastName());
-        thisUser.setPassword(user.getPassword());
-        thisUser.setStatus(user.getStatus());
-        thisUser.setId(user.getId()); // not working?, probably not an issue tho
-        thisUser.setEmail(user.getEmail());
         thisUser.setCardNum1(user.getCardNum1());
         thisUser.setCardBill1(user.getCardBill1());
         thisUser.setCardExp1(user.getCardExp1());
@@ -304,13 +303,19 @@ public class UserController {
         thisUser.setCardBill3(user.getCardBill3());
         thisUser.setCardExp3(user.getCardExp3());
         thisUser.setPromo(user.isPromo());
+        thisUser.setPhone(user.getPhone());
 
+        System.out.println("user email before loop: " + user.getEmail());  // USER EMAIL IS NEVER SET, CHECK AGAISNT REAL EMAIL SOMEHOW
         for (User userElem : userRepository.findAll()) {
-            if (userElem.getEmail().equals(user.getEmail())) {
-                //userElem = user;
-                //System.out.println("user card 1: " + user.getCardNum1());
+            System.out.println("looping through db");
+            System.out.println("user elem looping email to find match: " + userElem.getEmail());
+            if (userElem.getEmail().equals(thisUser.getEmail())) {
+                System.out.println("found match in db");
 
+                //System.out.println("user elem first name b4: " + userElem.getFirstName());
+                //System.out.println("user first name before: " + user.getFirstName());
                 userElem.setFirstName(user.getFirstName());
+                //System.out.println("user elem first name after: " + userElem.getFirstName());
                 userElem.setLastName(user.getLastName());
                 userElem.setCardNum1(user.getCardNum1());
                 userElem.setCardBill1(user.getCardBill1());
@@ -322,6 +327,7 @@ public class UserController {
                 userElem.setCardBill3(user.getCardBill3());
                 userElem.setCardExp3(user.getCardExp3());
                 userElem.setPromo(user.isPromo());
+                userElem.setPhone(user.getPhone());
                 userRepository.save(userElem);
                 break;
             }

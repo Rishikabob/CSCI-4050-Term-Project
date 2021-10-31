@@ -25,6 +25,7 @@ public class User {
     private String cardExp1;
     private String cardExp2;
     private String cardExp3;
+    private String phone;
     private boolean promo;
 
     public User() {
@@ -36,6 +37,14 @@ public class User {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public Long getId() {

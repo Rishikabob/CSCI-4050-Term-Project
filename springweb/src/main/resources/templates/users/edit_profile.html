@@ -13,21 +13,17 @@
               method="post" style="max-width: 600px; margin: 0 auto;">
 
 
-            <i class="fa fa-key icon"></i>
-            <input type="password" th:field="*{password}" class="form-control"
-                   required minlength="6" maxlength="10" name="p" placeholder="Enter Password*" /></br>
-            <i class="fa fa-key icon"></i>
-            <input type="password" name="rp" placeholder="Re-Enter Password*" required="required" /></br>
-
-            <i class="fa fa-envelope icon"></i>
-            <input  th:field="*{email}" class="form-control" type="text" name="ea" placeholder="Enter Email*" required="required" /></br>
-
             <input th:field="*{firstName}" class="form-control"
                    required minlength="2" maxlength="20" type="text" name="fn" placeholder="Enter First Name"/>
             <input type="text" th:field="*{lastName}" class="form-control"
                    required minlength="2" maxlength="20" name="ln" placeholder="Enter Last Name"/>
+            <i class="fa fa-key icon"></i>
+            <input type="text" th:field="*{phone}" class="form-control"
+                   required minlength="10" maxlength="10" name="phone" placeholder="Enter PhoneNumber*" /></br>
 
-            <h2>Payment Info</h2>
+
+
+            <h2>Payment Info 1</h2>
             <label>Card Number</label></br>
             <i class="fa fa-credit-card-alt icon"></i>
             <input th:field="*{cardNum1}" type="text" name="cc1"/>
@@ -38,8 +34,34 @@
             <!--Street-->
             <i class="fa fa-road icon"></i>
             <input th:field="*{cardBill1}" type="text" name="sa" placeholder="Enter Billing Address"/></br>
+
+            <h2>Payment Info 2</h2>
+            <label>Card Number</label></br>
+            <i class="fa fa-credit-card-alt icon"></i>
+            <input th:field="*{cardNum2}" type="text" name="cc2"/>
+            <br />
+            <label>Expiration Date</label>
+            </br>
+            <input th:field="*{cardExp2}" type="text" name="cc2"/>
+            <!--Street-->
+            <i class="fa fa-road icon"></i>
+            <input th:field="*{cardBill2}" type="text" name="sa" placeholder="Enter Billing Address"/></br>
+
+            <h2>Payment Info 3</h2>
+            <label>Card Number</label></br>
+            <i class="fa fa-credit-card-alt icon"></i>
+            <input th:field="*{cardNum3}" type="text" name="cc3"/>
+            <br />
+            <label>Expiration Date</label>
+            </br>
+            <input th:field="*{cardExp3}" type="text" name="cc3"/>
+            <!--Street-->
+            <i class="fa fa-road icon"></i>
+            <input th:field="*{cardBill3}" type="text" name="sa" placeholder="Enter Billing Address"/></br>
+
             <label>Sign up for promos?</label>
             <input th:field="*{promo}" type="checkbox" id="promos" name="promos">
+
             <button id = "redButton" type="submit" class="btn btn-primary btn-block btn-large">Submit</button></br>
 
         </form>
