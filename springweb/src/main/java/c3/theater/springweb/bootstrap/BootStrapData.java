@@ -24,6 +24,7 @@ public class BootStrapData implements CommandLineRunner {
         System.out.println("Num users: " + userRepository.count());
 
         User user = new User("bob@gmail.com", "abc123", "Bob", "Smith");
+        user.setStatus(User.Status.ACTIVE);
         userRepository.save(user);
 
         System.out.println("Num users: " + userRepository.count());

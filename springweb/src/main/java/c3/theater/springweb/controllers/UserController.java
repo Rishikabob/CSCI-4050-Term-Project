@@ -58,107 +58,116 @@ public class UserController {
     @PostMapping("/process_register")
     public String processRegister(User user) {
         user.setStatus(User.Status.INACTIVE);
+        String returnString = "";
+        boolean validNewEmail = true;
+        // determine if valid or not
+        for (User userElem : userRepository.findAll()) {
+            if (userElem.getEmail().equals(user.getEmail())) {
+                validNewEmail = false;
+            }
+        }
 
-        // maybe store as a temporary thisUser, not the real one, until they are activated/confirmed
-        // onyl do above though if this seems to cause errors
-        //thisUser = new User();
-        //thisUser.setEmail();
-        userRepository.save(user);
-        thisRegAttemptUser = new User();
-        thisRegAttemptUser.setFirstName(user.getFirstName());
-        thisRegAttemptUser.setLastName(user.getLastName());
-        thisRegAttemptUser.setPassword(user.getPassword());
-        thisRegAttemptUser.setStatus(user.getStatus());
-        thisRegAttemptUser.setId(user.getId()); // not working?, probably not an issue tho
-        thisRegAttemptUser.setEmail(user.getEmail());
-        thisRegAttemptUser.setCardNum1(user.getCardNum1());
-        thisRegAttemptUser.setCardBill1(user.getCardBill1());
-        thisRegAttemptUser.setCardExp1(user.getCardExp1());
-        thisRegAttemptUser.setCardNum2(user.getCardNum2());
-        thisRegAttemptUser.setCardBill2(user.getCardBill2());
-        thisRegAttemptUser.setCardExp2(user.getCardExp2());
-        thisRegAttemptUser.setCardNum3(user.getCardNum3());
-        thisRegAttemptUser.setCardBill3(user.getCardBill3());
-        thisRegAttemptUser.setCardExp3(user.getCardExp3());
-        thisRegAttemptUser.setPromo(user.isPromo());
-        thisRegAttemptUser.setPhone(user.getPhone());
+        if (validNewEmail) {
+            userRepository.save(user);
+            thisRegAttemptUser = new User();
+            thisRegAttemptUser.setFirstName(user.getFirstName());
+            thisRegAttemptUser.setLastName(user.getLastName());
+            thisRegAttemptUser.setPassword(user.getPassword());
+            thisRegAttemptUser.setStatus(user.getStatus());
+            thisRegAttemptUser.setId(user.getId()); // not working?, probably not an issue tho
+            thisRegAttemptUser.setEmail(user.getEmail());
+            thisRegAttemptUser.setCardNum1(user.getCardNum1());
+            thisRegAttemptUser.setCardBill1(user.getCardBill1());
+            thisRegAttemptUser.setCardExp1(user.getCardExp1());
+            thisRegAttemptUser.setCardNum2(user.getCardNum2());
+            thisRegAttemptUser.setCardBill2(user.getCardBill2());
+            thisRegAttemptUser.setCardExp2(user.getCardExp2());
+            thisRegAttemptUser.setCardNum3(user.getCardNum3());
+            thisRegAttemptUser.setCardBill3(user.getCardBill3());
+            thisRegAttemptUser.setCardExp3(user.getCardExp3());
+            thisRegAttemptUser.setPromo(user.isPromo());
+            thisRegAttemptUser.setPhone(user.getPhone());
 
-        int random_intA = (int)Math.floor(Math.random()*(9+1)+0); //
-        int random_intB = (int)Math.floor(Math.random()*(9+1)+0); //
-        int random_intC = (int)Math.floor(Math.random()*(9+1)+0); //
-        int random_intD = (int)Math.floor(Math.random()*(9+1)+0); //
-        String generatedString = String.valueOf(random_intA) + String.valueOf(random_intB) + String.valueOf(random_intC) + String.valueOf(random_intD);
-        thisRegCode = generatedString;
-        System.out.println("genereated code string: " + generatedString);
-        String emailWithCode = "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" +
-                "\n" +
-                "<span style=\"display:none;font-size:1px;color:#fff;max-height:0\"></span>\n" +
-                "\n" +
-                "  <table role=\"presentation\" width=\"100%\" style=\"border-collapse:collapse;min-width:100%;width:100%!important\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n" +
-                "    <tbody><tr>\n" +
-                "      <td width=\"100%\" height=\"53\" bgcolor=\"#0b0c0c\">\n" +
-                "        \n" +
-                "        <table role=\"presentation\" width=\"100%\" style=\"border-collapse:collapse;max-width:580px\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\">\n" +
-                "          <tbody><tr>\n" +
-                "            <td width=\"70\" bgcolor=\"#0b0c0c\" valign=\"middle\">\n" +
-                "                <table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse\">\n" +
-                "                  <tbody><tr>\n" +
-                "                    <td style=\"padding-left:10px\">\n" +
-                "                  \n" +
-                "                    </td>\n" +
-                "                    <td style=\"font-size:28px;line-height:1.315789474;Margin-top:4px;padding-left:10px\">\n" +
-                "                      <span style=\"font-family:Helvetica,Arial,sans-serif;font-weight:700;color:#ffffff;text-decoration:none;vertical-align:top;display:inline-block\">Code: " + generatedString + "</span>\n" +
-                "                    </td>\n" +
-                "                  </tr>\n" +
-                "                </tbody></table>\n" +
-                "              </a>\n" +
-                "            </td>\n" +
-                "          </tr>\n" +
-                "        </tbody></table>\n" +
-                "        \n" +
-                "      </td>\n" +
-                "    </tr>\n" +
-                "  </tbody></table>\n" +
-                "  <table role=\"presentation\" class=\"m_-6186904992287805515content\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse;max-width:580px;width:100%!important\" width=\"100%\">\n" +
-                "    <tbody><tr>\n" +
-                "      <td width=\"10\" height=\"10\" valign=\"middle\"></td>\n" +
-                "      <td>\n" +
-                "        \n" +
-                "                <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse\">\n" +
-                "                  <tbody><tr>\n" +
-                "                    <td bgcolor=\"#1D70B8\" width=\"100%\" height=\"10\"></td>\n" +
-                "                  </tr>\n" +
-                "                </tbody></table>\n" +
-                "        \n" +
-                "      </td>\n" +
-                "      <td width=\"10\" valign=\"middle\" height=\"10\"></td>\n" +
-                "    </tr>\n" +
-                "  </tbody></table>\n" +
-                "\n" +
-                "\n" +
-                "\n" +
-                "  <table role=\"presentation\" class=\"m_-6186904992287805515content\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse;max-width:580px;width:100%!important\" width=\"100%\">\n" +
-                "    <tbody><tr>\n" +
-                "      <td height=\"30\"><br></td>\n" +
-                "    </tr>\n" +
-                "    <tr>\n" +
-                "      <td width=\"10\" valign=\"middle\"><br></td>\n" +
-                "      <td style=\"font-family:Helvetica,Arial,sans-serif;font-size:19px;line-height:1.315789474;max-width:560px\">\n" +
-                "        \n" +
-                "            <p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Hi " + ",</p><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> Thank you for registering. Please enter the code, " + generatedString + " into the site. </p><blockquote style=\"Margin:0 0 20px 0;border-left:10px solid #b1b4b6;padding:15px 0 0.1px 15px;font-size:19px;line-height:25px\"><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> <a href=\"" + "\"></a> </p></blockquote>\n  <p></p>" +
-                "        \n" +
-                "      </td>\n" +
-                "      <td width=\"10\" valign=\"middle\"><br></td>\n" +
-                "    </tr>\n" +
-                "    <tr>\n" +
-                "      <td height=\"30\"><br></td>\n" +
-                "    </tr>\n" +
-                "  </tbody></table><div class=\"yj6qo\"></div><div class=\"adL\">\n" +
-                "\n" +
-                "</div></div>";
-        emailSender.send(thisRegAttemptUser.getEmail(), emailWithCode);
-
-        return "users/register_confirm";
+            int random_intA = (int) Math.floor(Math.random() * (9 + 1) + 0); //
+            int random_intB = (int) Math.floor(Math.random() * (9 + 1) + 0); //
+            int random_intC = (int) Math.floor(Math.random() * (9 + 1) + 0); //
+            int random_intD = (int) Math.floor(Math.random() * (9 + 1) + 0); //
+            String generatedString = String.valueOf(random_intA) + String.valueOf(random_intB) + String.valueOf(random_intC) + String.valueOf(random_intD);
+            thisRegCode = generatedString;
+            //System.out.println("genereated code string: " + generatedString);
+            String emailWithCode = "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" +
+                    "\n" +
+                    "<span style=\"display:none;font-size:1px;color:#fff;max-height:0\"></span>\n" +
+                    "\n" +
+                    "  <table role=\"presentation\" width=\"100%\" style=\"border-collapse:collapse;min-width:100%;width:100%!important\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n" +
+                    "    <tbody><tr>\n" +
+                    "      <td width=\"100%\" height=\"53\" bgcolor=\"#0b0c0c\">\n" +
+                    "        \n" +
+                    "        <table role=\"presentation\" width=\"100%\" style=\"border-collapse:collapse;max-width:580px\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\">\n" +
+                    "          <tbody><tr>\n" +
+                    "            <td width=\"70\" bgcolor=\"#0b0c0c\" valign=\"middle\">\n" +
+                    "                <table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse\">\n" +
+                    "                  <tbody><tr>\n" +
+                    "                    <td style=\"padding-left:10px\">\n" +
+                    "                  \n" +
+                    "                    </td>\n" +
+                    "                    <td style=\"font-size:28px;line-height:1.315789474;Margin-top:4px;padding-left:10px\">\n" +
+                    "                      <span style=\"font-family:Helvetica,Arial,sans-serif;font-weight:700;color:#ffffff;text-decoration:none;vertical-align:top;display:inline-block\">Code: " + generatedString + "</span>\n" +
+                    "                    </td>\n" +
+                    "                  </tr>\n" +
+                    "                </tbody></table>\n" +
+                    "              </a>\n" +
+                    "            </td>\n" +
+                    "          </tr>\n" +
+                    "        </tbody></table>\n" +
+                    "        \n" +
+                    "      </td>\n" +
+                    "    </tr>\n" +
+                    "  </tbody></table>\n" +
+                    "  <table role=\"presentation\" class=\"m_-6186904992287805515content\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse;max-width:580px;width:100%!important\" width=\"100%\">\n" +
+                    "    <tbody><tr>\n" +
+                    "      <td width=\"10\" height=\"10\" valign=\"middle\"></td>\n" +
+                    "      <td>\n" +
+                    "        \n" +
+                    "                <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse\">\n" +
+                    "                  <tbody><tr>\n" +
+                    "                    <td bgcolor=\"#1D70B8\" width=\"100%\" height=\"10\"></td>\n" +
+                    "                  </tr>\n" +
+                    "                </tbody></table>\n" +
+                    "        \n" +
+                    "      </td>\n" +
+                    "      <td width=\"10\" valign=\"middle\" height=\"10\"></td>\n" +
+                    "    </tr>\n" +
+                    "  </tbody></table>\n" +
+                    "\n" +
+                    "\n" +
+                    "\n" +
+                    "  <table role=\"presentation\" class=\"m_-6186904992287805515content\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse;max-width:580px;width:100%!important\" width=\"100%\">\n" +
+                    "    <tbody><tr>\n" +
+                    "      <td height=\"30\"><br></td>\n" +
+                    "    </tr>\n" +
+                    "    <tr>\n" +
+                    "      <td width=\"10\" valign=\"middle\"><br></td>\n" +
+                    "      <td style=\"font-family:Helvetica,Arial,sans-serif;font-size:19px;line-height:1.315789474;max-width:560px\">\n" +
+                    "        \n" +
+                    "            <p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Hi " + ",</p><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> Thank you for registering. Please enter the code, " + generatedString + " into the site. </p><blockquote style=\"Margin:0 0 20px 0;border-left:10px solid #b1b4b6;padding:15px 0 0.1px 15px;font-size:19px;line-height:25px\"><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> <a href=\"" + "\"></a> </p></blockquote>\n  <p></p>" +
+                    "        \n" +
+                    "      </td>\n" +
+                    "      <td width=\"10\" valign=\"middle\"><br></td>\n" +
+                    "    </tr>\n" +
+                    "    <tr>\n" +
+                    "      <td height=\"30\"><br></td>\n" +
+                    "    </tr>\n" +
+                    "  </tbody></table><div class=\"yj6qo\"></div><div class=\"adL\">\n" +
+                    "\n" +
+                    "</div></div>";
+            emailSender.send(thisRegAttemptUser.getEmail(), emailWithCode);
+            returnString = "users/register_confirm";
+        } else {
+            returnString = "users/signup_form";
+            // TRY TO ADD APPROPRIATE MESSAGE TO USER INDICATING EMAIL IS ALREADY USED
+        }
+        return returnString;
     }
 
     //METHOD FOR WHEN THE USER REGISTRATION IS CONFIRMED
@@ -220,12 +229,15 @@ public class UserController {
         String enteredEmail = user.getEmail();
         String enteredPassword = user.getPassword();
         boolean valid = false;
+        boolean userInactive = false;
         // loop through db and see if input matches any db entries
-        for (User userElem : userRepository.findAll()) {
+        for (User userElem : userRepository.findAll()) { // checks if valid email and password, and sets it to this user
             if (userElem.getEmail().equals(enteredEmail)) {
                 if (userElem.getPassword().equals(enteredPassword)) {
                     valid = true;
-                    // maybe make a func to do this automatically for two user params
+                    if (userElem.getStatus().equals(User.Status.INACTIVE)) { // if user is valid but inactive
+                        userInactive = true;
+                    }
                     thisUser = new User();
                     thisUser.setFirstName(userElem.getFirstName());
                     thisUser.setLastName(userElem.getLastName());
@@ -250,12 +262,86 @@ public class UserController {
         }
         if (valid) { // valid login
             returnString = "home_loggedin";
-            //thisUser = userElem; // saves login as the current thisUser, DOES THIS  ACTUALLY WORK, maybe instead set all the values
-
-
-            //System.out.println("This user after login: " + thisUser.toString());
-            //System.out.println("Real user after login: " + user.toString());
-            // IS ABOVE CORRECT WAY TO SET EQUALS, maybe need to just set all values same/have set equals func
+            if (userInactive) {
+                // if user is valid, but not active yet, send to confirmation page and send confirm code
+                // send confirm code
+                int random_intA = (int) Math.floor(Math.random() * (9 + 1) + 0); //
+                int random_intB = (int) Math.floor(Math.random() * (9 + 1) + 0); //
+                int random_intC = (int) Math.floor(Math.random() * (9 + 1) + 0); //
+                int random_intD = (int) Math.floor(Math.random() * (9 + 1) + 0); //
+                String generatedString = String.valueOf(random_intA) + String.valueOf(random_intB) + String.valueOf(random_intC) + String.valueOf(random_intD);
+                thisRegCode = generatedString;
+                //System.out.println("genereated code string: " + generatedString);
+                String emailWithCode = "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" +
+                        "\n" +
+                        "<span style=\"display:none;font-size:1px;color:#fff;max-height:0\"></span>\n" +
+                        "\n" +
+                        "  <table role=\"presentation\" width=\"100%\" style=\"border-collapse:collapse;min-width:100%;width:100%!important\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n" +
+                        "    <tbody><tr>\n" +
+                        "      <td width=\"100%\" height=\"53\" bgcolor=\"#0b0c0c\">\n" +
+                        "        \n" +
+                        "        <table role=\"presentation\" width=\"100%\" style=\"border-collapse:collapse;max-width:580px\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\">\n" +
+                        "          <tbody><tr>\n" +
+                        "            <td width=\"70\" bgcolor=\"#0b0c0c\" valign=\"middle\">\n" +
+                        "                <table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse\">\n" +
+                        "                  <tbody><tr>\n" +
+                        "                    <td style=\"padding-left:10px\">\n" +
+                        "                  \n" +
+                        "                    </td>\n" +
+                        "                    <td style=\"font-size:28px;line-height:1.315789474;Margin-top:4px;padding-left:10px\">\n" +
+                        "                      <span style=\"font-family:Helvetica,Arial,sans-serif;font-weight:700;color:#ffffff;text-decoration:none;vertical-align:top;display:inline-block\">Code: " + generatedString + "</span>\n" +
+                        "                    </td>\n" +
+                        "                  </tr>\n" +
+                        "                </tbody></table>\n" +
+                        "              </a>\n" +
+                        "            </td>\n" +
+                        "          </tr>\n" +
+                        "        </tbody></table>\n" +
+                        "        \n" +
+                        "      </td>\n" +
+                        "    </tr>\n" +
+                        "  </tbody></table>\n" +
+                        "  <table role=\"presentation\" class=\"m_-6186904992287805515content\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse;max-width:580px;width:100%!important\" width=\"100%\">\n" +
+                        "    <tbody><tr>\n" +
+                        "      <td width=\"10\" height=\"10\" valign=\"middle\"></td>\n" +
+                        "      <td>\n" +
+                        "        \n" +
+                        "                <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse\">\n" +
+                        "                  <tbody><tr>\n" +
+                        "                    <td bgcolor=\"#1D70B8\" width=\"100%\" height=\"10\"></td>\n" +
+                        "                  </tr>\n" +
+                        "                </tbody></table>\n" +
+                        "        \n" +
+                        "      </td>\n" +
+                        "      <td width=\"10\" valign=\"middle\" height=\"10\"></td>\n" +
+                        "    </tr>\n" +
+                        "  </tbody></table>\n" +
+                        "\n" +
+                        "\n" +
+                        "\n" +
+                        "  <table role=\"presentation\" class=\"m_-6186904992287805515content\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse;max-width:580px;width:100%!important\" width=\"100%\">\n" +
+                        "    <tbody><tr>\n" +
+                        "      <td height=\"30\"><br></td>\n" +
+                        "    </tr>\n" +
+                        "    <tr>\n" +
+                        "      <td width=\"10\" valign=\"middle\"><br></td>\n" +
+                        "      <td style=\"font-family:Helvetica,Arial,sans-serif;font-size:19px;line-height:1.315789474;max-width:560px\">\n" +
+                        "        \n" +
+                        "            <p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Hi " + ",</p><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> Thank you for registering. Please enter the code, " + generatedString + " into the site. </p><blockquote style=\"Margin:0 0 20px 0;border-left:10px solid #b1b4b6;padding:15px 0 0.1px 15px;font-size:19px;line-height:25px\"><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> <a href=\"" + "\"></a> </p></blockquote>\n  <p></p>" +
+                        "        \n" +
+                        "      </td>\n" +
+                        "      <td width=\"10\" valign=\"middle\"><br></td>\n" +
+                        "    </tr>\n" +
+                        "    <tr>\n" +
+                        "      <td height=\"30\"><br></td>\n" +
+                        "    </tr>\n" +
+                        "  </tbody></table><div class=\"yj6qo\"></div><div class=\"adL\">\n" +
+                        "\n" +
+                        "</div></div>";
+                emailSender.send(thisRegAttemptUser.getEmail(), emailWithCode);
+                // send to confirm page
+                returnString = "users/register_confirm";
+            }
         } else { // invalid login
             returnString = "users/login"; // a failed login should return user to login attempt
         }
@@ -335,10 +421,5 @@ public class UserController {
         return "home_loggedin";
 
     }
-
-    // why does this user not have a first and last name saved?, it might not be attached to real user (auto fill in webPage)
-
-    // HELPER METHOD TO ASSIGN ONE USER ALL THE VALUES OF SECOND USER
-
 
 }

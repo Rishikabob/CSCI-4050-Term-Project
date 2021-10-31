@@ -31,9 +31,7 @@
             <label>Expiration Date</label>
             </br>
             <input th:field="*{cardExp1}" type="text" name="cc1"/>
-            <!--Street-->
-            <i class="fa fa-road icon"></i>
-            <input th:field="*{cardBill1}" type="text" name="sa" placeholder="Enter Billing Address"/></br>
+
 
             <h2>Payment Info 2</h2>
             <label>Card Number</label></br>
@@ -43,9 +41,7 @@
             <label>Expiration Date</label>
             </br>
             <input th:field="*{cardExp2}" type="text" name="cc2"/>
-            <!--Street-->
-            <i class="fa fa-road icon"></i>
-            <input th:field="*{cardBill2}" type="text" name="sa" placeholder="Enter Billing Address"/></br>
+
 
             <h2>Payment Info 3</h2>
             <label>Card Number</label></br>
@@ -55,9 +51,11 @@
             <label>Expiration Date</label>
             </br>
             <input th:field="*{cardExp3}" type="text" name="cc3"/>
+
+            <h2>Billing Information (Street Address, City, State, Zip Code)</h2>
             <!--Street-->
             <i class="fa fa-road icon"></i>
-            <input th:field="*{cardBill3}" type="text" name="sa" placeholder="Enter Billing Address"/></br>
+            <input th:field="*{cardBill1}" type="text" name="sa" placeholder="Enter Billing Address"/></br>
 
             <label>Sign up for promos?</label>
             <input th:field="*{promo}" type="checkbox" id="promos" name="promos">
