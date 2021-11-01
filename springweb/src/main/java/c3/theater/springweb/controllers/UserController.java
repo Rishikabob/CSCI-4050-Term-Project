@@ -14,6 +14,7 @@ import java.util.Random;
 public class UserController {
 
     private final UserRepository userRepository;
+
     private final EmailSender emailSender;
     User thisUser;
     private User thisRegAttemptUser;

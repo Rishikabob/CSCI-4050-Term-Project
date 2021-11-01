@@ -1,7 +1,9 @@
 package c3.theater.springweb.bootstrap;
 
 import c3.theater.springweb.repositories.UserRepository;
+import c3.theater.springweb.repositories.AdminRepository;
 import c3.theater.springweb.domain.User;
+import c3.theater.springweb.domain.Admin;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -11,9 +13,11 @@ import c3.theater.springweb.repositories.UserRepository;
 public class BootStrapData implements CommandLineRunner {
 
     public final UserRepository userRepository;
+    public final AdminRepository adminRepository;
 
-    public BootStrapData(UserRepository userRepository) {
+    public BootStrapData(UserRepository userRepository, AdminRepository adminRepository) {
         this.userRepository = userRepository;
+        this.adminRepository = adminRepository;
     }
 
     @Override
@@ -26,6 +30,9 @@ public class BootStrapData implements CommandLineRunner {
         User user = new User("bob@gmail.com", "abc123", "Bob", "Smith");
         user.setStatus(User.Status.ACTIVE);
         userRepository.save(user);
+
+        Admin admin = new Admin("testAdmin", "aaabbb");
+        adminRepository.save(admin);
 
         System.out.println("Num users: " + userRepository.count());
     }
