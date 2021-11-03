@@ -4,12 +4,14 @@
 		<meta charset="utf-8">
 		<title>Order Summary</title>
 		<link rel="stylesheet" href="resources/css/orderSummary.css">
+
 	</head>
 		<header>
 			<h1 id = "header">Order Summary</h1></br></br>
 		</header>
 		<body class="container">
 			<div class="content">
+			
 			<h2>Your Ticket Details:</h2>
 			<p>Movie: Shang Chi</p>
 			<p>Date/Time: Sunday, Oct. 16 at 7:00 pm</p>
@@ -19,21 +21,25 @@
 			<p>Child: $5.00</p>
 			<p>Senior: $5.00</p>
 			<p>Total Tickets: 2</p>
+			
 			<button class = inlineAddSubtract>-</button><p class = inline>Adult Tickets: 1</p><button class = inlineAddSubtract>+</button><br>
 			<button class = inlineAddSubtract>-</button><p class = inline>Child Tickets: 0</p><button class = inlineAddSubtract>+</button><br>
 			<button class = inlineAddSubtract>-</button><p class = inline>Senior Tickets: 1</p><button class = inlineAddSubtract>+</button>
+			
 			<p>Ticket Price: 1 x $10.00 = $10.00</p>
 			<p> 1 x $5.00 = $5.00</p>
 			<p>Tax: $1.99</p>
 			<div class="sep"></div>
 			<p>Order Total: $16.99</p>
+			<div class = "searchContainer">
+				<input type="text" placeholder="Enter Promocode Here">
+			</div>
+			<br>
+			<footer class="container">
+				<button type="button">Confirm Promocode</button>
+			</footer>
+			<!-- display how much is saved and update order total if promocode is valid. if not display promocode not found -->
 		</div>
-		
-		<footer class="container">
-				<button type="button">Confirm</button>
-				<button type="button">Update</button>
-				<button type="button">Delete</button>
-		</footer>
 		
 	</body>
 	  <a href="selectseats.html">

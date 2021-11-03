@@ -5,7 +5,22 @@
 	margin-inline: 1%;
 }	
 
+.searchContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    
+}
 
+.searchContainer input {
+    width: 105%;
+    padding: 10px;
+    outline: none;
+    border-radius: 25px 25px 25px 025px;
+    border-style: none;
+	background: white;
+    
+}
 #header {
 	border: thin solid crimson;
 	background-color: crimson;
@@ -30,7 +45,7 @@ div.sep {
 button {
 	margin-top: 1%;
 	height: 50px;
-	width: 100px;
+	width: 115px;
 	background-color: crimson;
     border-radius: 25px;
 	color: white;
