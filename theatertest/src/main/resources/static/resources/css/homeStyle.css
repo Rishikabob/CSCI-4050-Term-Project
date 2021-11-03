@@ -62,7 +62,6 @@ h1 {
     display: flex;
     justify-content: center;
     width: 100%;
-    
 }
 
 .searchContainer input {
@@ -71,7 +70,6 @@ h1 {
     outline: none;
     border-radius: 0px 25px 25px 0px;
     border-style: none;
-    
 }
 
 .icon {
