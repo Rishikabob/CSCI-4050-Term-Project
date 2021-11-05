@@ -1,0 +1,77 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+	background-color: #252525;
+	color: white;
+	margin-inline: 1%;
+}
+
+#trailerBlock {
+	display: block;
+}
+
+div.desc {
+	color:white;
+	text-align:center;
+}
+
+#search {
+	margin-top: 1em;
+	margin-left: 22em;
+	width: 50em;
+	background-color: white;
+}
+
+button.bookMovie {
+	float:none;
+	margin-left: 2.5em;
+	background-color: red;
+	color: white;
+	border-radius: 5px;
+	border-color: red;
+	
+}
+
+div.gallery {
+	margin: 20px;
+	border: 2px solid black;
+	float: left;
+	width: 150px;
+}
+
+div.gallery:hover {
+	border: solid white;
+}
+
+div.gallery img {
+	width: 100%;
+	height: 200px;
+}
+
+#header {
+	border: thin solid red;
+	background-color: red;
+	margin-right: 1%;
+	margin-left: 1%;
+	margin-top: 1%;
+	margin-bottom: 1%;
+	font-size: 400%;
+	border-radius: 5px;
+}
+
+
+#signin, #signup {
+	float:right;
+	background-color: white;
+	border-radius: 5px;
+	border-color: white;
+	color: red;
+}
+
+.line {
+	border-left: 1px solid white;
+	height: 1em;
+}
+
+h2 {
+	color: white;
+}
