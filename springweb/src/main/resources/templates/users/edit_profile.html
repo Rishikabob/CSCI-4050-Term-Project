@@ -2,13 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Edit Profile</title>
-    <link rel="stylesheet" type="text/css"  href="css/signup.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css"  href="resources/css/signup.css">
 </head>
 <body>
 <div class="container">
     <div class="box">
-        <h1 id = 'header'>Sign Up</h1>
+        <h1 id = 'header'>Edit Profile</h1>
         <form id = form th:action="@{/process_edit_profile}" th:object="${user}"
               method="post" style="max-width: 600px; margin: 0 auto;">
 
