@@ -2,6 +2,7 @@ package c3.theater.springweb.controllers;
 
 import c3.theater.springweb.domain.Admin;
 import c3.theater.springweb.repositories.AdminRepository;
+import c3.theater.springweb.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,9 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class AdminController {
 
     private final AdminRepository adminRepository;
+    private final UserRepository userRepository;
 
-    public AdminController(AdminRepository adminRepository) {
+    public AdminController(AdminRepository adminRepository, UserRepository userRepository) {
         this.adminRepository = adminRepository;
+        this.userRepository = userRepository;
     }
 
     // Allows login
@@ -42,6 +45,16 @@ public class AdminController {
     @PostMapping("/a_logout")
     public String adminLogout(Model model) {
         String returnString = "home";
+
+
+
+        return returnString;
+    }
+
+    @PostMapping("/manage_users")
+    public String adminManageUsers(Model model) {
+        model.addAttribute("users", userRepository.findAll());
+        String returnString = "admin/manage_users";
 
 
 
