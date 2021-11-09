@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Users List</title>
-    <link rel ="stylesheet" type="text/css" href="resources/css/style.css"/>
+    <link rel ="stylesheet" type="text/css" href="resources/css/homeStyle.css"/>
 
 </head>
 <body>
@@ -24,6 +24,10 @@
         <td th:text="${user.email}">testemail@testemailprovider.com</td>
         <td th:text="${user.password}">abc123</td>
     </tr>
+    <form th:action="@{/manage_user}" th:object="${user}" method="post">
+        <div><label> ID : <input th:field="*{id}" type="text" name="User ID"/> </label></div>
+        <div><input type="submit" value="Manage this user"/></div>
+    </form>
 </table>
 
 <!--Below - Figure out how to add a user upon button click -->

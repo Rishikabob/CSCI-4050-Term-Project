@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users List</title>
+    <link rel ="stylesheet" type="text/css" href="resources/css/homeStyle.css"/>
+
+</head>
+<body>
+<h1>User List</h1>
+
+<table>
+    <form id = form th:action="@{/manage_user_action}" th:object="${user}"
+          method="post" style="max-width: 600px; margin: 0 auto;">
+
+
+        <input th:field="*{firstName}" class="form-control"
+               required minlength="2" maxlength="20" type="text" name="fn" placeholder="Enter First Name"/>
+        <input type="text" th:field="*{lastName}" class="form-control"
+               required minlength="2" maxlength="20" name="ln" placeholder="Enter Last Name"/>
+        <i class="fa fa-key icon"></i>
+        <input type="text" th:field="*{phone}" class="form-control"
+               required minlength="10" maxlength="10" name="phone" placeholder="Enter PhoneNumber*" /></br>
+
+
+        <h2>Payment Info 1</h2>
+        <label>Card Number</label></br>
+        <i class="fa fa-credit-card-alt icon"></i>
+        <input th:field="*{cardNum1}" type="text" name="cc1"/>
+        <br />
+        <label>Expiration Date</label>
+        </br>
+        <input th:field="*{cardExp1}" type="text" name="cc1"/>
+
+
+        <h2>Payment Info 2</h2>
+        <label>Card Number</label></br>
+        <i class="fa fa-credit-card-alt icon"></i>
+        <input th:field="*{cardNum2}" type="text" name="cc2"/>
+        <br />
+        <label>Expiration Date</label>
+        </br>
+        <input th:field="*{cardExp2}" type="text" name="cc2"/>
+
+
+        <h2>Payment Info 3</h2>
+        <label>Card Number</label></br>
+        <i class="fa fa-credit-card-alt icon"></i>
+        <input th:field="*{cardNum3}" type="text" name="cc3"/>
+        <br />
+        <label>Expiration Date</label>
+        </br>
+        <input th:field="*{cardExp3}" type="text" name="cc3"/>
+
+        <h2>Billing Information (Street Address, City, State, Zip Code)</h2>
+        <!--Street-->
+        <i class="fa fa-road icon"></i>
+        <input th:field="*{cardBill1}" type="text" name="sa" placeholder="Enter Billing Address"/></br>
+
+        <label>Sign up for promos?</label>
+        <input th:field="*{promo}" type="checkbox" id="promos" name="promos">
+
+        <button id = "redButton" type="submit" class="btn btn-primary btn-block btn-large">Submit</button></br>
+
+    </form>
+</table>
+
+<!--Below - Figure out how to add a user upon button click -->
+<button type="button" onclick=" ${BootStrapData.UserRepository.()}">Click Me!</button>
+
+</body>
+</html>

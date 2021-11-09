@@ -35,7 +35,10 @@ public class BootStrapData implements CommandLineRunner {
         User user = new User("bob@gmail.com", "abc123", "Bob", "Smith");
         user.setStatus(User.Status.ACTIVE);
         userRepository.save(user);
-        System.out.println("Added basic user");
+        User user2 = new User("bob2@gmail.com", "abc123", "Bob2", "Smith2");
+        user.setStatus(User.Status.ACTIVE);
+        userRepository.save(user2);
+        System.out.println("Added basic users");
 
         Admin admin = new Admin("testAdmin", "aaabbb");
         adminRepository.save(admin);

@@ -1,6 +1,7 @@
 package c3.theater.springweb.controllers;
 
 import c3.theater.springweb.domain.Admin;
+import c3.theater.springweb.domain.User;
 import c3.theater.springweb.repositories.AdminRepository;
 import c3.theater.springweb.repositories.MovieTitleRepository;
 import c3.theater.springweb.repositories.UserRepository;
@@ -15,6 +16,8 @@ public class AdminController {
     private final AdminRepository adminRepository;
     private final UserRepository userRepository;
     private final MovieTitleRepository movieTitleRepository;
+
+    private User thisUser;
 
     public AdminController(AdminRepository adminRepository, UserRepository userRepository, MovieTitleRepository movieTitleRepository) {
         this.adminRepository = adminRepository;
@@ -56,7 +59,33 @@ public class AdminController {
     @PostMapping("/manage_users")
     public String adminManageUsers(Model model) {
         model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("user", new User());
         String returnString = "admin/manage_users";
+        return returnString;
+    }
+
+    @PostMapping("/manage_user")
+    public String adminManageUser(User user) {
+       String returnString = "admin/manage_user";
+        // find corresponding user and set as this user
+        for (User userElem : userRepository.findAll()) {
+            if (userElem.getId().equals(user.getId())) {
+                thisUser = new User();
+                thisUser.setEmail(userElem.getEmail());
+                thisUser.setFirstName(userElem.getFirstName());
+                user.setEmail(thisUser.getEmail());
+                user.setFirstName(userElem.getFirstName());
+                // ASSIGN REST OF VALUES TO BOTH USER AND THIS USER
+            }
+        }
+        return returnString;
+    }
+
+    @PostMapping("/manage_user_action")
+    public String adminManageUserAction(User user) {
+        String returnString = "admin/manage_users";
+        // find the real correct user in teh repo
+        // save values to the correct user
         return returnString;
     }
 
