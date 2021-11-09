@@ -2,6 +2,7 @@ package c3.theater.springweb.controllers;
 
 import c3.theater.springweb.domain.Admin;
 import c3.theater.springweb.repositories.AdminRepository;
+import c3.theater.springweb.repositories.MovieTitleRepository;
 import c3.theater.springweb.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,10 +14,12 @@ public class AdminController {
 
     private final AdminRepository adminRepository;
     private final UserRepository userRepository;
+    private final MovieTitleRepository movieTitleRepository;
 
-    public AdminController(AdminRepository adminRepository, UserRepository userRepository) {
+    public AdminController(AdminRepository adminRepository, UserRepository userRepository, MovieTitleRepository movieTitleRepository) {
         this.adminRepository = adminRepository;
         this.userRepository = userRepository;
+        this.movieTitleRepository = movieTitleRepository;
     }
 
     // Allows login
@@ -42,23 +45,34 @@ public class AdminController {
         return returnString;
     }
 
+    // Logout
     @PostMapping("/a_logout")
     public String adminLogout(Model model) {
         String returnString = "home";
-
-
-
         return returnString;
     }
 
+    // Manage Users
     @PostMapping("/manage_users")
     public String adminManageUsers(Model model) {
         model.addAttribute("users", userRepository.findAll());
         String returnString = "admin/manage_users";
-
-
-
         return returnString;
     }
 
+    // Manage Movies
+    @PostMapping("/manage_movies")
+    public String adminManageMovies(Model model) {
+        model.addAttribute("movies", movieTitleRepository.findAll());
+        String returnString = "admin/manage_movies";
+        return returnString;
+    }
+
+    // Manage Promos
+    @PostMapping("/manage_promos")
+    public String adminManagePromos(Model model) {
+        //model.addAttribute("movies", movieTitleRepository.findAll());
+        String returnString = "admin/manage_promos";
+        return returnString;
+    }
 }

@@ -9,13 +9,13 @@
 <h1>Welcome!</h1>
 
 <p>You are logged in as an Admin! :)</p>
-<form th:action="@{/a_logout}" th:object="${admin}" method="post">
+<form th:action="@{/manage_movies}" th:object="${admin}" method="post">
     <input type="submit" value="Manage Movies"/>
 </form>
 <form th:action="@{/manage_users}" th:object="${admin}" method="post">
     <input type="submit" value="Manage Users"/>
 </form>
-<form th:action="@{/a_logout}" th:object="${admin}" method="post">
+<form th:action="@{/manage_promos}" th:object="${admin}" method="post">
     <input type="submit" value="Manage Promotions"/>
 </form>
 <form th:action="@{/a_logout}" th:object="${admin}" method="post">
