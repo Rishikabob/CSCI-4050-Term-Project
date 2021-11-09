@@ -1,6 +1,7 @@
 package c3.theater.springweb.controllers;
 
 import c3.theater.springweb.domain.Admin;
+import c3.theater.springweb.domain.MovieTitle;
 import c3.theater.springweb.domain.User;
 import c3.theater.springweb.repositories.AdminRepository;
 import c3.theater.springweb.repositories.MovieTitleRepository;
@@ -86,6 +87,7 @@ public class AdminController {
         String returnString = "admin/manage_users";
         // find the real correct user in teh repo
         // save values to the correct user
+        // THIS REQUIREMENT IS DROPPED FROM THE PROJECT
         return returnString;
     }
 
@@ -94,6 +96,26 @@ public class AdminController {
     public String adminManageMovies(Model model) {
         model.addAttribute("movies", movieTitleRepository.findAll());
         String returnString = "admin/manage_movies";
+        return returnString;
+    }
+
+    // Manage Movies
+    @PostMapping("/admin_add_movie")
+    public String adminAddMovie(Model model) {
+        model.addAttribute("movieTitle", new MovieTitle());
+        String returnString = "admin/add_movie";
+        return returnString;
+    }
+
+    // Manage Movies
+    @PostMapping("/add_movie_process")
+    public String addMovieProcess(MovieTitle movieTitle) { // maybe movieTitle param rather than model?
+        //model.addAttribute("movies", movieTitleRepository.findAll());
+        // GET THIS MOVEITITLE FROM HTML AND STORE IT IN DATABASE
+        //String returnString = "admin/add_movie";
+        movieTitleRepository.save(movieTitle);
+        System.out.println("Added Movie: " + movieTitle.toString());
+        String returnString = "admin/admin_logged_in"; // for some reason it is not showing the added movie
         return returnString;
     }
 

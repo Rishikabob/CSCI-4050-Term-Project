@@ -22,15 +22,14 @@ public class MovieTitle {
     private Set<MovieShowing> movieShowings = new HashSet<>();
 
     private String title;
-    private Genre genre;
+    private String genre;
     private String cast;
     private String director;
     private String producer;
     private String synopsis;
-    private String[] reviews;
     private String trailerPicture;
     private String trailerVideo;
-    private Rating rating;
+    private String rating;
     // CREATE A WAY TO STORE IF IT IS COMING SOON OR IN THEATERS, AUTOMATICALLY?
 
 
@@ -45,14 +44,13 @@ public class MovieTitle {
     public MovieTitle() {
     }
 
-    public MovieTitle(String title, Genre genre, String cast, String director, String producer, String synopsis, String[] reviews, String trailerPicture, String trailerVideo, Rating rating) {
+    public MovieTitle(String title, String genre, String cast, String director, String producer, String synopsis, String trailerPicture, String trailerVideo, String rating) {
         this.title = title;
         this.genre = genre;
         this.cast = cast;
         this.director = director;
         this.producer = producer;
         this.synopsis = synopsis;
-        this.reviews = reviews;
         this.trailerPicture = trailerPicture;
         this.trailerVideo = trailerVideo;
         this.rating = rating;
@@ -76,11 +74,11 @@ public class MovieTitle {
         this.title = title;
     }
 
-    public Genre getGenre() {
+    public String getGenre() {
         return genre;
     }
 
-    public void setGenre(Genre genre) {
+    public void setGenre(String genre) {
         this.genre = genre;
     }
 
@@ -116,14 +114,6 @@ public class MovieTitle {
         this.synopsis = synopsis;
     }
 
-    public String[] getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(String[] reviews) {
-        this.reviews = reviews;
-    }
-
     public String getTrailerPicture() {
         return trailerPicture;
     }
@@ -140,11 +130,11 @@ public class MovieTitle {
         this.trailerVideo = trailerVideo;
     }
 
-    public Rating getRating() {
+    public String getRating() {
         return rating;
     }
 
-    public void setRating(Rating rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 
@@ -158,7 +148,6 @@ public class MovieTitle {
                 ", director='" + director + '\'' +
                 ", producer='" + producer + '\'' +
                 ", synopsis='" + synopsis + '\'' +
-                ", reviews=" + Arrays.toString(reviews) +
                 ", trailerPicture='" + trailerPicture + '\'' +
                 ", trailerVideo='" + trailerVideo + '\'' +
                 ", rating=" + rating +

@@ -19,9 +19,9 @@
     <td th:text="${movie.title}">TestTitle</td>
   </tr>
 </table>
-
-<!--Below - Figure out how to add a user upon button click -->
-<button type="button" onclick=" ${BootStrapData.UserRepository.()}">Click Me!</button>
+<form th:action="@{/admin_add_movie}" method="post">
+  <div><input type="submit" value="Add Movie"/></div>
+</form>
 
 </body>
 </html>
