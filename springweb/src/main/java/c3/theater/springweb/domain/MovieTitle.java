@@ -30,6 +30,7 @@ public class MovieTitle {
     private String trailerPicture;
     private String trailerVideo;
     private String rating;
+    private boolean comingSoon;
     // CREATE A WAY TO STORE IF IT IS COMING SOON OR IN THEATERS, AUTOMATICALLY?
 
 
@@ -44,7 +45,7 @@ public class MovieTitle {
     public MovieTitle() {
     }
 
-    public MovieTitle(String title, String genre, String cast, String director, String producer, String synopsis, String trailerPicture, String trailerVideo, String rating) {
+    public MovieTitle(String title, String genre, String cast, String director, String producer, String synopsis, String trailerPicture, String trailerVideo, String rating, boolean comingSoon) {
         this.title = title;
         this.genre = genre;
         this.cast = cast;
@@ -54,9 +55,16 @@ public class MovieTitle {
         this.trailerPicture = trailerPicture;
         this.trailerVideo = trailerVideo;
         this.rating = rating;
+        this.comingSoon = comingSoon;
     }
 
+    public boolean isComingSoon() {
+        return comingSoon;
+    }
 
+    public void setComingSoon(boolean comingSoon) {
+        this.comingSoon = comingSoon;
+    }
 
     public Long getId() {
         return id;
@@ -150,7 +158,8 @@ public class MovieTitle {
                 ", synopsis='" + synopsis + '\'' +
                 ", trailerPicture='" + trailerPicture + '\'' +
                 ", trailerVideo='" + trailerVideo + '\'' +
-                ", rating=" + rating +
+                ", rating=" + rating + '\'' +
+                ", comingSoon=" + comingSoon +
                 '}';
     }
 

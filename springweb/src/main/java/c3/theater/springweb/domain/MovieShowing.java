@@ -14,6 +14,9 @@ public class MovieShowing {
     private String endTime;
 
     @ManyToOne
+    private ShowRoom showRoom;
+
+    @ManyToOne
     private MovieTitle movieTitle;
 
     // NEEDS A REFERENCE TO A MOVIE TITLE
@@ -21,11 +24,20 @@ public class MovieShowing {
     public MovieShowing() {
     }
 
-    public MovieShowing(String showDate, String showTime, String endTime, MovieTitle movieTitle) {
+    public MovieShowing(String showDate, String showTime, String endTime, MovieTitle movieTitle, ShowRoom showRoom) {
         this.showDate = showDate;
         this.showTime = showTime;
         this.endTime = endTime;
         this.movieTitle = movieTitle;
+        this.showRoom = showRoom;
+    }
+
+    public ShowRoom getShowRoom() {
+        return showRoom;
+    }
+
+    public void setShowRoom(ShowRoom showRoom) {
+        this.showRoom = showRoom;
     }
 
     public Long getId() {
