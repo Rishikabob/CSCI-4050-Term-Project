@@ -4,6 +4,7 @@ import c3.theater.springweb.domain.Admin;
 import c3.theater.springweb.domain.MovieTitle;
 import c3.theater.springweb.domain.User;
 import c3.theater.springweb.repositories.AdminRepository;
+import c3.theater.springweb.repositories.MovieShowingRepository;
 import c3.theater.springweb.repositories.MovieTitleRepository;
 import c3.theater.springweb.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
@@ -17,13 +18,15 @@ public class AdminController {
     private final AdminRepository adminRepository;
     private final UserRepository userRepository;
     private final MovieTitleRepository movieTitleRepository;
+    private final MovieShowingRepository movieShowingRepository;
 
     private User thisUser;
 
-    public AdminController(AdminRepository adminRepository, UserRepository userRepository, MovieTitleRepository movieTitleRepository) {
+    public AdminController(AdminRepository adminRepository, UserRepository userRepository, MovieTitleRepository movieTitleRepository, MovieShowingRepository movieShowingRepository) {
         this.adminRepository = adminRepository;
         this.userRepository = userRepository;
         this.movieTitleRepository = movieTitleRepository;
+        this.movieShowingRepository  = movieShowingRepository;
     }
 
     // Allows login
@@ -88,6 +91,14 @@ public class AdminController {
         // find the real correct user in teh repo
         // save values to the correct user
         // THIS REQUIREMENT IS DROPPED FROM THE PROJECT
+        return returnString;
+    }
+
+    // Manage Movies
+    @PostMapping("/manage_showings")
+    public String adminManageShowings(Model model) {
+        model.addAttribute("showings", movieShowingRepository.findAll());
+        String returnString = "admin/manage_showings";
         return returnString;
     }
 

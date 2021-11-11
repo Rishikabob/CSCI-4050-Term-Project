@@ -5,13 +5,17 @@ import javax.persistence.*;
 @Entity
 public class MovieShowing {
 
+    public enum Period{A, B, C, D}
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String showDate;
-    private String showTime;
-    private String endTime;
+    private int timePeriod;
+    private Period period;
+    private String title;
+    //private String showRoom;
 
     @ManyToOne
     private ShowRoom showRoom;
@@ -19,17 +23,43 @@ public class MovieShowing {
     @ManyToOne
     private MovieTitle movieTitle;
 
+
     // NEEDS A REFERENCE TO A MOVIE TITLE
 
     public MovieShowing() {
     }
 
-    public MovieShowing(String showDate, String showTime, String endTime, MovieTitle movieTitle, ShowRoom showRoom) {
+    public MovieShowing(String showDate, int timePeriod, ShowRoom showRoom, MovieTitle movieTitle) {
         this.showDate = showDate;
-        this.showTime = showTime;
-        this.endTime = endTime;
-        this.movieTitle = movieTitle;
+        this.timePeriod = timePeriod;
         this.showRoom = showRoom;
+        this.movieTitle = movieTitle;
+        title = movieTitle.getTitle();
+        // SET PERIOD TO TIME PERIODS CORRESPONDING VALUE
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Period getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(Period period) {
+        this.period = period;
+    }
+
+    public int getTimePeriod() {
+        return timePeriod;
+    }
+
+    public void setTimePeriod(int timePeriod) {
+        this.timePeriod = timePeriod;
     }
 
     public ShowRoom getShowRoom() {
@@ -56,28 +86,13 @@ public class MovieShowing {
         this.showDate = showDate;
     }
 
-    public String getShowTime() {
-        return showTime;
-    }
-
-    public void setShowTime(String showTime) {
-        this.showTime = showTime;
-    }
-
-    public String getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
-    }
-
     public MovieTitle getMovieTitle() {
         return movieTitle;
     }
 
     public void setMovieTitle(MovieTitle movieTitle) {
         this.movieTitle = movieTitle;
+        title = movieTitle.getTitle();
     }
 
     @Override
@@ -85,8 +100,9 @@ public class MovieShowing {
         return "MovieShowing{" +
                 "id=" + id +
                 ", showDate='" + showDate + '\'' +
-                ", showTime='" + showTime + '\'' +
-                ", endTime='" + endTime + '\'' +
+                ", timePeriod=" + timePeriod +
+                ", period=" + period +
+                ", showRoom=" + showRoom +
                 ", movieTitle=" + movieTitle +
                 '}';
     }

@@ -57,7 +57,8 @@ public class BootStrapData implements CommandLineRunner {
         // adds a movie showing
         MovieShowing movieShowing = new MovieShowing();
         movieShowing.setMovieTitle(movieTitle); // connect this showing side to its title
-        movieShowing.setShowTime("2:00PM");
+        movieShowing.setTimePeriod(1);
+        movieShowing.setShowDate("11/24");
         movieShowing.setShowRoom(showRoomA);
         movieShowingRepository.save(movieShowing);
 
