@@ -1,12 +1,7 @@
 package c3.theater.springweb.controllers;
 
-import c3.theater.springweb.domain.Admin;
-import c3.theater.springweb.domain.MovieTitle;
-import c3.theater.springweb.domain.User;
-import c3.theater.springweb.repositories.AdminRepository;
-import c3.theater.springweb.repositories.MovieShowingRepository;
-import c3.theater.springweb.repositories.MovieTitleRepository;
-import c3.theater.springweb.repositories.UserRepository;
+import c3.theater.springweb.domain.*;
+import c3.theater.springweb.repositories.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,14 +14,16 @@ public class AdminController {
     private final UserRepository userRepository;
     private final MovieTitleRepository movieTitleRepository;
     private final MovieShowingRepository movieShowingRepository;
+    private final ShowRoomRepository showRoomRepository;
 
     private User thisUser;
 
-    public AdminController(AdminRepository adminRepository, UserRepository userRepository, MovieTitleRepository movieTitleRepository, MovieShowingRepository movieShowingRepository) {
+    public AdminController(AdminRepository adminRepository, UserRepository userRepository, MovieTitleRepository movieTitleRepository, MovieShowingRepository movieShowingRepository, ShowRoomRepository showRoomRepository) {
         this.adminRepository = adminRepository;
         this.userRepository = userRepository;
         this.movieTitleRepository = movieTitleRepository;
         this.movieShowingRepository  = movieShowingRepository;
+        this.showRoomRepository = showRoomRepository;
     }
 
     // Allows login
@@ -99,6 +96,70 @@ public class AdminController {
     public String adminManageShowings(Model model) {
         model.addAttribute("showings", movieShowingRepository.findAll());
         String returnString = "admin/manage_showings";
+        return returnString;
+    }
+
+    // Manage Movies
+    @PostMapping("/admin_add_showing")
+    public String adminAddShowing(Model model) {
+        model.addAttribute("movieShowing", new MovieShowing());
+        String returnString = "admin/add_showing";
+        return returnString;
+    }
+
+    // Add Showing
+    @PostMapping("/add_showing_process")
+    public String addShowingProcess(MovieShowing movieShowing) {
+        String returnString = "admin/admin_logged_in";
+        boolean titleValid = false;
+        boolean roomValid = false;
+        boolean timeValid = true;
+
+        // DO THE BELOW
+        // 1. CHECK IF MOVIE TITLE IS REAL IN DB AND THEN SET MOVIETITLE TO THAT
+        for (MovieTitle movieElem : movieTitleRepository.findAll()) {
+            if (movieElem.getTitle().equals(movieShowing.getTitle())) {
+                // movie title is valid
+                titleValid = true;
+                movieShowing.setMovieTitle(movieElem); // check if this works correctly, or if a new movie elem needs be made and assigned with same values
+                System.out.println("movie title valid");
+            }
+        }
+        // 2. CHECK IF SHOW ROOM IS REAL IN DB AND THEN SET SHOWROOM TO THAT
+        for (ShowRoom roomElem : showRoomRepository.findAll()) {
+            //System.out.println("web room name: " + roomElem.getName());
+            if (roomElem.getName().equals(movieShowing.getRoomName())) {
+                System.out.println("room elem name: " + roomElem.getName());
+                // movie title is valid
+                //System.out.println("1");
+                roomValid = true;
+                System.out.println("2");
+                movieShowing.setShowRoom(roomElem); // check if this works correctly, or if a new movie elem needs be made and assigned with same values
+                System.out.println("room valid");
+            }
+        }
+        // 3. CHECK IF DATE AND TIME OVERLAP OR NOT for the specific room ONLY
+        for (MovieShowing showingElem : movieShowingRepository.findAll()) {
+            if (showingElem.getRoomName().equals(movieShowing.getRoomName())) {
+                if (showingElem.getTimePeriod().equals(movieShowing.getTimePeriod())) {
+                    if (showingElem.getShowDate().equals(movieShowing.getShowDate())) {
+                        timeValid = false;
+                        System.out.println("time invalid");
+                        // MAYBE SET PERIOD VAR
+                    }
+                }
+            }
+        }
+        // 4. IF EVERYTHING WORKED, ADD TO DB ADN SEND TO CORRECT WEB PAGE
+        if (timeValid && roomValid && titleValid) {
+            movieShowingRepository.save(movieShowing);
+            System.out.println("Added Showing: " + movieShowing.toString());
+        }
+        // 5. IF FAILURE TRY AGAIN (MAYBE GIVE ERROR MESSAGE)
+
+        //movieShowingRepository.save(movieShowing);
+
+
         return returnString;
     }
 

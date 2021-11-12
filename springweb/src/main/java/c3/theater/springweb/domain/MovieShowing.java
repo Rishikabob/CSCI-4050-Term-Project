@@ -12,10 +12,10 @@ public class MovieShowing {
     private Long id;
 
     private String showDate;
-    private int timePeriod;
+    private String timePeriod; // DEFAULTS TO 1 ALSOOO, maybe make this a string so that i can error check in here and not get error page on web
     private Period period;
-    private String title;
-    //private String showRoom;
+    private String title; // IF ISSUES, JUST USE MOVIETITLE.TITLE IN HTML INSTEAD OF THIS
+    private String roomName; // when a new showing is added, check if roomname is valid and set to a real existing room
 
     @ManyToOne
     private ShowRoom showRoom;
@@ -29,13 +29,21 @@ public class MovieShowing {
     public MovieShowing() {
     }
 
-    public MovieShowing(String showDate, int timePeriod, ShowRoom showRoom, MovieTitle movieTitle) {
+    public MovieShowing(String showDate, String timePeriod, ShowRoom showRoom, MovieTitle movieTitle) {
         this.showDate = showDate;
         this.timePeriod = timePeriod;
         this.showRoom = showRoom;
         this.movieTitle = movieTitle;
         title = movieTitle.getTitle();
         // SET PERIOD TO TIME PERIODS CORRESPONDING VALUE
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
     }
 
     public String getTitle() {
@@ -54,11 +62,11 @@ public class MovieShowing {
         this.period = period;
     }
 
-    public int getTimePeriod() {
+    public String getTimePeriod() {
         return timePeriod;
     }
 
-    public void setTimePeriod(int timePeriod) {
+    public void setTimePeriod(String timePeriod) {
         this.timePeriod = timePeriod;
     }
 
@@ -102,7 +110,7 @@ public class MovieShowing {
                 ", showDate='" + showDate + '\'' +
                 ", timePeriod=" + timePeriod +
                 ", period=" + period +
-                ", showRoom=" + showRoom +
+                ", roomName=" + roomName +
                 ", movieTitle=" + movieTitle +
                 '}';
     }

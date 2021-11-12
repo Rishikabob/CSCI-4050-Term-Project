@@ -49,17 +49,19 @@ public class BootStrapData implements CommandLineRunner {
         movieTitleRepository.save(movieTitle);
 
         // adds two show rooms
-        ShowRoom showRoomA = new ShowRoom("Show Room A");
-        ShowRoom showRoomB = new ShowRoom("Show Room A");
+        ShowRoom showRoomA = new ShowRoom("A");
+        //showRoomA.set
+        ShowRoom showRoomB = new ShowRoom("B");
         showRoomRepository.save(showRoomA);
         showRoomRepository.save(showRoomB);
 
         // adds a movie showing
         MovieShowing movieShowing = new MovieShowing();
         movieShowing.setMovieTitle(movieTitle); // connect this showing side to its title
-        movieShowing.setTimePeriod(1);
+        movieShowing.setTimePeriod("1");
         movieShowing.setShowDate("11/24");
         movieShowing.setShowRoom(showRoomA);
+        movieShowing.setRoomName("A");
         movieShowingRepository.save(movieShowing);
 
         // adds movie showing to the showroom

@@ -48,14 +48,14 @@ public class ShowRoom {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "ShowRoom{" +
-                "id=" + id +
-                ", movieShowings=" + movieShowings +
-                ", name='" + name + '\'' +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "ShowRoom{" +
+//                "id=" + id +
+//                ", movieShowings=" + movieShowings +
+//                ", name='" + name + '\'' +
+//                '}';
+//    }
 
     @Override
     public boolean equals(Object o) {
