@@ -45,7 +45,10 @@ public class BootStrapData implements CommandLineRunner {
 
         // adds a movie title
         MovieTitle movieTitle = new MovieTitle();
-        movieTitle.setTitle("Test Movie");
+        movieTitle.setTitle("Ex Machina");
+        movieTitle.setRating("R");
+        movieTitle.setTrailerVideo("https://www.youtube.com/embed/bggUmgeMCdc");
+        movieTitle.setTrailerPicture("https://m.media-amazon.com/images/M/MV5BMTUxNzc0OTIxMV5BMl5BanBnXkFtZTgwNDI3NzU2NDE@._V1_FMjpg_UX1000_.jpg");
         movieTitleRepository.save(movieTitle);
 
         // adds two show rooms

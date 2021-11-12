@@ -23,12 +23,28 @@
 			</form>
         </div>
     </div>
+
     <div class = "bodyContainer">
         <div class = "searchContainer">
             <i class="fa fa-search icon"></i>
             <input type="text" placeholder="Search Movie">
         </div>
         <h1>Now Playing</h1>
+
+    <tr th:each="movie : ${movies}">
+        <div class = "movieContainer">
+            <div class="gallery">
+                <a>
+                    <img th:src="*{movie.trailerPicture}" alt="Shang Chi">
+                    <iframe width="168" height="95" th:src="*{movie.trailerVideo}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </a>
+                <h2 data-th-text="*{movie.title}"> Hello </h2>
+                <p data-th-text="*{movie.rating}"></p>
+                <!--<button type="button">Book Movie</button>-->
+            </div>
+        </div>
+    </tr>
+        <!--
         <div class = "movieContainer">
             <div class="gallery">
                 <a href="https://www.youtube.com/watch?v=8YjFbMbfXaQ">
@@ -119,7 +135,8 @@
                 <button class="bookMovie" type="button">Book Movie</button>
             </div>
         </div>
+        -->
     </div>
-		
+
 	</body>
 </html>

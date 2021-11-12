@@ -2,6 +2,8 @@ package c3.theater.springweb.controllers;
 
 import c3.theater.springweb.domain.User;
 import c3.theater.springweb.email.EmailSender;
+import c3.theater.springweb.repositories.MovieShowingRepository;
+import c3.theater.springweb.repositories.MovieTitleRepository;
 import c3.theater.springweb.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,8 @@ import java.util.Random;
 public class UserController {
 
     private final UserRepository userRepository;
+    private final MovieTitleRepository movieTitleRepository;
+    private final MovieShowingRepository movieShowingRepository;
 
     private final EmailSender emailSender;
     User thisUser;
@@ -21,15 +25,21 @@ public class UserController {
     private String thisRegCode; // the registration code
     private String thisForgotPasswordCode;
 
-    public UserController(UserRepository userRepository, EmailSender emailSender) {
+    public UserController(UserRepository userRepository, EmailSender emailSender, MovieTitleRepository movieTitleRepository, MovieShowingRepository movieShowingRepository) {
         this.userRepository = userRepository;
         this.emailSender = emailSender; // ADDED THIS, make sure it didnt break anything
+        this.movieTitleRepository = movieTitleRepository;
+        this.movieShowingRepository = movieShowingRepository;
     }
 
     // Homepage
     @RequestMapping("/")
     public String goHome(Model model) {
+        //System.out.println("TEST 1"); // TEST
         model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("movies", movieTitleRepository.findAll());
+        model.addAttribute("shows", movieShowingRepository.findAll()); // make sure it shows on home page and is updated when we add stuff
+        // add two diff things, one for coming soon and one for now playing
         return "home"; // looks for list template (html temp) in directory users
     }
 
