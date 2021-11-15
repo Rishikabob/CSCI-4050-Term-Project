@@ -32,27 +32,63 @@
         <h1>Now Playing</h1>
 
         <div class = "movieContainer">
-    <tr th:each="movie : ${movies}">
+    <tr th:each="nowPlaying : ${nowPlayings}">
 
             <div class="gallery">
                 <a>
-                    <img th:src="*{movie.trailerPicture}" alt="Shang Chi">
-                    <iframe width="150" height="85" th:src="*{movie.trailerVideo}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <img th:src="*{nowPlaying.trailerPicture}" alt="Shang Chi">
+                    <iframe width="150" height="85" th:src="*{nowPlaying.trailerVideo}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </a>
-                <h2 data-th-text="*{movie.title}"> Hello </h2>
-                <p data-th-text="*{movie.rating}"></p>
+                <h2 data-th-text="*{nowPlaying.title}"> Hello </h2>
+                <p data-th-text="*{nowPlaying.rating}"></p>
                 <!--<button type="button">Book Movie</button>-->
-                <form th:action="@{/info}" th:object="${movieTitle}" th:value="${movie}">
+                <form th:action="@{/info}" th:object="${movieTitle}" th:value="${nowPlaying}">
                     <!--<h2 data-th-text="*{title}"> Hello </h2>-->
-                    <input type="hidden" th:name="title" th:id="title" th:value="${movie.title}">
-                    <input type="hidden" th:name="id" th:id="id" th:value="${movie.id}">
-                    <input type="hidden" th:name="rating" th:id="rating" th:value="${movie.rating}">
+                    <input type="hidden" th:name="title" th:id="title" th:value="${nowPlaying.title}">
+                    <input type="hidden" th:name="id" th:id="id" th:value="${nowPlaying.id}">
+                    <input type="hidden" th:name="rating" th:id="rating" th:value="${nowPlaying.rating}">
+                    <input type="hidden" th:name="genre" th:id="genre" th:value="${nowPlaying.genre}">
+                    <input type="hidden" th:name="cast" th:id="cast" th:value="${nowPlaying.cast}">
+                    <input type="hidden" th:name="director" th:id="director" th:value="${nowPlaying.director}">
+                    <input type="hidden" th:name="producer" th:id="producer" th:value="${nowPlaying.producer}">
+                    <input type="hidden" th:name="synopsis" th:id="synopsis" th:value="${nowPlaying.synopsis}">
                     <input type="submit" value="Book / Info"/>
                 </form>
 
             </div>
 
     </tr>
+        </div>
+
+        <h1>Coming Soon</h1>
+
+        <div class = "movieContainer">
+            <tr th:each="comingSoon : ${comingSoons}">
+
+                <div class="gallery">
+                    <a>
+                        <img th:src="*{comingSoon.trailerPicture}" alt="Shang Chi">
+                        <iframe width="150" height="85" th:src="*{comingSoon.trailerVideo}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </a>
+                    <h2 data-th-text="*{comingSoon.title}"> Hello </h2>
+                    <p data-th-text="*{comingSoon.rating}"></p>
+                    <!--<button type="button">Book Movie</button>-->
+                    <form th:action="@{/info}" th:object="${movieTitle}" th:value="${comingSoon}">
+                        <!--<h2 data-th-text="*{title}"> Hello </h2>-->
+                        <input type="hidden" th:name="title" th:id="title" th:value="${comingSoon.title}">
+                        <input type="hidden" th:name="id" th:id="id" th:value="${comingSoon.id}">
+                        <input type="hidden" th:name="rating" th:id="rating" th:value="${comingSoon.rating}">
+                        <input type="hidden" th:name="genre" th:id="genre" th:value="${comingSoon.genre}">
+                        <input type="hidden" th:name="cast" th:id="cast" th:value="${comingSoon.cast}">
+                        <input type="hidden" th:name="director" th:id="director" th:value="${comingSoon.director}">
+                        <input type="hidden" th:name="producer" th:id="producer" th:value="${comingSoon.producer}">
+                        <input type="hidden" th:name="synopsis" th:id="synopsis" th:value="${comingSoon.synopsis}">
+                        <input type="submit" value="Book / Info"/>
+                    </form>
+
+                </div>
+
+            </tr>
         </div>
         <!--
         <div class = "movieContainer">

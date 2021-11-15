@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 @Controller
@@ -19,6 +21,12 @@ public class UserController {
     private final UserRepository userRepository;
     private final MovieTitleRepository movieTitleRepository;
     private final MovieShowingRepository movieShowingRepository;
+    //private final MovieTitleRepository comingSoon;
+    //private final MovieTitleRepository nowPlaying;
+    List<MovieTitle> comingSoon;
+    List<MovieTitle> nowPlaying;
+
+    //private MovieTitle[] nowPlaying;
 
     private final EmailSender emailSender;
     User thisUser;
@@ -26,21 +34,39 @@ public class UserController {
     private String thisRegCode; // the registration code
     private String thisForgotPasswordCode;
 
-    public UserController(UserRepository userRepository, EmailSender emailSender, MovieTitleRepository movieTitleRepository, MovieShowingRepository movieShowingRepository) {
+    public UserController(UserRepository userRepository, EmailSender emailSender, MovieTitleRepository movieTitleRepository, MovieShowingRepository movieShowingRepository, MovieTitleRepository comingSoon, MovieTitleRepository nowPlaying) {
         this.userRepository = userRepository;
         this.emailSender = emailSender; // ADDED THIS, make sure it didnt break anything
         this.movieTitleRepository = movieTitleRepository;
         this.movieShowingRepository = movieShowingRepository;
+        //this.comingSoon = comingSoon; // SEE IF THIS AND LINE BELOW WORK
+        //this.nowPlaying = nowPlaying;
     }
 
     // Homepage
     @RequestMapping("/")
     public String goHome(Model model) {
-        //System.out.println("TEST 1"); // TEST
+        // DONT KEEP ADDING UPON REFRESH
+        comingSoon = new ArrayList<MovieTitle>();
+        nowPlaying  = new ArrayList<MovieTitle>();
+        for (MovieTitle movie : movieTitleRepository.findAll()) {
+            if (movie.isComingSoon()) {
+                System.out.println("is coming soon : " + movie);
+                comingSoon.add(movie);
+                //nowPlaying.delete(movie);
+            } else if (movie.isComingSoon() == false){
+                System.out.println("is now playing: " + movie);
+                nowPlaying.add(movie);
+                //comingSoon.delete(movie);
+            }
+        }
+
         model.addAttribute("users", userRepository.findAll());
         model.addAttribute("movies", movieTitleRepository.findAll());
         model.addAttribute("shows", movieShowingRepository.findAll()); // make sure it shows on home page and is updated when we add stuff
         model.addAttribute("movieTitle", new MovieTitle()); // THE MOVIE TITLE WE WANT INFO FOR
+        model.addAttribute("comingSoons", comingSoon);
+        model.addAttribute("nowPlayings", nowPlaying);
         // add two diff things, one for coming soon and one for now playing
         return "home"; // looks for list template (html temp) in directory users
     }

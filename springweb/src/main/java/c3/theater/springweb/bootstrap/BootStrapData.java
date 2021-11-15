@@ -47,17 +47,31 @@ public class BootStrapData implements CommandLineRunner {
         MovieTitle movieTitle = new MovieTitle();
         movieTitle.setTitle("Ex Machina");
         movieTitle.setRating("R");
+        movieTitle.setGenre("Thriller");
         movieTitle.setTrailerVideo("https://www.youtube.com/embed/bggUmgeMCdc");
         movieTitle.setTrailerPicture("https://m.media-amazon.com/images/M/MV5BMTUxNzc0OTIxMV5BMl5BanBnXkFtZTgwNDI3NzU2NDE@._V1_FMjpg_UX1000_.jpg");
+        movieTitle.setComingSoon(false);
         movieTitleRepository.save(movieTitle);
 
         // adds a movie title
         MovieTitle movieTitle2 = new MovieTitle();
         movieTitle2.setTitle("The Big Lebowski");
         movieTitle2.setRating("R");
+        movieTitle2.setGenre("Comedy");
         movieTitle2.setTrailerVideo("https://www.youtube.com/embed/cd-go0oBF4Y");
         movieTitle2.setTrailerPicture("https://adventuresinevaluation.podbean.com/mf/web/m5wcvb/Big-Lebowski-movie-poster.jpg");
+        movieTitle2.setComingSoon(false);
         movieTitleRepository.save(movieTitle2);
+
+        // adds a movie title
+        MovieTitle movieTitle3 = new MovieTitle();
+        movieTitle3.setTitle("The Batman");
+        movieTitle3.setRating("R");
+        movieTitle3.setGenre("Action");
+        movieTitle3.setTrailerVideo("https://www.youtube.com/embed/mqqft2x_Aa4");
+        movieTitle3.setTrailerPicture("https://m.media-amazon.com/images/M/MV5BYTExZTdhY2ItNGQ1YS00NjJlLWIxMjYtZTI1MzNlMzY0OTk4XkEyXkFqcGdeQXVyMTEyMjM2NDc2._V1_.jpg");
+        movieTitle3.setComingSoon(true);
+        movieTitleRepository.save(movieTitle3);
 
         // adds two show rooms
         ShowRoom showRoomA = new ShowRoom("A");

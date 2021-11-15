@@ -7,18 +7,39 @@
 
 </head>
 <body>
-<h1> Movie Title</h1>
+<h1 th:object="${movieTitle}" th:text="${movieTitle.title}"> Movie Title</h1>
 
 <table>
+
     <tr>
-        <th>ID</th>
-        <th>Title</th>
-        <th>Rating</th>
+        <th scope="row">Rating</th>
+        <td th:object="${movieTitle}" th:text="${movieTitle.rating}"></td>
+    </tr>
+    <tr>
+        <th scope="row">Genre</th>
+        <td th:object="${movieTitle}" th:text="${movieTitle.genre}"></td>
+    </tr>
+    <tr>
+        <th scope="row">Cast</th>
+        <td th:object="${movieTitle}" th:text="${movieTitle.cast}"></td>
+    </tr>
+    <tr>
+        <th scope="row">Director</th>
+        <td th:object="${movieTitle}" th:text="${movieTitle.director}"></td>
+    </tr>
+    <tr>
+        <th scope="row">Producer</th>
+        <td th:object="${movieTitle}" th:text="${movieTitle.producer}"></td>
+    </tr>
+    <tr>
+        <th scope="row">Synopsis</th>
+        <td th:object="${movieTitle}" th:text="${movieTitle.synopsis}"></td>
     </tr>
 
-        <td th:object="${movieTitle}" th:text="${movieTitle.id}">123</td>
-        <td th:object="${movieTitle}" th:text="${movieTitle.title}">TestFirstName</td>
-        <td th:object="${movieTitle}" th:text="${movieTitle.rating}">TestFirstName</td>
+
+        <th>Show Dates and Times</th>
+
+
 
 
 </table>
