@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users List</title>
+    <link rel ="stylesheet" type="text/css" href="resources/css/style.css"/>
+
+</head>
+<body>
+<h1> Movie Title</h1>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Rating</th>
+    </tr>
+
+        <td th:object="${movieTitle}" th:text="${movieTitle.id}">123</td>
+        <td th:object="${movieTitle}" th:text="${movieTitle.title}">TestFirstName</td>
+        <td th:object="${movieTitle}" th:text="${movieTitle.rating}">TestFirstName</td>
+
+
+</table>
+
+<!--Below - Figure out how to add a user upon button click -->
+<!--
+<button type="button" onclick=" ${BootStrapData.UserRepository.()}">Click Me!</button>
+-->
+
+</body>
+</html>

@@ -51,6 +51,14 @@ public class BootStrapData implements CommandLineRunner {
         movieTitle.setTrailerPicture("https://m.media-amazon.com/images/M/MV5BMTUxNzc0OTIxMV5BMl5BanBnXkFtZTgwNDI3NzU2NDE@._V1_FMjpg_UX1000_.jpg");
         movieTitleRepository.save(movieTitle);
 
+        // adds a movie title
+        MovieTitle movieTitle2 = new MovieTitle();
+        movieTitle2.setTitle("The Big Lebowski");
+        movieTitle2.setRating("R");
+        movieTitle2.setTrailerVideo("https://www.youtube.com/embed/cd-go0oBF4Y");
+        movieTitle2.setTrailerPicture("https://adventuresinevaluation.podbean.com/mf/web/m5wcvb/Big-Lebowski-movie-poster.jpg");
+        movieTitleRepository.save(movieTitle2);
+
         // adds two show rooms
         ShowRoom showRoomA = new ShowRoom("A");
         //showRoomA.set

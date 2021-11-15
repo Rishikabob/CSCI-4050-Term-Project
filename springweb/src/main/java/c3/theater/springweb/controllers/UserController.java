@@ -1,5 +1,6 @@
 package c3.theater.springweb.controllers;
 
+import c3.theater.springweb.domain.MovieTitle;
 import c3.theater.springweb.domain.User;
 import c3.theater.springweb.email.EmailSender;
 import c3.theater.springweb.repositories.MovieShowingRepository;
@@ -39,6 +40,7 @@ public class UserController {
         model.addAttribute("users", userRepository.findAll());
         model.addAttribute("movies", movieTitleRepository.findAll());
         model.addAttribute("shows", movieShowingRepository.findAll()); // make sure it shows on home page and is updated when we add stuff
+        model.addAttribute("movieTitle", new MovieTitle()); // THE MOVIE TITLE WE WANT INFO FOR
         // add two diff things, one for coming soon and one for now playing
         return "home"; // looks for list template (html temp) in directory users
     }
@@ -374,6 +376,16 @@ public class UserController {
         //thisUser = user; // saves login as the current thisUser
         //System.out.println("email and password they tried ot login with: " + enteredEmail + " " + enteredPassword);
         //return "home";
+    }
+
+    // Edit Profile
+    @GetMapping("/info")
+    public String getInfo(MovieTitle movieTitle) {
+        //System.out.println("thisUser passed to edit profile for auto fill: " + thisUser.toString());
+        //model.addAttribute("user", thisUser);
+        System.out.println("INFO CALLED");
+        System.out.println(movieTitle);
+        return "/info";
     }
 
     // Edit Profile
