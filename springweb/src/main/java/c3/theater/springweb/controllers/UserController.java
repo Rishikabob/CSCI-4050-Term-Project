@@ -51,11 +51,11 @@ public class UserController {
         nowPlaying  = new ArrayList<MovieTitle>();
         for (MovieTitle movie : movieTitleRepository.findAll()) {
             if (movie.isComingSoon()) {
-                System.out.println("is coming soon : " + movie);
+                //System.out.println("is coming soon : " + movie);
                 comingSoon.add(movie);
                 //nowPlaying.delete(movie);
             } else if (movie.isComingSoon() == false){
-                System.out.println("is now playing: " + movie);
+                //System.out.println("is now playing: " + movie);
                 nowPlaying.add(movie);
                 //comingSoon.delete(movie);
             }
@@ -406,11 +406,19 @@ public class UserController {
 
     // Edit Profile
     @GetMapping("/info")
-    public String getInfo(MovieTitle movieTitle) {
+    public String getInfo(Model model, MovieTitle movieTitle) {
         //System.out.println("thisUser passed to edit profile for auto fill: " + thisUser.toString());
         //model.addAttribute("user", thisUser);
-        System.out.println("INFO CALLED");
-        System.out.println(movieTitle);
+        //System.out.println("INFO CALLED");
+        //System.out.println(movieTitle);
+        //model.addAttribute("showings", movieShowingRepository.findAll());
+        //System.out.println(movieShowingRepository.findAll());
+
+        for (MovieTitle movieTest : movieTitleRepository.findAll()) {
+            if (movieTest.getTitle().equals(movieTitle.getTitle())) {
+                model.addAttribute("shows", movieTest.getMovieShowings());
+            }
+        }
         return "/info";
     }
 
