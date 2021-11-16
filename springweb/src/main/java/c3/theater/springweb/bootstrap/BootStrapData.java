@@ -73,6 +73,16 @@ public class BootStrapData implements CommandLineRunner {
         movieTitle3.setComingSoon(true);
         movieTitleRepository.save(movieTitle3);
 
+        // adds a movie title
+        MovieTitle movieTitle4 = new MovieTitle();
+        movieTitle4.setTitle("Inglourious Basterds");
+        movieTitle4.setRating("R");
+        movieTitle4.setGenre("Action");
+        movieTitle4.setTrailerVideo("https://www.youtube.com/embed/KnrRy6kSFF0");
+        movieTitle4.setTrailerPicture("https://m.media-amazon.com/images/M/MV5BOTJiNDEzOWYtMTVjOC00ZjlmLWE0NGMtZmE1OWVmZDQ2OWJhXkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_FMjpg_UX1000_.jpg");
+        movieTitle4.setComingSoon(false);
+        movieTitleRepository.save(movieTitle4);
+
         // adds two show rooms
         ShowRoom showRoomA = new ShowRoom("A");
         //showRoomA.set

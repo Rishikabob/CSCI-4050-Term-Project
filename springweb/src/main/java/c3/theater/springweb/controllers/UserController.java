@@ -599,6 +599,27 @@ public class UserController {
     public String searchLogged(Model model, @RequestParam String searchString) {
         System.out.println("seacrhString: " + searchString); // SAVE THIS SOMEWHERE
         currentSearch = searchString;
+        // get search results
+        searchResult = new ArrayList<MovieTitle>();
+        for (MovieTitle movie: movieTitleRepository.findAll()) {
+            System.out.println("Movie title: " + movie.getTitle());
+            //System.out.println("")
+            if (movie.getTitle().equals(searchString)) {
+                System.out.println("found title");
+                searchResult.add(movie);
+            }
+            if (movie.getGenre().equals(searchString)) {
+                searchResult.add(movie);
+            }
+
+        }
+        model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("movies", movieTitleRepository.findAll());
+        model.addAttribute("shows", movieShowingRepository.findAll()); // make sure it shows on home page and is updated when we add stuff
+        model.addAttribute("movieTitle", new MovieTitle()); // THE MOVIE TITLE WE WANT INFO FOR
+        model.addAttribute("comingSoons", comingSoon);
+        model.addAttribute("nowPlayings", nowPlaying);
+        model.addAttribute("searchResults", searchResult);
         return "/searchResultsB"; // Instread go to search results page corresponding to logged in search
     }
 
