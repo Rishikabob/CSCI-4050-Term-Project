@@ -26,9 +26,12 @@
 
     <div class = "bodyContainer">
         <div class = "searchContainer">
-            <i class="fa fa-search icon"></i>
-            <input type="text" placeholder="Search Movie">
+            <form id = form th:action="@{/search_web}">
+                <input type="text" th:value="${searchString}" name="searchString" placeholder="Search Movie">
+                <button id = "redButton" type="submit" class="btn btn-primary btn-block btn-large">Search</button>
+            </form>
         </div>
+
         <h1>Now Playing</h1>
 
         <div class = "movieContainer">

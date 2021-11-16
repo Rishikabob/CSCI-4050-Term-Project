@@ -47,7 +47,7 @@ public class BootStrapData implements CommandLineRunner {
         MovieTitle movieTitle = new MovieTitle();
         movieTitle.setTitle("Ex Machina");
         movieTitle.setRating("R");
-        movieTitle.setGenre("Thriller");
+        movieTitle.setGenre("Sci-Fi");
         movieTitle.setTrailerVideo("https://www.youtube.com/embed/bggUmgeMCdc");
         movieTitle.setTrailerPicture("https://m.media-amazon.com/images/M/MV5BMTUxNzc0OTIxMV5BMl5BanBnXkFtZTgwNDI3NzU2NDE@._V1_FMjpg_UX1000_.jpg");
         movieTitle.setComingSoon(false);
@@ -88,6 +88,15 @@ public class BootStrapData implements CommandLineRunner {
         movieShowing.setShowRoom(showRoomA);
         movieShowing.setRoomName("A");
         movieShowingRepository.save(movieShowing);
+
+        // adds a movie showing
+        MovieShowing movieShowing2 = new MovieShowing();
+        movieShowing2.setMovieTitle(movieTitle); // connect this showing side to its title
+        movieShowing2.setTimePeriod("3");
+        movieShowing2.setShowDate("11/24");
+        movieShowing2.setShowRoom(showRoomA);
+        movieShowing2.setRoomName("A");
+        movieShowingRepository.save(movieShowing2);
 
         // adds movie showing to the showroom
         showRoomA.getMovieShowings().add(movieShowing);

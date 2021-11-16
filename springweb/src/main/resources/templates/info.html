@@ -50,6 +50,11 @@
         <td th:text="${show.title}">123</td>
         <td th:text="${show.showDate}">123</td>
         <td th:text="${show.timePeriod}">123</td>
+        <td>
+        <form th:action="@{/}" th:object="${user}">
+            <input type="submit" value="Book"/>
+        </form>
+        </td>
     </tr>
 
 

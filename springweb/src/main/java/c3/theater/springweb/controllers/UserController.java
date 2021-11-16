@@ -25,6 +25,7 @@ public class UserController {
     //private final MovieTitleRepository nowPlaying;
     List<MovieTitle> comingSoon;
     List<MovieTitle> nowPlaying;
+    List<MovieTitle> searchResult;
 
     //private MovieTitle[] nowPlaying;
 
@@ -33,6 +34,8 @@ public class UserController {
     private User thisRegAttemptUser;
     private String thisRegCode; // the registration code
     private String thisForgotPasswordCode;
+
+    private String currentSearch = "";
 
     public UserController(UserRepository userRepository, EmailSender emailSender, MovieTitleRepository movieTitleRepository, MovieShowingRepository movieShowingRepository, MovieTitleRepository comingSoon, MovieTitleRepository nowPlaying) {
         this.userRepository = userRepository;
@@ -67,6 +70,8 @@ public class UserController {
         model.addAttribute("movieTitle", new MovieTitle()); // THE MOVIE TITLE WE WANT INFO FOR
         model.addAttribute("comingSoons", comingSoon);
         model.addAttribute("nowPlayings", nowPlaying);
+        model.addAttribute("searchResults", searchResult);
+        //model.addAttribute("searchString", new String());
         // add two diff things, one for coming soon and one for now playing
         return "home"; // looks for list template (html temp) in directory users
     }
@@ -213,9 +218,30 @@ public class UserController {
     //METHOD FOR WHEN THE USER REGISTRATION IS CONFIRMED
     // Confirm registration
     @PostMapping("/confirm_registration")
-    public String confirmRegistration(User user) { // maybe pass String rather than user?, how to do multiple params
-        //model.addAttribute("code", thisRegCode);
-        //model.addAttribute("user", new User());
+    public String confirmRegistration(Model model, User user) { // maybe pass String rather than user?, how to do multiple params
+        // DO THE HOMEPAGE STUFF
+        comingSoon = new ArrayList<MovieTitle>();
+        nowPlaying  = new ArrayList<MovieTitle>();
+        for (MovieTitle movie : movieTitleRepository.findAll()) {
+            if (movie.isComingSoon()) {
+                //System.out.println("is coming soon : " + movie);
+                comingSoon.add(movie);
+                //nowPlaying.delete(movie);
+            } else if (movie.isComingSoon() == false){
+                //System.out.println("is now playing: " + movie);
+                nowPlaying.add(movie);
+                //comingSoon.delete(movie);
+            }
+        }
+
+        model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("movies", movieTitleRepository.findAll());
+        model.addAttribute("shows", movieShowingRepository.findAll()); // make sure it shows on home page and is updated when we add stuff
+        model.addAttribute("movieTitle", new MovieTitle()); // THE MOVIE TITLE WE WANT INFO FOR
+        model.addAttribute("comingSoons", comingSoon);
+        model.addAttribute("nowPlayings", nowPlaying);
+        // END OF HOMEPAGE STUFF
+
         System.out.println("the user code entered stored in getCardNum2 : " + user.getCardNum2());
         String returnString = "";
 
@@ -262,7 +288,28 @@ public class UserController {
 
     // Processes login
     @PostMapping("/home_loggedin") // maybe change name since it will return user to home logged in (was processlogin
-    public String processLogin(User user) {
+    public String processLogin(Model model, User user) {
+        comingSoon = new ArrayList<MovieTitle>();
+        nowPlaying  = new ArrayList<MovieTitle>();
+        for (MovieTitle movie : movieTitleRepository.findAll()) {
+            if (movie.isComingSoon()) {
+                //System.out.println("is coming soon : " + movie);
+                comingSoon.add(movie);
+                //nowPlaying.delete(movie);
+            } else if (movie.isComingSoon() == false){
+                //System.out.println("is now playing: " + movie);
+                nowPlaying.add(movie);
+                //comingSoon.delete(movie);
+            }
+        }
+
+        model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("movies", movieTitleRepository.findAll());
+        model.addAttribute("shows", movieShowingRepository.findAll()); // make sure it shows on home page and is updated when we add stuff
+        model.addAttribute("movieTitle", new MovieTitle()); // THE MOVIE TITLE WE WANT INFO FOR
+        model.addAttribute("comingSoons", comingSoon);
+        model.addAttribute("nowPlayings", nowPlaying);
+
         String returnString = "";
         String enteredEmail = user.getEmail();
         String enteredPassword = user.getPassword();
@@ -390,7 +437,7 @@ public class UserController {
 
     // maybe this should be a post mapping and is rather  a function tht will call go home
     // Process logout
-    @PostMapping("/home") // maybe change name somehow since it takes u to regular home (was process logout)
+        @PostMapping("/home") // maybe change name somehow since it takes u to regular home (was process logout)
     public String processLogout(Model model) { // should is be user or model
         //TEST ALL OF THIS
         //System.out.println("process logout was called");
@@ -433,7 +480,35 @@ public class UserController {
     // Processes Edit Profile
     @PostMapping("/process_edit_profile")
     // what would happen if multiple ones had same mapping, how would html differentiate
-    public String processEditProfile(User user) {
+    public String processEditProfile(Model model, User user) {
+//        for (MovieTitle movieTest : movieTitleRepository.findAll()) {
+//            if (movieTest.getTitle().equals(movieTitle.getTitle())) {
+//                model.addAttribute("shows", movieTest.getMovieShowings());
+//            }
+//        }
+        // DO THE HOMEPAGE STUFF
+        comingSoon = new ArrayList<MovieTitle>();
+        nowPlaying  = new ArrayList<MovieTitle>();
+        for (MovieTitle movie : movieTitleRepository.findAll()) {
+            if (movie.isComingSoon()) {
+                //System.out.println("is coming soon : " + movie);
+                comingSoon.add(movie);
+                //nowPlaying.delete(movie);
+            } else if (movie.isComingSoon() == false){
+                //System.out.println("is now playing: " + movie);
+                nowPlaying.add(movie);
+                //comingSoon.delete(movie);
+            }
+        }
+
+        model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("movies", movieTitleRepository.findAll());
+        model.addAttribute("shows", movieShowingRepository.findAll()); // make sure it shows on home page and is updated when we add stuff
+        model.addAttribute("movieTitle", new MovieTitle()); // THE MOVIE TITLE WE WANT INFO FOR
+        model.addAttribute("comingSoons", comingSoon);
+        model.addAttribute("nowPlayings", nowPlaying);
+        // END OF HOMEPAGE STUFF
+
         thisUser.setFirstName(user.getFirstName());
         thisUser.setLastName(user.getLastName());
         thisUser.setCardNum1(user.getCardNum1());
@@ -487,10 +562,72 @@ public class UserController {
 
     }
 
+    // Search Web
+    @GetMapping("/search_web") // what would happen if multiple ones had same mapping, how would html differentiate
+    public String searchWeb(Model model, @RequestParam String searchString) {
+
+
+        System.out.println("searchString: " + searchString); // SAVE THIS SOMEWHERE
+        currentSearch = searchString;
+        // get search results
+        searchResult = new ArrayList<MovieTitle>();
+        for (MovieTitle movie: movieTitleRepository.findAll()) {
+            System.out.println("Movie title: " + movie.getTitle());
+            //System.out.println("")
+            if (movie.getTitle().equals(searchString)) {
+                System.out.println("found title");
+                searchResult.add(movie);
+            }
+            if (movie.getGenre().equals(searchString)) {
+                searchResult.add(movie);
+            }
+
+        }
+        model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("movies", movieTitleRepository.findAll());
+        model.addAttribute("shows", movieShowingRepository.findAll()); // make sure it shows on home page and is updated when we add stuff
+        model.addAttribute("movieTitle", new MovieTitle()); // THE MOVIE TITLE WE WANT INFO FOR
+        model.addAttribute("comingSoons", comingSoon);
+        model.addAttribute("nowPlayings", nowPlaying);
+        model.addAttribute("searchResults", searchResult);
+
+        return "/searchResultsA"; // Instread go to search results page corresponding to web search
+    }
+
+    // Search Logged In
+    @GetMapping("/search_logged") // what would happen if multiple ones had same mapping, how would html differentiate
+    public String searchLogged(Model model, @RequestParam String searchString) {
+        System.out.println("seacrhString: " + searchString); // SAVE THIS SOMEWHERE
+        currentSearch = searchString;
+        return "/searchResultsB"; // Instread go to search results page corresponding to logged in search
+    }
+
     // Processes Change Password
     @PostMapping("/process_change_password")
     // what would happen if multiple ones had same mapping, how would html differentiate
-    public String processChangePassword(User user) {
+    public String processChangePassword(Model model, User user) {
+        // DO THE HOMEPAGE STUFF
+        comingSoon = new ArrayList<MovieTitle>();
+        nowPlaying  = new ArrayList<MovieTitle>();
+        for (MovieTitle movie : movieTitleRepository.findAll()) {
+            if (movie.isComingSoon()) {
+                //System.out.println("is coming soon : " + movie);
+                comingSoon.add(movie);
+                //nowPlaying.delete(movie);
+            } else if (movie.isComingSoon() == false){
+                //System.out.println("is now playing: " + movie);
+                nowPlaying.add(movie);
+                //comingSoon.delete(movie);
+            }
+        }
+
+        model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("movies", movieTitleRepository.findAll());
+        model.addAttribute("shows", movieShowingRepository.findAll()); // make sure it shows on home page and is updated when we add stuff
+        model.addAttribute("movieTitle", new MovieTitle()); // THE MOVIE TITLE WE WANT INFO FOR
+        model.addAttribute("comingSoons", comingSoon);
+        model.addAttribute("nowPlayings", nowPlaying);
+        // END OF HOMEPAGE STUFF
         String returnString = "";
         System.out.println("old user pass: " + user.getPassword());
         System.out.println("new user pass: " + user.getCardBill2());
