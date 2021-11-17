@@ -3,11 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Users List</title>
-    <link rel ="stylesheet" type="text/css" href="resources/css/style.css"/>
+    <link rel ="stylesheet" type="text/css" href="resources/css/homeStyle.css"/>
 
 </head>
 <body>
 <h1 th:object="${movieTitle}" th:text="${movieTitle.title}"> Movie Title</h1>
+
+
+<a>
+        <img width="255" height="450" th:src="${movieTitle.trailerPicture}" alt="FailedToLoad">
+        <iframe width="450" height="255" th:src="${movieTitle.trailerVideo}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</a>
 
 <table>
 
@@ -35,6 +41,7 @@
         <th scope="row">Synopsis</th>
         <td th:object="${movieTitle}" th:text="${movieTitle.synopsis}"></td>
     </tr>
+
 
 
         <th>Show Dates and Times</th>

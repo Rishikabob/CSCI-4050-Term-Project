@@ -460,7 +460,8 @@ public class UserController {
         //System.out.println(movieTitle);
         //model.addAttribute("showings", movieShowingRepository.findAll());
         //System.out.println(movieShowingRepository.findAll());
-
+        System.out.println("trailer pic on info: " + movieTitle.getTrailerPicture());
+        System.out.println("trailer pic on info: " + movieTitle.getTrailerPicture());
         for (MovieTitle movieTest : movieTitleRepository.findAll()) {
             if (movieTest.getTitle().equals(movieTitle.getTitle())) {
                 model.addAttribute("shows", movieTest.getMovieShowings());
