@@ -1,10 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Promo Test</title>
+    <title>Promotionst</title>
+    <link rel ="stylesheet" type="text/css" href="resources/css/homeStyle.css"/>
+
 </head>
 <body>
-<p>Promo Test Page</p>
+<h1>Current Promotions</h1>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Discount</th>
+        <th>Code</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Message</th>
+    </tr>
+    <tr th:each="promo : ${promos}">
+        <td th:text="${promo.id}">123</td>
+        <td th:text="${promo.discount}">TestLastName</td>
+        <td th:text="${promo.code}">testemail@testemailprovider.com</td>
+        <td th:text="${promo.startDate}">abc123</td>
+        <td th:text="${promo.endDate}">abc123</td>
+        <td th:text="${promo.message}">TestFirstName</td>
+    </tr>
+</table>
+
+<h1>Add a Promotion</h1>
+<form th:action="@{/add_promo}" th:object="${promo}" method="post">
+    <div><label> Discount : <input th:field="*{discount}" type="text" name="email"/> </label></div>
+    <div><label> Code : <input th:field="*{code}" type="text" name="code"/> </label></div>
+    <div><label> Start Date : <input th:field="*{startDate}" type="tex" name="startDate"/> </label></div>
+    <div><label> End Date : <input th:field="*{endDate}" type="text" name="endDate"/> </label></div>
+    <div><label> Message : <input th:field="*{message}" type="text" name="message"/> </label></div>
+    <div><input type="submit" value="Send"/></div>
+</form>
+
+<!--Below - Figure out how to add a user upon button click -->
+<!--
+<button type="button" onclick=" ${BootStrapData.UserRepository.()}">Click Me!</button>
+-->
+
 </body>
 </html>

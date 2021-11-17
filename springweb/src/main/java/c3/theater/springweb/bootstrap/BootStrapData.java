@@ -15,13 +15,15 @@ public class BootStrapData implements CommandLineRunner {
     public final MovieTitleRepository movieTitleRepository;
     public final MovieShowingRepository movieShowingRepository;
     public final ShowRoomRepository showRoomRepository;
+    public final PromoRepository promoRepository;
 
-    public BootStrapData(UserRepository userRepository, AdminRepository adminRepository, MovieTitleRepository movieTitleRepository, MovieShowingRepository movieShowingRepository, ShowRoomRepository showRoomRepository) {
+    public BootStrapData(UserRepository userRepository, AdminRepository adminRepository, MovieTitleRepository movieTitleRepository, MovieShowingRepository movieShowingRepository, ShowRoomRepository showRoomRepository, PromoRepository promoRepository) {
         this.userRepository = userRepository;
         this.adminRepository = adminRepository;
         this.movieTitleRepository = movieTitleRepository;
         this.movieShowingRepository = movieShowingRepository;
         this.showRoomRepository = showRoomRepository;
+        this.promoRepository = promoRepository;
     }
 
     @Override
@@ -32,9 +34,11 @@ public class BootStrapData implements CommandLineRunner {
         // adds two users
         User user = new User("bob@gmail.com", "abc123", "Bob", "Smith");
         user.setStatus(User.Status.ACTIVE);
+        user.setPromo(false);
         userRepository.save(user);
         User user2 = new User("bob2@gmail.com", "abc123", "Bob2", "Smith2");
-        user.setStatus(User.Status.ACTIVE);
+        user2.setStatus(User.Status.ACTIVE);
+        user2.setPromo(true);
         userRepository.save(user2);
         System.out.println("Added basic users");
 
@@ -108,12 +112,19 @@ public class BootStrapData implements CommandLineRunner {
         movieShowing2.setRoomName("A");
         movieShowingRepository.save(movieShowing2);
 
+        Promo promo1 = new Promo("Save 10% on Thanksgiving weekend!", "159GRS", "10", "11/26", "11/28");
+        promoRepository.save(promo1);
+
+        // DO BELOW FOR ALL MOVIE SHOWINGS, DO BELOW DYNAMICALLY IN CONTROLLER CODE
+
         // adds movie showing to the showroom
         showRoomA.getMovieShowings().add(movieShowing);
+        showRoomA.getMovieShowings().add(movieShowing2);
         showRoomRepository.save(showRoomA);
 
         // adds movie showing to the movie title
         movieTitle.getMovieShowings().add(movieShowing); // add this showing to the title side
+        movieTitle.getMovieShowings().add(movieShowing2);
         movieTitleRepository.save(movieTitle);
 
         System.out.println("Num users: " + userRepository.count());

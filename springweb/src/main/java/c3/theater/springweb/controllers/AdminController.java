@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import c3.theater.springweb.email.EmailSender;
 
 @Controller
 public class AdminController {
@@ -15,15 +16,19 @@ public class AdminController {
     private final MovieTitleRepository movieTitleRepository;
     private final MovieShowingRepository movieShowingRepository;
     private final ShowRoomRepository showRoomRepository;
+    private final PromoRepository promoRepository;
+    private final EmailSender emailSender;
 
     private User thisUser;
 
-    public AdminController(AdminRepository adminRepository, UserRepository userRepository, MovieTitleRepository movieTitleRepository, MovieShowingRepository movieShowingRepository, ShowRoomRepository showRoomRepository) {
+    public AdminController(AdminRepository adminRepository, UserRepository userRepository, MovieTitleRepository movieTitleRepository, MovieShowingRepository movieShowingRepository, ShowRoomRepository showRoomRepository, PromoRepository promoRepository, EmailSender emailSender) {
         this.adminRepository = adminRepository;
         this.userRepository = userRepository;
         this.movieTitleRepository = movieTitleRepository;
         this.movieShowingRepository  = movieShowingRepository;
         this.showRoomRepository = showRoomRepository;
+        this.promoRepository = promoRepository;
+        this.emailSender = emailSender;
     }
 
     // Allows login
@@ -114,12 +119,14 @@ public class AdminController {
         boolean titleValid = false;
         boolean roomValid = false;
         boolean timeValid = true;
+        MovieTitle thisMovieTitle = new MovieTitle();
 
         // DO THE BELOW
         // 1. CHECK IF MOVIE TITLE IS REAL IN DB AND THEN SET MOVIETITLE TO THAT
         for (MovieTitle movieElem : movieTitleRepository.findAll()) {
             if (movieElem.getTitle().equals(movieShowing.getTitle())) {
                 // movie title is valid
+                thisMovieTitle = movieElem;
                 titleValid = true;
                 movieShowing.setMovieTitle(movieElem); // check if this works correctly, or if a new movie elem needs be made and assigned with same values
                 System.out.println("movie title valid");
@@ -154,6 +161,12 @@ public class AdminController {
         if (timeValid && roomValid && titleValid) {
             movieShowingRepository.save(movieShowing);
             System.out.println("Added Showing: " + movieShowing.toString());
+            System.out.println("show room var value: " + movieShowing.getShowRoom());
+
+            movieShowing.getShowRoom().getMovieShowings().add(movieShowing);
+            showRoomRepository.save(movieShowing.getShowRoom());
+            movieShowing.getMovieTitle().getMovieShowings().add(movieShowing);
+            movieTitleRepository.save(movieShowing.getMovieTitle()); // check if it actually saves real movie Title. CHECK ALL LINKS
         }
         // 5. IF FAILURE TRY AGAIN (MAYBE GIVE ERROR MESSAGE)
 
@@ -186,6 +199,7 @@ public class AdminController {
         // GET THIS MOVEITITLE FROM HTML AND STORE IT IN DATABASE
         //String returnString = "admin/add_movie";
         movieTitleRepository.save(movieTitle);
+
         System.out.println("Added Movie: " + movieTitle.toString());
         String returnString = "admin/admin_logged_in"; // for some reason it is not showing the added movie
         return returnString;
@@ -194,8 +208,91 @@ public class AdminController {
     // Manage Promos
     @PostMapping("/manage_promos")
     public String adminManagePromos(Model model) {
-        //model.addAttribute("movies", movieTitleRepository.findAll());
+        model.addAttribute("promos", promoRepository.findAll());
+        model.addAttribute("promo", new Promo());
         String returnString = "admin/manage_promos";
+        return returnString;
+    }
+
+    // Add Promo
+    @PostMapping("/add_promo")
+    public String addPromo(Model model, Promo promo) {
+        promoRepository.save(promo);
+
+        // SEND TO CORRECT USER EMAILS
+        for (User user: userRepository.findAll()) {
+            if (user.isPromo()) {
+                String promoEmail = "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" +
+                        "\n" +
+                        "<span style=\"display:none;font-size:1px;color:#fff;max-height:0\"></span>\n" +
+                        "\n" +
+                        "  <table role=\"presentation\" width=\"100%\" style=\"border-collapse:collapse;min-width:100%;width:100%!important\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n" +
+                        "    <tbody><tr>\n" +
+                        "      <td width=\"100%\" height=\"53\" bgcolor=\"#0b0c0c\">\n" +
+                        "        \n" +
+                        "        <table role=\"presentation\" width=\"100%\" style=\"border-collapse:collapse;max-width:580px\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\">\n" +
+                        "          <tbody><tr>\n" +
+                        "            <td width=\"70\" bgcolor=\"#0b0c0c\" valign=\"middle\">\n" +
+                        "                <table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse\">\n" +
+                        "                  <tbody><tr>\n" +
+                        "                    <td style=\"padding-left:10px\">\n" +
+                        "                  \n" +
+                        "                    </td>\n" +
+                        "                    <td style=\"font-size:28px;line-height:1.315789474;Margin-top:4px;padding-left:10px\">\n" +
+                        "                      <span style=\"font-family:Helvetica,Arial,sans-serif;font-weight:700;color:#ffffff;text-decoration:none;vertical-align:top;display:inline-block\">Code: " + promo.getCode() + "</span>\n" +
+                        "                    </td>\n" +
+                        "                  </tr>\n" +
+                        "                </tbody></table>\n" +
+                        "              </a>\n" +
+                        "            </td>\n" +
+                        "          </tr>\n" +
+                        "        </tbody></table>\n" +
+                        "        \n" +
+                        "      </td>\n" +
+                        "    </tr>\n" +
+                        "  </tbody></table>\n" +
+                        "  <table role=\"presentation\" class=\"m_-6186904992287805515content\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse;max-width:580px;width:100%!important\" width=\"100%\">\n" +
+                        "    <tbody><tr>\n" +
+                        "      <td width=\"10\" height=\"10\" valign=\"middle\"></td>\n" +
+                        "      <td>\n" +
+                        "        \n" +
+                        "                <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse\">\n" +
+                        "                  <tbody><tr>\n" +
+                        "                    <td bgcolor=\"#1D70B8\" width=\"100%\" height=\"10\"></td>\n" +
+                        "                  </tr>\n" +
+                        "                </tbody></table>\n" +
+                        "        \n" +
+                        "      </td>\n" +
+                        "      <td width=\"10\" valign=\"middle\" height=\"10\"></td>\n" +
+                        "    </tr>\n" +
+                        "  </tbody></table>\n" +
+                        "\n" +
+                        "\n" +
+                        "\n" +
+                        "  <table role=\"presentation\" class=\"m_-6186904992287805515content\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse;max-width:580px;width:100%!important\" width=\"100%\">\n" +
+                        "    <tbody><tr>\n" +
+                        "      <td height=\"30\"><br></td>\n" +
+                        "    </tr>\n" +
+                        "    <tr>\n" +
+                        "      <td width=\"10\" valign=\"middle\"><br></td>\n" +
+                        "      <td style=\"font-family:Helvetica,Arial,sans-serif;font-size:19px;line-height:1.315789474;max-width:560px\">\n" +
+                        "        \n" +
+                        "            <p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Hi " + ",</p><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> New Promo! Use code, " + promo.getCode() + " . " + promo.getMessage() + " </p><blockquote style=\"Margin:0 0 20px 0;border-left:10px solid #b1b4b6;padding:15px 0 0.1px 15px;font-size:19px;line-height:25px\"><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> <a href=\"" + "\"></a> </p></blockquote>\n  <p></p>" +
+                        "        \n" +
+                        "      </td>\n" +
+                        "      <td width=\"10\" valign=\"middle\"><br></td>\n" +
+                        "    </tr>\n" +
+                        "    <tr>\n" +
+                        "      <td height=\"30\"><br></td>\n" +
+                        "    </tr>\n" +
+                        "  </tbody></table><div class=\"yj6qo\"></div><div class=\"adL\">\n" +
+                        "\n" +
+                        "</div></div>";
+                emailSender.send(user.getEmail(), promoEmail);
+            }
+        }
+
+        String returnString = "admin/admin_logged_in";
         return returnString;
     }
 }
