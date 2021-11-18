@@ -31,6 +31,7 @@ public class MovieTitle {
     private String trailerVideo;
     private String rating;
     private boolean comingSoon;
+    private String state;
     // CREATE A WAY TO STORE IF IT IS COMING SOON OR IN THEATERS, AUTOMATICALLY?
 
 
@@ -56,14 +57,36 @@ public class MovieTitle {
         this.trailerVideo = trailerVideo;
         this.rating = rating;
         this.comingSoon = comingSoon;
+        if (comingSoon) {
+            state = "Coming Soon";
+        } else {
+            state = "Now Playing";
+        }
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     public boolean isComingSoon() {
         return comingSoon;
     }
 
+    public String getComingSoon() {
+        return String.valueOf(comingSoon); // maybe as a string?
+    }
+
     public void setComingSoon(boolean comingSoon) {
         this.comingSoon = comingSoon;
+        if (comingSoon) {
+            state = "Coming Soon";
+        } else {
+            state = "Now Playing";
+        }
     }
 
     public Long getId() {
