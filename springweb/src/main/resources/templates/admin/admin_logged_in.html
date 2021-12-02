@@ -2,27 +2,33 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>Spring Security Example</title>
-		<link rel ="stylesheet" type="text/css" href="resources/css/homeStyle.css"/>
+		<link rel ="stylesheet" type="text/css" href="resources/css/adminHome.css"/>
 
 </head>
 <body>
+<div class = "headerContainer">
 <h1>Welcome!</h1>
 
 <p>You are logged in as an Admin! :)</p>
-<form th:action="@{/manage_movies}" th:object="${admin}" method="post">
-    <input type="submit" value="Manage Movies"/>
+</div>
+<div class="container">
+    <div class="box">
+<form th:action="@{/manage_movies}" th:object="${admin}" method="post" id = form>
+    <button id = "redButton" type="submit" class="btn btn-primary btn-block btn-large">Manage Movies</button></br>
 </form>
-<form th:action="@{/manage_showings}" th:object="${admin}" method="post">
-    <input type="submit" value="Manage Showings"/>
+<form th:action="@{/manage_showings}" th:object="${admin}" method="post" id = form>
+    <button id = "redButton" type="submit" class="btn btn-primary btn-block btn-large">Manage Showings</button></br>
 </form>
-<form th:action="@{/manage_users}" th:object="${admin}" method="post">
-    <input type="submit" value="Manage Users"/>
+<form th:action="@{/manage_users}" th:object="${admin}" method="post" id = form>
+    <button id = "redButton" type="submit" class="btn btn-primary btn-block btn-large">Manage Users</button></br>
 </form>
-<form th:action="@{/manage_promos}" th:object="${admin}" method="post">
-    <input type="submit" value="Manage Promotions"/>
+<form th:action="@{/manage_promos}" th:object="${admin}" method="post" id = form >
+    <button id = "redButton" type="submit" class="btn btn-primary btn-block btn-large">Manage Promotions</button></br>
 </form>
-<form th:action="@{/home}" th:object="${admin}" method="post">
-    <input type="submit" value="Log Out"/>
+<form th:action="@{/home}" th:object="${admin}" method="post"id = form >
+    <button id = "redButton" type="submit" class="btn btn-primary btn-block btn-large">Log Out</button></br>
 </form>
+    </div>
+</div>
 </body>
 </html>
