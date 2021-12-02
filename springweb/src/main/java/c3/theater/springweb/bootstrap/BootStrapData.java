@@ -16,20 +16,23 @@ public class BootStrapData implements CommandLineRunner {
     public final MovieShowingRepository movieShowingRepository;
     public final ShowRoomRepository showRoomRepository;
     public final PromoRepository promoRepository;
+    public final TicketRepository ticketRepository;
 
-    public BootStrapData(UserRepository userRepository, AdminRepository adminRepository, MovieTitleRepository movieTitleRepository, MovieShowingRepository movieShowingRepository, ShowRoomRepository showRoomRepository, PromoRepository promoRepository) {
+    public BootStrapData(UserRepository userRepository, AdminRepository adminRepository, MovieTitleRepository movieTitleRepository, MovieShowingRepository movieShowingRepository, ShowRoomRepository showRoomRepository, PromoRepository promoRepository, TicketRepository ticketRepository) {
         this.userRepository = userRepository;
         this.adminRepository = adminRepository;
         this.movieTitleRepository = movieTitleRepository;
         this.movieShowingRepository = movieShowingRepository;
         this.showRoomRepository = showRoomRepository;
         this.promoRepository = promoRepository;
+        this.ticketRepository = ticketRepository;
     }
 
     @Override
     public void run(String... args) throws Exception {
 
         System.out.println("Started in Bootstrap");
+
 
         // adds two users
 //        User user = new User("bob@gmail.com", "abc123", "Bob", "Smith");
@@ -143,7 +146,9 @@ public class BootStrapData implements CommandLineRunner {
 //        movieTitle.getMovieShowings().add(movieShowing); // add this showing to the title side
 //        movieTitle.getMovieShowings().add(movieShowing2);
 //        movieTitleRepository.save(movieTitle);
-
+        Ticket Ticket1 = new Ticket();
+        Ticket1.setSeatNum(10);
+        System.out.println(Ticket1.getSeatNum());
         System.out.println("Num users: " + userRepository.count());
         System.out.println("Num movie titles: " + movieTitleRepository.count());
     }
