@@ -10,15 +10,33 @@ public class Ticket {
     private Long screeningId;
     private int seatNum;
     private Long userId;
+    private boolean isChild;
+    private String state;
+
 
     public Ticket() {
     }
 
-    public Ticket(Long ticketId, Long screeningId, int seatNum, Long userId) {
+    public Ticket(Long ticketId, Long screeningId, int seatNum, Long userId, boolean isChild, String state) {
         this.ticketId = ticketId;
         this.screeningId = screeningId;
         this.seatNum = seatNum;
         this.userId = userId;
+        this.isChild = isChild;
+        if (isChild) {
+            state = "Child";
+        } else {
+            state = "Adult";
+        }
+        this.state = state;
+    }
+
+    public boolean isChild() {
+        return isChild;
+    }
+
+    public void setChild(boolean child) {
+        isChild = child;
     }
 
     public Long getTicketId() {
