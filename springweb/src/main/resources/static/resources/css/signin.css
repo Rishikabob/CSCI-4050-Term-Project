@@ -1,6 +1,6 @@
 *{
     font-family: Arial, Helvetica, sans-serif;
-	
+
 }
 
 body {
@@ -17,9 +17,9 @@ body {
 .box {
     background-color: white;
     width: 35%;
-    height: 500px;
+    height: 625px;
     border-radius: 25px;
-    margin-top: 10%;
+    margin-top: 5%;
     box-shadow: 0px 0px 10px black;
 }
 #form {
@@ -36,13 +36,19 @@ body {
     margin: 10px 0;
     background-color: gray;
     opacity: 80%;
-    
+
 }
 
 #header {
     text-align: center;
     font-size: 35pt;
 }
+
+#subHeader {
+    text-align: center;
+    font-size:  25pt;
+}
+
 #redButton {
 	border-radius: 25px;
 	background-color: crimson;
@@ -62,5 +68,5 @@ body {
     min-width: 15px;
     text-align: center;
     border-radius: 25px;
-    
+
   }

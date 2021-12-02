@@ -4,23 +4,33 @@
 <head>
     <title>Spring Security Example </title>
 		<link rel ="stylesheet" type="text/css" href="resources/css/signin.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 <body>
+<div class="container">
+    <div class="box">
+        <h1 id = 'header'>Sign In</h1>
 <div th:if="${param.error}">
     Invalid username and password.
 </div>
 <div th:if="${param.logout}">
     You have been logged out.
 </div>
-<form th:action="@{/home_loggedin}" th:object="${user}" method="post">
-    <div><label> Email : <input th:field="*{email}" type="text" name="email"/> </label></div>
-    <div><label> Password: <input th:field="*{password}" type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
+<form th:action="@{/home_loggedin}" th:object="${user}" method="post" id = form>
+    <i class="fa fa-envelope icon"></i>
+    <input th:field="*{email}" id = input type="text" name="email" placeholder="Enter Email" required="required" /></br>
+    <i class="fa fa-key icon"></i>
+    <input th:field="*{password}" id = input type="password" name="password" placeholder="Enter Password" required="required" /></br>
+
+    <button id = "redButton" type="submit" class="btn btn-primary btn-block btn-large">Submit</button></br>
 </form>
-<form th:action="@{/forgot_password}" th:object="${user}">
-    <div><label> Email : <input th:field="*{email}" type="text" name="email"/> </label></div>
-    <input type="submit" value="Forgot Password"/>
+        <h1 id = 'subHeader'> Forgot Password? </h1>
+<form th:action="@{/forgot_password}" th:object="${user}" id = form>
+    <input th:field="*{email}" id = input type="text" name="email" placeholder="Enter Email"/></br>
+    <button id = "redButton" type="submit" class="btn btn-primary btn-block btn-large">Forgot Password</button></br>
 </form>
+    </div>
+</div>
 </body>
 </html>

@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Spring Security Example</title>
+    <title>Homepage</title>
 		<link rel ="stylesheet" type="text/css" href="resources/css/homeStyle.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 <body>
-<h1>Welcome!</h1>
 
+    <div class = "headerContainer">
+<h1>Welcome!</h1>
 <p>You are logged in! :)</p>
+        <div class = "buttonContainer">
 <form th:action="@{/edit_profile}" th:object="${user}">
     <input type="submit" value="Edit Profile"/>
 </form>
 <form th:action="@{/home}" th:object="${user}" method="post">
     <input type="submit" value="Log Out"/>
 </form>
+        </div>
+    </div>
+
+
 <div class = "bodyContainer">
     <div class = "searchContainer">
         <form id = form th:action="@{/search_logged}">
