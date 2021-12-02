@@ -6,6 +6,7 @@
 		<meta charset="utf-8">
 		<title>Home</title>
 		<link rel="stylesheet" href="resources/css/homeStyle.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	</head>
 	<body>
     <div class = "headerContainer">
@@ -26,6 +27,7 @@
 
     <div class = "bodyContainer">
         <div class = "searchContainer">
+            <i class="fa fa-search icon"></i>
             <form id = form th:action="@{/search_web}">
                 <input type="text" th:value="${searchString}" name="searchString" placeholder="Search Movie">
                 <button id = "redButton" type="submit" class="btn btn-primary btn-block btn-large">Search</button>
