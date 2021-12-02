@@ -38,6 +38,9 @@ body {
     opacity: 80%;
 
 }
+input::placeholder {
+  color: #fff;
+}
 
 #header {
     text-align: center;

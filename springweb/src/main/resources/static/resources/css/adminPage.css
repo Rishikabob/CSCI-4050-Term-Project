@@ -12,7 +12,7 @@
 }
 body {
 	background-color: #252525;
-	color: white;
+	color: black;
 
 }
 
@@ -55,9 +55,9 @@ input::placeholder {
     font-size: 35pt;
 }
 
-.center {
-     margin-left: auto;
-      margin-right: auto;
+#subHeader {
+    text-align: center;
+    font-size:  25pt;
 }
 
 #redButton {

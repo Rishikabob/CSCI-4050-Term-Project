@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Users List</title>
-    <link rel ="stylesheet" type="text/css" href="resources/css/style.css"/>
+    <link rel ="stylesheet" type="text/css" href="resources/css/adminPage.css"/>
 
 </head>
 <body>
-<h1>Showings List</h1>
+
+<div class="container">
+    <div class="box">
+        <h1 id = header>Showings List</h1>
 
 <table>
     <tr>
@@ -25,9 +28,10 @@
         <td th:text="${show.showRoom.name}">123</td>
     </tr>
 </table>
-<form th:action="@{/admin_add_showing}" method="post">
-    <div><input type="submit" value="Add Movie Showing"/></div>
+<form th:action="@{/admin_add_showing}" method="post" id = form>
+    <button id = "redButton" type="submit" class="btn btn-primary btn-block btn-large">Add Movie Showing</button></br>
 </form>
-
+    </div>
+</div>
 </body>
 </html>

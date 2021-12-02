@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Add Movie</title>
-    <link rel="stylesheet" type="text/css"  href="resources/css/homeStyle.css">
+    <link rel="stylesheet" type="text/css"  href="resources/css/addMovStyle.css">
 </head>
 <body>
 <div class="container">
@@ -12,24 +12,24 @@
               method="post" style="max-width: 600px; margin: 0 auto;">
 
 
-            <input th:field="*{title}" class="form-control"
+            <input th:field="*{title}" id = input class="form-control"
                    required minlength="2" maxlength="100" type="text" name="fn" placeholder="Movie Title: "/>
-            <input th:field="*{genre}" class="form-control"
+            <input th:field="*{genre}" id = input class="form-control"
                    required minlength="2" maxlength="20" type="text" name="fn" placeholder="Genre: "/>
-            <input th:field="*{cast}" class="form-control"
+            <input th:field="*{cast}" id = input class="form-control"
                    required minlength="2" maxlength="100" type="text" name="fn" placeholder="Cast: "/>
-            <input th:field="*{director}" class="form-control"
+            <input th:field="*{director}" id = input class="form-control"
                    required minlength="2" maxlength="100" type="text" name="fn" placeholder="Director: "/>
-            <input th:field="*{producer}" class="form-control"
+            <input th:field="*{producer}" id = input class="form-control"
                    required minlength="2" maxlength="100" type="text" name="fn" placeholder="Producer: "/>
-            <input th:field="*{synopsis}" class="form-control"
+            <input th:field="*{synopsis}" id = input class="form-control"
                    required minlength="2" maxlength="1000" type="text" name="fn" placeholder="Synopsis: "/>
-            <input th:field="*{trailerPicture}" class="form-control"
+            <input th:field="*{trailerPicture}" id = input class="form-control"
                    required minlength="2" maxlength="1000" type="text" name="fn" placeholder="Trailer Image: "/>
-            <input th:field="*{trailerVideo}" class="form-control"
+            <input th:field="*{trailerVideo}" id = input class="form-control"
                    required minlength="2" maxlength="1000" type="text" name="fn" placeholder="Trailer Video: "/>
-            <input th:field="*{rating}" class="form-control"
-                   required minlength="1" maxlength="20" type="text" name="fn" placeholder="Rating: "/>
+            <input th:field="*{rating}" id = input class="form-control"
+                   required minlength="1" maxlength="20" type="text" name="fn" placeholder="Rating: "/> </br>
             <label>Is the movie coming soon?</label>
             <input th:field="*{comingSoon}" type="checkbox" id="promos" name="coming soon">
             <button id = "redButton" type="submit" class="btn btn-primary btn-block btn-large">Submit</button></br>

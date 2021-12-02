@@ -38,6 +38,9 @@ body {
     opacity: 80%;
     
 }
+input::placeholder {
+  color: #fff;
+}
 .box label {
     float:inline-start;
     padding-inline: 15%;

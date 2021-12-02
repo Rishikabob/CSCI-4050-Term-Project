@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Add Movie</title>
-    <link rel="stylesheet" type="text/css"  href="resources/css/homeStyle.css">
+    <link rel="stylesheet" type="text/css"  href="resources/css/adminPage.css">
 </head>
 <body>
 <div class="container">
@@ -12,13 +12,13 @@
               method="post" style="max-width: 600px; margin: 0 auto;">
 
 
-            <input th:field="*{title}" class="form-control"
+            <input th:field="*{title}" id = input class="form-control"
                    required minlength="2" maxlength="100" type="text" name="fn" placeholder="Movie Title: "/>
-            <input th:field="*{showDate}" class="form-control"
+            <input th:field="*{showDate}" id = input class="form-control"
                    required minlength="2" maxlength="20" type="text" name="fn" placeholder="Show Date: "/>
-            <input th:field="*{timePeriod}" class="form-control"
+            <input th:field="*{timePeriod}" id = input class="form-control"
                    required minlength="1" maxlength="20" type="text" name="fn" placeholder="Show Time Period (1, 2, 3, or 4): "/>
-            <input th:field="*{roomName}" class="form-control"
+            <input th:field="*{roomName}" id = input class="form-control"
                    required minlength="1" maxlength="20" type="text" name="fn" placeholder="Room (A or B): "/>
 
             <button id = "redButton" type="submit" class="btn btn-primary btn-block btn-large">Submit</button></br>
