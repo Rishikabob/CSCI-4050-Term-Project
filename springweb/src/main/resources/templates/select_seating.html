@@ -72,36 +72,18 @@
 <br><center><h2>Number of seats selected: <span id = "count">0</span></h2></center>
 <script src = "seatingScript.js"></script>
 
-<table>
-  <tr>
-    <th>ticketId</th>
-    <th>screeningId</th>
-    <th>seatNum</th>
-    <th>userId</th>
-    <th>numChild</th>
-    <th>numAdult</th>
-  </tr>
-  <tr th:each="ticket : ${tickets}">
-    <td th:text="${ticket.ticketId}">123</td>
-    <td th:text="${ticket.screeningId}">TestLastName</td>
-    <td th:text="${ticket.seatNum}">testemail@testemailprovider.com</td>
-    <td th:text="${ticket.userId}">abc123</td>
-    <td th:text="${ticket.numChild}">abc123</td>
-    <td th:text="${ticket.numAdult}">TestFirstName</td>
-  </tr>
-</table>
-
 </body>
 
 
-
+<center>
 <form th:action="@{/checkout}" th:object="${ticket}" method="post">
-  <div><label> screeningId : <input th:field="*{screeningId}" type="text" name="screeningId"/> </label></div>
-  <div><label> seatNum : <input th:field="*{seatNum}" type="text" name="seatNum"/> </label></div>
-  <div><label> userId : <input th:field="*{userId}" type="tex" name="userId"/> </label></div>
-  <div><label> numChild : <input th:field="*{numChild}" type="text" name="numChild"/> </label></div>
-  <div><label> numAdult : <input th:field="*{numAdult}" type="text" name="numAdult"/> </label></div>
-  <div><input type="submit" value="Send"/></div>
+  <div><label> Screen Id : <input th:field="*{screeningId}" type="text" name="screeningId"/> </label></div>
+  <div><label> Number Of Seats : <input th:field="*{seatNum}" type="text" name="seatNum"/> </label></div>
+  <div><label> User Id : <input th:field="*{userId}" type="text" name="userId"/> </label></div>
+  <div><label> Number of Children : <input th:field="*{numChild}" type="text" name="numChild"/> </label></div>
+  <div><label> Number of Adults : <input th:field="*{numAdult}" type="text" name="numAdult"/> </label></div>
+  <div><input type="submit" value="Check Out"/></div>
 </form>
+</center>
 
 </html>

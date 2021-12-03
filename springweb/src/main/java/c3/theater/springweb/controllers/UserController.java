@@ -486,8 +486,8 @@ public class UserController {
     @PostMapping("/checkout")
     public String checkOut(Model model, Ticket ticket) {
         ticketRepository.save(ticket);
-        String returnString = "/checkout";
-        return returnString;
+
+        return "/checkout";
     }
 
     // Edit Profile
