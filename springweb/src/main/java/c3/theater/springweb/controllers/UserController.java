@@ -2,12 +2,10 @@ package c3.theater.springweb.controllers;
 
 import c3.theater.springweb.domain.MovieShowing;
 import c3.theater.springweb.domain.MovieTitle;
+import c3.theater.springweb.domain.ShowRoom;
 import c3.theater.springweb.domain.User;
 import c3.theater.springweb.email.EmailSender;
-import c3.theater.springweb.repositories.MovieShowingRepository;
-import c3.theater.springweb.repositories.MovieTitleRepository;
-import c3.theater.springweb.repositories.TicketRepository;
-import c3.theater.springweb.repositories.UserRepository;
+import c3.theater.springweb.repositories.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +21,7 @@ public class UserController {
     private final UserRepository userRepository;
     private final MovieTitleRepository movieTitleRepository;
     private final MovieShowingRepository movieShowingRepository;
+    private final ShowRoomRepository showRoomRepository;
     private final TicketRepository ticketRepository;
     //private final MovieTitleRepository comingSoon;
     //private final MovieTitleRepository nowPlaying;
@@ -40,11 +39,12 @@ public class UserController {
 
     private String currentSearch = "";
 
-    public UserController(UserRepository userRepository, EmailSender emailSender, MovieTitleRepository movieTitleRepository, MovieShowingRepository movieShowingRepository, MovieTitleRepository comingSoon, MovieTitleRepository nowPlaying, TicketRepository ticketRepository) {
+    public UserController(UserRepository userRepository, EmailSender emailSender, MovieTitleRepository movieTitleRepository, MovieShowingRepository movieShowingRepository, ShowRoomRepository showRoomRepository, MovieTitleRepository comingSoon, MovieTitleRepository nowPlaying, TicketRepository ticketRepository) {
         this.userRepository = userRepository;
         this.emailSender = emailSender; // ADDED THIS, make sure it didnt break anything
         this.movieTitleRepository = movieTitleRepository;
         this.movieShowingRepository = movieShowingRepository;
+        this.showRoomRepository = showRoomRepository;
         this.ticketRepository = ticketRepository;
         //this.comingSoon = comingSoon; // SEE IF THIS AND LINE BELOW WORK
         //this.nowPlaying = nowPlaying;
@@ -474,17 +474,21 @@ public class UserController {
         return "/info";
     }
 
-    //bookmovie
-    @GetMapping("/selectseats")
-    public String selectSeats(Model model, MovieTitle movieTitle) {
-        System.out.println("trailer pic on info: " + movieTitle.getTrailerPicture());
-        System.out.println("Movie Title" + movieTitle.getTitle());
-        for (MovieTitle movieTest : movieTitleRepository.findAll()) {
-            if (movieTest.getTitle().equals(movieTitle.getTitle())) {
-                model.addAttribute("shows", movieTest.getMovieShowings());
+    //Select seating
+    @GetMapping("/select_seating")
+    public String selectSeating(Model model, MovieShowing movieShowing) {
+        //System.out.println("thisUser passed to edit profile for auto fill: " + thisUser.toString());
+        //model.addAttribute("user", thisUser);
+        //System.out.println("INFO CALLED");
+        //System.out.println(movieTitle);
+        //model.addAttribute("showings", movieShowingRepository.findAll());
+        //System.out.println(movieShowingRepository.findAll());
+        for (ShowRoom test : showRoomRepository.findAll()) {
+            if (test.getId().equals(movieShowing.getId())) {
+                model.addAttribute("shows", test.getMovieShowings());
             }
         }
-        return "/selectseats";
+        return "/select_seating";
     }
 
     // Edit Profile

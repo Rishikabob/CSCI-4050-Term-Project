@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Seat Selection</title>
+  <link rel="stylesheet" type="text/css"  href="resources/css/selectSeating.css">
+  <!-- <h1 id="header">Seats for X</h1> -->
+  <h1 id = "header" th:object="${movieShowing}" th:text="${movieShowing.title}"> Movie Title</h1>
+  <h1 th:object="${movieShowing}" th:text="${movieShowing.showDate}"> Show Date</h1>
+  <h1 th:object="${movieShowing}" th:text="${movieShowing.timePeriod}"> Time</h1>
+</head>
+<body>
+<div class="seating">
+  <center>
+    <h2>
+      Screen
+    </h2>
+  </center>
+  <div class="row">
+    <div class="seat"></div>
+    <div class="seat"></div>
+    <div class="seat"></div>
+    <div class="seat"></div>
+    <div class="seat"></div>
+    <div class="seat"></div>
+    <div class="seat"></div>
+    <div class="seat"></div>
+  </div>
+  <div class="row">
+    <div class="seat"></div>
+    <div class="seat"></div>
+    <div class="seat"></div>
+    <div class="seat"></div>
+    <div class="seat"></div>
+    <div class="seat"></div>
+    <div class="seat"></div>
+    <div class="seat"></div>
+  </div>
+
+  <div class="row">
+    <div class="seat"></div>
+    <div class="seat"></div>
+    <div class="seat"></div>
+    <div class="seat"></div>
+    <div class="seat"></div>
+    <div class="seat"></div>
+    <div class="seat"></div>
+    <div class="seat"></div>
+  </div>
+  <div class="row">
+    <div class="seat"></div>
+    <div class="seat"></div>
+    <div class="seat"></div>
+    <div class="seat"></div>
+    <div class="seat"></div>
+    <div class="seat"></div>
+    <div class="seat"></div>
+    <div class="seat"></div>
+  </div>
+  <div class="row">
+    <div class="seat"></div>
+    <div class="seat"></div>
+    <div class="seat"></div>
+    <div class="seat"></div>
+    <div class="seat"></div>
+    <div class="seat"></div>
+    <div class="seat"></div>
+    <div class="seat"></div>
+  </div>
+</div>
+<br><center><h2>Number of seats selected: <span id = "count">0</span></h2></center>
+<script src = "seatingScript.js"></script>
+</body>
+<a href="showtime.html">
+  <button id = "backButton">
+    Back
+  </button>
+</a>
+
+<a href="orderSummary.html">
+  <button id = "continueButton">
+    Continue
+  </button>
+</a>
+</html>
