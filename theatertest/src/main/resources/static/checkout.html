@@ -11,22 +11,19 @@
   <div class="column">
     <h1 id="header">Checkout</h1>
     <h2>Movie</h2>
-    <p>Movie Title</p>
-    <h2>Shipping Address</h2>
-    <p>Name</p>
-    <p>Address</p>
-    <h2>Payment Method</h2>
+    <p>Ex Machina</p>
     <p>Payment Card</p>
-	    <a href="orderSummary.html">
-    <button id="backButton">Back</button>
-    </a> 
+	    
 	</div>
   <div class="column">
     <h2>Tickets</h2>
-    <p>Adult: 1</p>
-	<p>Child: 0</p>
-	<p>Senior: 1</p>
-	<p>Total Tickets: 2</p>
+<th> Adult: </th>
+<td th:object="${ticket}" th:text="${ticket.seatNum}"></td> </br>
+<th>Children: </th>
+<td th:object="${ticket}" th:text="${ticket.seatNum}"></td> </br>
+<th>Total Tickets: </th>
+<td th:object="${ticket}" th:text="${ticket.seatNum}"></td> </br>
+
 	<h2>Ticket Pricing</h2>
     <p>Adult: $10.00</p>
 	<p>Child: $5.00</p>
@@ -36,9 +33,9 @@
 	<p>Online Fees: $5.00</p>
 	<p>Taxes: $2.00</p>
 	<p>Total: $22.00</p>
-	    <a href="orderconfirmation.html">
-    <button id="continueButton">Checkout</button>
-    </a>
+  <form th:action="@{/}">
+    <input type="submit" value="Complete and Confrim Checkout"/>
+</form>
   </div>
   </body>
   

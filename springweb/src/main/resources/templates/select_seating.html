@@ -77,11 +77,13 @@
 
 <center>
 <form th:action="@{/checkout}" th:object="${ticket}" method="post">
-  <div><label> Screen Id : <input th:field="*{screeningId}" type="text" name="screeningId"/> </label></div>
+
   <div><label> Number Of Seats : <input th:field="*{seatNum}" type="text" name="seatNum"/> </label></div>
-  <div><label> User Id : <input th:field="*{userId}" type="text" name="userId"/> </label></div>
   <div><label> Number of Children : <input th:field="*{numChild}" type="text" name="numChild"/> </label></div>
   <div><label> Number of Adults : <input th:field="*{numAdult}" type="text" name="numAdult"/> </label></div>
+
+  <div><label> User Id : <input th:field="*{userId}" type="text" name="userId"/> </label></div>
+  <div><label> Screen Id : <input th:field="*{screeningId}" type="text" name="screeningId"/> </label></div>
   <div><input type="submit" value="Check Out"/></div>
 </form>
 </center>
