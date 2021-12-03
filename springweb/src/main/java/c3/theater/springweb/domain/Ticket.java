@@ -10,33 +10,20 @@ public class Ticket {
     private Long screeningId;
     private int seatNum;
     private Long userId;
-    private boolean isChild;
-    private String state;
+    private int numChild;
+    private int numAdult;
 
 
     public Ticket() {
     }
 
-    public Ticket(Long ticketId, Long screeningId, int seatNum, Long userId, boolean isChild, String state) {
+    public Ticket(Long ticketId, Long screeningId, int seatNum, Long userId, int numChild, int numAdult) {
         this.ticketId = ticketId;
         this.screeningId = screeningId;
         this.seatNum = seatNum;
         this.userId = userId;
-        this.isChild = isChild;
-        if (isChild) {
-            state = "Child";
-        } else {
-            state = "Adult";
-        }
-        this.state = state;
-    }
-
-    public boolean isChild() {
-        return isChild;
-    }
-
-    public void setChild(boolean child) {
-        isChild = child;
+        this.numChild = numChild;
+        this.numAdult = numAdult;
     }
 
     public Long getTicketId() {
@@ -69,6 +56,22 @@ public class Ticket {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public int getNumChild() {
+        return numChild;
+    }
+
+    public void setNumChild(int numChild) {
+        this.numChild = numChild;
+    }
+
+    public int getNumAdult() {
+        return numAdult;
+    }
+
+    public void setNumAdult(int numAdult) {
+        this.numAdult = numAdult;
     }
 
     @Override

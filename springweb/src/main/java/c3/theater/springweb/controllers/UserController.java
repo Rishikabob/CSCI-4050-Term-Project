@@ -1,9 +1,6 @@
 package c3.theater.springweb.controllers;
 
-import c3.theater.springweb.domain.MovieShowing;
-import c3.theater.springweb.domain.MovieTitle;
-import c3.theater.springweb.domain.ShowRoom;
-import c3.theater.springweb.domain.User;
+import c3.theater.springweb.domain.*;
 import c3.theater.springweb.email.EmailSender;
 import c3.theater.springweb.repositories.*;
 import org.springframework.stereotype.Controller;
@@ -477,18 +474,20 @@ public class UserController {
     //Select seating
     @GetMapping("/select_seating")
     public String selectSeating(Model model, MovieShowing movieShowing) {
-        //System.out.println("thisUser passed to edit profile for auto fill: " + thisUser.toString());
-        //model.addAttribute("user", thisUser);
-        //System.out.println("INFO CALLED");
-        //System.out.println(movieTitle);
-        //model.addAttribute("showings", movieShowingRepository.findAll());
-        //System.out.println(movieShowingRepository.findAll());
+        model.addAttribute("tickets", ticketRepository.findAll());
+        model.addAttribute("ticket", new Ticket());
         for (ShowRoom test : showRoomRepository.findAll()) {
             if (test.getId().equals(movieShowing.getId())) {
                 model.addAttribute("shows", test.getMovieShowings());
             }
         }
         return "/select_seating";
+    }
+    @PostMapping("/checkout")
+    public String checkOut(Model model, Ticket ticket) {
+        ticketRepository.save(ticket);
+        String returnString = "/checkout";
+        return returnString;
     }
 
     // Edit Profile

@@ -146,9 +146,13 @@ public class BootStrapData implements CommandLineRunner {
 //        movieTitle.getMovieShowings().add(movieShowing); // add this showing to the title side
 //        movieTitle.getMovieShowings().add(movieShowing2);
 //        movieTitleRepository.save(movieTitle);
-        Ticket Ticket1 = new Ticket();
-        Ticket1.setSeatNum(10);
-        System.out.println(Ticket1.getSeatNum());
+
+//        Ticket Ticket1 = new Ticket();
+//        Ticket1.setNumAdult(1);
+//        Ticket1.setNumChild(1);
+//        Ticket1.setUserId(1L);
+//        Ticket1.setScreeningId(17L);
+//        ticketRepository.save(Ticket1);
         System.out.println("Num users: " + userRepository.count());
         System.out.println("Num movie titles: " + movieTitleRepository.count());
     }
