@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Users List</title>
+  <link rel ="stylesheet" type="text/css" href="resources/css/homeStyle.css"/>
+
+</head>
+<body>
+<h1 th:object="${movieTitle}" th:text="${movieTitle.title}"> Movie Title</h1>
+
+
+<a>
+  <img width="255" height="450" th:src="${movieTitle.trailerPicture}" alt="FailedToLoad">
+  <iframe width="450" height="255" th:src="${movieTitle.trailerVideo}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</a>
+
+<table>
+
+  <tr>
+    <th scope="row">Rating</th>
+    <td th:object="${movieTitle}" th:text="${movieTitle.rating}"></td>
+  </tr>
+  <tr>
+    <th scope="row">Genre</th>
+    <td th:object="${movieTitle}" th:text="${movieTitle.genre}"></td>
+  </tr>
+  <tr>
+    <th scope="row">Cast</th>
+    <td th:object="${movieTitle}" th:text="${movieTitle.cast}"></td>
+  </tr>
+  <tr>
+    <th scope="row">Director</th>
+    <td th:object="${movieTitle}" th:text="${movieTitle.director}"></td>
+  </tr>
+  <tr>
+    <th scope="row">Producer</th>
+    <td th:object="${movieTitle}" th:text="${movieTitle.producer}"></td>
+  </tr>
+  <tr>
+    <th scope="row">Synopsis</th>
+    <td th:object="${movieTitle}" th:text="${movieTitle.synopsis}"></td>
+  </tr>
+  <tr>
+    <th scope="row">Release </th>
+    <td th:object="${movieTitle}" th:text="${movieTitle.state}"></td>
+  </tr>
+
+
+  <th>Show Dates and Times</th>
+  <br>
+  <tr>
+    <th>ID</th>
+    <th>Title</th>
+    <th>Date</th>
+    <th>Time Period</th>
+  </tr>
+  <tr th:each="show : ${shows}">
+    <td th:text="${show.id}">123</td>
+    <td th:text="${show.title}">123</td>
+    <td th:text="${show.showDate}">123</td>
+    <td th:text="${show.timePeriod}">123</td>
+    <td>
+      <form th:action="@{/select_seating}" th:object="${movieShowing}" th:value="${show}">
+        <input type="hidden" th:name="title" th:id="title" th:value="${show.title}">
+        <input type="hidden" th:name="showDate" th:id="showDate" th:value="${show.showDate}">
+        <input type="hidden" th:name="timePeriod" th:id="timePeriod" th:value="${show.timePeriod}">
+        <input type="submit" value="Book"/>
+      </form>
+    </td>
+  </tr>
+
+
+
+
+</table>
+
+<!--Below - Figure out how to add a user upon button click -->
+<!--
+<button type="button" onclick=" ${BootStrapData.UserRepository.()}">Click Me!</button>
+-->
+
+</body>
+</html>

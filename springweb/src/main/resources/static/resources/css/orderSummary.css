@@ -3,26 +3,26 @@ body {
 	background-color: #252525;
 	color: white;
 	margin-inline: 1%;
-}	
+}
 
 .searchContainer {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    
+	display: flex;
+	justify-content: center;
+	width: 100%;
+
 }
 
 .searchContainer input {
-    width: 105%;
-    padding: 10px;
-    outline: none;
-    border-radius: 25px 25px 25px 025px;
-    border-style: none;
+	width: 105%;
+	padding: 10px;
+	outline: none;
+	border-radius: 25px 25px 25px 025px;
+	border-style: none;
 	background: white;
-    
+
 }
 #header{
-    border: thin solid crimson;
+	border: thin solid crimson;
 	background-color: crimson;
 	margin-right: 1%;
 	margin-left: 1%;
@@ -33,13 +33,13 @@ body {
 }
 
 div.sep {
-	width: 400px; 
+	width: 400px;
 	background: #5F85DB;
 	color: #fff;
 	border-bottom: 1px solid white;
 	width: 12em;
 	margin-left: 45px;
-	
+
 }
 
 button {
@@ -47,7 +47,7 @@ button {
 	height: 50px;
 	width: 115px;
 	background-color: crimson;
-    border-radius: 25px;
+	border-radius: 25px;
 	color: white;
 	font-size: large;
 	align-self: center;
@@ -68,42 +68,42 @@ div.content {
 
 .inlineAddSubtract{
 	background-color: crimson;
-    border-radius: 25px;
-    border-style: hidden;
-    color: white;
-    font-size: 120%;
-    height:45px;
+	border-radius: 25px;
+	border-style: hidden;
+	color: white;
+	font-size: 120%;
+	height:45px;
 	width:45px;
-	 display: inline-block;
-    margin-left: 5px;
-   margin-right: 5px;
+	display: inline-block;
+	margin-left: 5px;
+	margin-right: 5px;
 }
 
 .inline{
-	 display: inline-block;
-    margin-left: 5px;
-   margin-right: 5px;
+	display: inline-block;
+	margin-left: 5px;
+	margin-right: 5px;
 }
 
 #backButton {
-		border-radius: 25px;
+	border-radius: 25px;
 	background-color: crimson;
 	border-color: crimson;
 	width: 300px;
 	height: 50px ;
 	font-size: 20px;
-  position: absolute;
-  margin-top:100px;
-  left: 3%;
+	position: absolute;
+	margin-top:100px;
+	left: 3%;
 }
 #continueButton {
-		border-radius: 25px;
+	border-radius: 25px;
 	background-color: crimson;
 	border-color: crimson;
 	width: 300px;
 	height: 50px ;
 	font-size: 20px;
-  position: absolute;
-  margin-top:100px;
-  right: 3%;
+	position: absolute;
+	margin-top:100px;
+	right: 3%;
 }
