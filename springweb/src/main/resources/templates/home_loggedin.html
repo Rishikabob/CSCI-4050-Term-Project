@@ -44,7 +44,7 @@
                 <h2 data-th-text="*{nowPlaying.title}"> Hello </h2>
                 <p data-th-text="*{nowPlaying.rating}"></p>
                 <!--<button type="button">Book Movie</button>-->
-                <form th:action="@{/info}" th:object="${movieTitle}" th:value="${nowPlaying}">
+                <form th:action="@{/info_loggedin}" th:object="${movieTitle}" th:value="${nowPlaying}">
                     <!--<h2 data-th-text="*{title}"> Hello </h2>-->
                     <input type="hidden" th:name="title" th:id="title" th:value="${nowPlaying.title}">
                     <input type="hidden" th:name="id" th:id="id" th:value="${nowPlaying.id}">
@@ -78,7 +78,7 @@
                 <h2 data-th-text="*{comingSoon.title}"> Hello </h2>
                 <p data-th-text="*{comingSoon.rating}"></p>
                 <!--<button type="button">Book Movie</button>-->
-                <form th:action="@{/info}" th:object="${movieTitle}" th:value="${comingSoon}">
+                <form th:action="@{/info_loggedin}" th:object="${movieTitle}" th:value="${comingSoon}">
                     <!--<h2 data-th-text="*{title}"> Hello </h2>-->
                     <input type="hidden" th:name="title" th:id="title" th:value="${comingSoon.title}">
                     <input type="hidden" th:name="id" th:id="id" th:value="${comingSoon.id}">

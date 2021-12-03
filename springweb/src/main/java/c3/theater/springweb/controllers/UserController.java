@@ -452,7 +452,7 @@ public class UserController {
         //return "home";
     }
 
-    // Edit Profile
+    // Movie Info
     @GetMapping("/info")
     public String getInfo(Model model, MovieTitle movieTitle) {
         //System.out.println("thisUser passed to edit profile for auto fill: " + thisUser.toString());
@@ -470,6 +470,26 @@ public class UserController {
         }
         return "/info";
     }
+
+    // Movie Info
+    @GetMapping("/info_loggedin")
+    public String getInfoLoggedIn(Model model, MovieTitle movieTitle) {
+        //System.out.println("thisUser passed to edit profile for auto fill: " + thisUser.toString());
+        //model.addAttribute("user", thisUser);
+        //System.out.println("INFO CALLED");
+        //System.out.println(movieTitle);
+        //model.addAttribute("showings", movieShowingRepository.findAll());
+        //System.out.println(movieShowingRepository.findAll());
+        System.out.println("trailer pic on info: " + movieTitle.getTrailerPicture());
+        System.out.println("trailer pic on info: " + movieTitle.getTrailerPicture());
+        for (MovieTitle movieTest : movieTitleRepository.findAll()) {
+            if (movieTest.getTitle().equals(movieTitle.getTitle())) {
+                model.addAttribute("shows", movieTest.getMovieShowings());
+            }
+        }
+        return "/info_loggedin";
+    }
+
 
     //Select seating
     @GetMapping("/select_seating")

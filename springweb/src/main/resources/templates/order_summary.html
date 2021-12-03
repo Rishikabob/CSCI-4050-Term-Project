@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Order Summary</title>
+    <link rel="stylesheet" href="resources/css/orderSummary.css">
+    <h1 id = "header">Order Summary</h1></br></br>
+</head>
+<body class="container">
+<div class="content">
+    <table>
+        <tr>
+            <th scope="row">Your Ticket Details: </th>
+        </tr>
+        <tr>
+            <th scope="row">Movie</th>
+            <td th:object="${movieTitle}" th:text="${movieTitle.rating}"></td>
+        </tr>
+        <tr>
+            <th scope="row">Total Price:</th>
+            <td th:object="${movieTitle}" th:text="${movieTitle.genre}"></td>
+        </tr>
+        <tr>
+            <th scope="row">Total Tickets</th>
+            <td th:object="${movieTitle}" th:text="${movieTitle.genre}"></td>
+        </tr>
+    </table>
+    <div class = "searchContainer">
+        <input type="text" placeholder="Enter Promocode Here">
+    </div>
+    <br>
+    <footer class="container">
+        <button type="button">Confirm Promocode</button>
+    </footer>
+    <!-- display how much is saved and update order total if promocode is valid. if not display promocode not found -->
+</div>
+
+</body>
+</html>
